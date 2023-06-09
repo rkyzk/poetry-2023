@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-
-import styles from "../../styles/SignUpForm.module.css";
+import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
@@ -22,14 +21,14 @@ const SignUpForm = () => {
     password1: "",
     password2: ""
   });
-  const {username, password1, password2 } = signUpData;
+  const { username, password1, password2 } = signUpData;
   const history = useHistory();
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -37,13 +36,13 @@ const SignUpForm = () => {
     event.preventDefault();
     try {
       await axios.post('dj-rest-auth/registration/', signUpData);
-      history.push("/signin")
+      history.push("/signin");
     } catch(err){
-      setErrors(err.response?.data)
+      setErrors(err.response?.data);
     }
   }
   return (
-    <Col className="my-auto py-2 p-md-2" md={6}>
+    <Col className="my-auto py-2 p-md-2" md={{ span: 6, offset: 3 }}>
       <Container className={`${appStyles.Content} p-4 `}>
         <h1 className={styles.Header}>sign up</h1>
         <Form onSubmit={handleSubmit}>
@@ -57,9 +56,6 @@ const SignUpForm = () => {
               value={username}
               onChange={handleChange}
             />
-            <Form.Text className={styles.FormText}>
-            We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
           {errors.username?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
@@ -67,7 +63,7 @@ const SignUpForm = () => {
               </Alert>
             ))}
           <Form.Group controlId="password1">
-            <Form.Label className="d-none">Password1</Form.Label>
+            <Form.Label className="d-none">Password</Form.Label>
             <Form.Control
               className={styles.Input}
               type="password"
