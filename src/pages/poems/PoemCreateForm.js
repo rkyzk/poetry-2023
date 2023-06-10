@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { NavLink, useHistory } from "react-router-dom";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import styles from "../../styles/PoemCreateEditForm.module.css";
-import appStyles from "../../App.module.css";
+import { useHistory } from "react-router";
+// import styles from "../../styles/PoemCreateEditForm.module.css";
+// import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
+import {
+  Form,
+  Button,
+  Col,
+  Row,
+  Container,
+  Alert,
+} from "react-bootstrap";
 
 function PoemCreateForm() {
   const [errors, setErrors] = useState({});
@@ -23,8 +26,8 @@ function PoemCreateForm() {
     setPoem({
       ...poem,
       [event.target.name]: event.target.value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,15 +35,15 @@ function PoemCreateForm() {
     formData.append("title", title);
     formData.append("content", content);
     try {
-      const { data } = await axiosReq.post('poems/create/', poem);
-      history.push("/poems/`${data.id}`");
+      const { data } = await axiosReq.post('poems/create/', formData);
+      history.push(`/poems/${data.id}`);
     } catch(err){
       console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
     }
-  }
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -54,6 +57,13 @@ function PoemCreateForm() {
           onChange={handleChange}
         />    
       </Form.Group>
+      {errors?.title?.map((message, idx) => (
+        <Form.Group controlId="title">
+          <Alert variant="warning" key={idx}>		
+            {message}		
+          </Alert>	
+        </Form.Group>	
+      ))}
       <Form.Group controlId="content">
         <Form.Label>Content</Form.Label>
         <Form.Control
@@ -65,6 +75,13 @@ function PoemCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Form.Group controlId="content">
+          <Alert variant="warning" key={idx}>		
+            {message}		
+          </Alert>	
+        </Form.Group>	
+      ))}
       <Button variant="primary" type="submit" name="poem" value="publish">
         Publish
       </Button>
@@ -73,7 +90,7 @@ function PoemCreateForm() {
       </Button>
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => {}}
+        onClick={() => history.goBack()}
       >
        Cancel
       </Button>

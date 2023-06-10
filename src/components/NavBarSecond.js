@@ -1,6 +1,6 @@
 import React from "react"; // removed { useContext }
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import styles from "../styles/NavBar.module.css";
+import styles from "../styles/NavBarSecond.module.css";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 // import { SetCurrentUserContext } from "../App";
@@ -10,7 +10,7 @@ const NavBarSecond = () => {
   const currentUser = useCurrentUser();
 
   return (
-    <Navbar className={styles.NavBar} expand="md">
+    <Navbar className={styles.NavBarSecond} expand="md">
       <Container>
         <NavDropdown title="Poems" id="nav-dropdown">
           <NavDropdown.Item>
