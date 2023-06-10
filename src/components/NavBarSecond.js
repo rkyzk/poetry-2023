@@ -1,6 +1,6 @@
 import React from "react"; // removed { useContext }
-import { Navbar, Container, Nav } from "react-bootstrap";
-// import styles from "../styles/NavBar.module.css";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 // import { SetCurrentUserContext } from "../App";
@@ -8,56 +8,23 @@ import { useCurrentUser } from "../contexts/CurrentUserContext";
 const NavBarSecond = () => {
   // const currentUser = useContext(SetCurrentUserContext);
   const currentUser = useCurrentUser();
-  const loggedInIcons = <>{currentUser?.username}</>;
-  const loggedOutIcons = (
-    <>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        className="mr-3"
-        to="/signin"
-      >
-        Sign in
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        className="mr-3"
-        to="/signup"
-      >
-        Sign up
-      </NavLink>
-    </>
-  );
+
   return (
-    <Navbar className={styles.NavBar} expand="md" fixed="top">
+    <Navbar className={styles.NavBar} expand="md">
       <Container>
-        <NavLink exact activeClassName={styles.Active} to="/">
-          <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
-          </Navbar.Brand>
-        </NavLink>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto text-left">
-            <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-              className="mr-3"
-              to="/"
-            >
-              Home
+        <NavDropdown title="Poems" id="nav-dropdown">
+          <NavDropdown.Item>
+            <NavLink className={styles.NavLink} to="/new-poems">
+              New Poems
             </NavLink>
-            <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/contact">
-              Contact
-            </NavLink>
-            {currentUser? loggedInIcons : loggedOutIcons}
-          </Nav>
-        </Navbar.Collapse>
+          </NavDropdown.Item>
+          <NavDropdown.Item>Popular Poems</NavDropdown.Item>
+          <NavDropdown.Item>Poems by Categories</NavDropdown.Item>
+          <NavDropdown.Item>Search</NavDropdown.Item>
+        </NavDropdown>
       </Container>
     </Navbar>
   );
 };
 
-export default NavBar;
+export default NavBarSecond;

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { NavLink, useHistory } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import styles from "../../styles/PoemCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+import { axiosReq } from "../../api/axiosDefaults";
 
 function PoemCreateForm() {
   const [errors, setErrors] = useState({});
@@ -15,6 +17,7 @@ function PoemCreateForm() {
     content: "",
   });
   const { title, content } = poem
+  const history = useHistory();
 
   const handleChange = (event) => {
     setPoem({
@@ -23,8 +26,24 @@ function PoemCreateForm() {
     })
   }
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    try {
+      const { data } = await axiosReq.post('poems/create/', poem);
+      history.push("/poems/`${data.id}`");
+    } catch(err){
+      console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
+    }
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group controlId="title">
         <Form.Label>Title</Form.Label>
         <Form.Control
