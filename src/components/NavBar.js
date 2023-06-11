@@ -3,14 +3,43 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/logo.jpg";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
-import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
+import Avatar from "./Avatar";
+import axios from "axios";
 // import { SetCurrentUserContext } from "../App";
 
 const NavBar = () => {
-  // const currentUser = useContext(SetCurrentUserContext);
   const currentUser = useCurrentUser();
-  const loggedInIcons = <>{currentUser?.username}</>;
-  const loggedOutIcons = (
+  const setCurrentUser = useSetCurrentUser();
+  
+  const handleSignOut = async () => {
+    try {
+      await axios.post("dj-rest-auth/logout/");
+      setCurrentUser(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const loggedIn = (
+    <>
+      <NavLink
+        className={styles.NavLink}
+        to="/"
+        onClick={handleSignOut}
+      >
+        Sign out
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        to={`/profiles/${currentUser?.profile_id}`}
+      >
+        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+      </NavLink>
+    </>
+  );
+
+  const loggedOut = (
     <>
       <NavLink
         className={styles.NavLink}
@@ -26,10 +55,11 @@ const NavBar = () => {
         className="mr-3"
         to="/signup"
       >
-        Sign up
+        Register
       </NavLink>
     </>
   );
+
   return (
     <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container>
@@ -50,10 +80,15 @@ const NavBar = () => {
             >
               Home
             </NavLink>
-            <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/contact">
+            <NavLink
+              className={styles.NavLink}
+              className="mr-3"
+              activeClassName={styles.Active}
+              to="/contact"
+            >
               Contact
             </NavLink>
-            {currentUser? loggedInIcons : loggedOutIcons}
+            {currentUser? loggedIn : loggedOut}
           </Nav>
         </Navbar.Collapse>
       </Container>
