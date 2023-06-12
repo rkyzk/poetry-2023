@@ -7,7 +7,7 @@ import "./api/axiosDefaults";
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import PoemCreateForm from "./pages/poems/PoemCreateForm";
-import NewPoems from "./pages/poems_lists/NewPoems";
+import PoemsPage from "./pages/poems/PoemsPage";
 import PoemPage from "./pages/poems/PoemPage";
 
 
@@ -24,7 +24,7 @@ function App() {
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/contact" render={() => <h1>Contact</h1>} />
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
-          <Route exact path="/new-poems" render={() => <NewPoems />} />
+          <Route exact path="/new-poems" render={() => <PoemsPage />} />
           <Route exact path="/poems/:id" render={() => <PoemPage />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
