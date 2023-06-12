@@ -15,16 +15,16 @@ import {
 
 function PoemCreateForm() {
   const [errors, setErrors] = useState({});
-  const [poem, setPoem] = useState({
+  const [poemData, setPoemData] = useState({
     title: "",
     content: "",
   });
-  const { title, content } = poem
+  const { title, content } = poemData;
   const history = useHistory();
 
   const handleChange = (event) => {
-    setPoem({
-      ...poem,
+    setPoemData({
+      ...poemData,
       [event.target.name]: event.target.value,
     });
   };
@@ -35,9 +35,9 @@ function PoemCreateForm() {
     formData.append("title", title);
     formData.append("content", content);
     try {
-      const { data } = await axiosReq.post('poems/create/', formData);
+      const { data } = await axiosReq.post('/poems/', formData);
       history.push(`/poems/${data.id}`);
-    } catch(err){
+    } catch (err){
       console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
@@ -64,7 +64,8 @@ function PoemCreateForm() {
           </Alert>	
         </Form.Group>	
       ))}
-      <Form.Group controlId="content">
+      <Form.Group> 
+      {/* controlId="content" */}
         <Form.Label>Content</Form.Label>
         <Form.Control
           type="text"
@@ -76,11 +77,9 @@ function PoemCreateForm() {
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (
-        <Form.Group controlId="content">
           <Alert variant="warning" key={idx}>		
             {message}		
-          </Alert>	
-        </Form.Group>	
+          </Alert>
       ))}
       <Button variant="primary" type="submit" name="poem" value="publish">
         Publish

@@ -6,23 +6,23 @@ export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
 
 export const useCurrentUser = () => useContext(CurrentUserContext);
-export const useSetCurrentUser = () => useSetCurrentUser(SetCurrentUserContext);
+export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
-export const CurrentUserProvider = ({children}) => {
+export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
   const handleMount = async () => {
     try {
-      const {data} = await axios.get("dj-rest-auth/user/");
+      const { data } = await axios.get("dj-rest-auth/user/");
       setCurrentUser(data);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
   };
     
   useEffect(() => {
     handleMount();
-  }, [])
+  }, []);
 
   useMemo(() => {
     axiosReq.interceptors.request.use(
@@ -68,9 +68,9 @@ export const CurrentUserProvider = ({children}) => {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <SetCurrentUserContext.Provider value={setCurrentUser}>
+      <SetCurrentUserContext.Provider value={setCurrentUser}>
       {children}
-    </SetCurrentUserContext.Provider>
+      </SetCurrentUserContext.Provider>
     </CurrentUserContext.Provider>
-  )
+  );
 };

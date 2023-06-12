@@ -14,6 +14,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 
 const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
@@ -21,7 +22,14 @@ const SignUpForm = () => {
     password1: "",
     password2: ""
   });
+
+  const [profileData, setProfileData] = useState({
+    // add this!
+    display_name: "",
+    about_me: ""
+  });
   const { username, password1, password2 } = signUpData;
+  const { display_name, about_me } = profileData;
   const history = useHistory();
   const [errors, setErrors] = useState({});
 
@@ -30,12 +38,17 @@ const SignUpForm = () => {
       ...signUpData,
       [event.target.name]: event.target.value,
     });
+    setProfileData({
+      ...profileData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('dj-rest-auth/registration/', signUpData);
+      const { data } = await axios.post('dj-rest-auth/registration/', signUpData);
+      await axiosReq.post(`/profiles/${data.id}`, profileData);
       history.push("/signin");
     } catch(err){
       setErrors(err.response?.data);
@@ -93,7 +106,29 @@ const SignUpForm = () => {
               <Alert variant="warning" key={idx}>
                 {message}
               </Alert>
-            ))}
+          ))}
+          <Form.Group controlId="display_name">
+            <Form.Label className="d-none">Display name if different from username</Form.Label>
+            <Form.Control
+              className={styles.Input}
+              type="text"
+              placeholder="Display name"
+              name="display_name"
+              value={display_name}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="about_me">
+            <Form.Label className="d-none">A few things about yourself optional</Form.Label>
+            <Form.Control
+              className={styles.Input}
+              type="text"
+              placeholder="About me"
+              name="about_me"
+              value={about_me}
+              onChange={handleChange}
+            />
+          </Form.Group>
           <Button
             className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
             type="submit"
