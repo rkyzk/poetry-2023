@@ -7,12 +7,14 @@ import "./api/axiosDefaults";
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import PoemCreateForm from "./pages/poems/PoemCreateForm";
+import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PoemsPage from "./pages/poems/PoemsPage";
 import PoemPage from "./pages/poems/PoemPage";
 
 
 function App() {
-
+  const currentUser = useCurrentUser();
+  const profile_id = currentUser?.profile_id || "";
   return (
     <div className={styles.App}>
       <NavBar />
@@ -23,8 +25,16 @@ function App() {
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/contact" render={() => <h1>Contact</h1>} />
+          <Route exact
+                 path="/my-poems"
+                 render={() => <PoemsPage
+                                 filter={`owner__profile=${profile_id}&`} />} />
+          <Route
+            exact
+            path="/liked"
+            render={() => <PoemsPage
+                            filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`} />} />     
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
-          <Route exact path="/new-poems" render={() => <PoemsPage />} />
           <Route exact path="/poems/:id" render={() => <PoemPage />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>

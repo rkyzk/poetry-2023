@@ -1,5 +1,5 @@
 import React from "react"; // removed { useContext }
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../assets/logo.jpg";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
@@ -25,19 +25,39 @@ const NavBar = () => {
 
   const loggedIn = (
     <>
-      <NavLink
-        className={styles.NavLink}
-        to="/"
-        onClick={handleSignOut}
-      >
-        Sign out
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        to={`/profiles/${currentUser?.profile_id}`}
-      >
-        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
-      </NavLink>
+      <Avatar src={currentUser?.profile_image} height={40} />
+      <NavDropdown title={currentUser?.username} id="nav-dropdown">
+        <NavDropdown.Item>
+          <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}>
+            My Profile
+          </NavLink>
+        </NavDropdown.Item>
+        <NavDropdown.Item>
+          <NavLink className={styles.NavLink} to="/my-poems">
+            My Poems
+          </NavLink>
+        </NavDropdown.Item>
+        <NavDropdown.Item>
+          <NavLink className={styles.NavLink} to="/liked">
+            Poems I liked
+          </NavLink>
+        </NavDropdown.Item>
+         {/* 
+        <NavDropdown.Item>
+          <NavLink className={styles.NavLink}>
+            Profiles I'm following
+          </NavLink> 
+        </NavDropdown.Item> */}
+        <NavDropdown.Item>
+          <NavLink
+            className={styles.NavLink}
+            to="/"
+            onClick={handleSignOut}
+          >
+            Sign out
+          </NavLink> 
+        </NavDropdown.Item>
+      </NavDropdown>
     </>
   );
 
