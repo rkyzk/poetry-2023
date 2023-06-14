@@ -4,6 +4,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Poem = (props) => {
   const {
@@ -64,7 +65,7 @@ const Poem = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && poemPage && "..."}
+            {is_owner && poemPage && <MoreDropdown />}
           </div>
         </Media>
       </Card.Body>
