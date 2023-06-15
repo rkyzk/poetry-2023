@@ -10,6 +10,7 @@ import PoemCreateForm from "./pages/poems/PoemCreateForm";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PoemsPage from "./pages/poems/PoemsPage";
 import PoemPage from "./pages/poems/PoemPage";
+import PoemEditForm from "./pages/poems/PoemEditForm";
 
 
 function App() {
@@ -35,7 +36,8 @@ function App() {
             render={() => <PoemsPage
                             filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`} />} />     
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
-          <Route exact path="/poems/:id" render={() => <PoemPage />} />
+          <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />
+          <Route exact path="/poems/:id" render={() => <PoemPage />} />       
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

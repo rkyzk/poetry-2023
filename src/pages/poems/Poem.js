@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "../../styles/Post.module.css";
+import { useHistory } from "react-router";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Poem = (props) => {
@@ -23,6 +24,20 @@ const Poem = (props) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+  const history = useHistory();
+
+  const handleEdit = () => {
+    history.push(`/poems/${id}/edit`);
+  }
+
+  const handleDelete = async () => {
+    try {
+      await axiosReq.delete(`/poems/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }  
+  };
 
   const handleLike = async () => {
     try {
@@ -65,15 +80,21 @@ const Poem = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && poemPage && <MoreDropdown />}
+            {is_owner && poemPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </Media>
       </Card.Body>
-      {/* <Link to={`/poems/${id}`}>
-        <Card.Img src={image} alt={title} />
-      </Link> */}
       <Card.Body>
-        {title && <Card.Title className="text-center">{title}</Card.Title>}
+        {title && <Card.Title className="text-center">
+          <Link to={`/poems/${id}`}>
+            {title}
+          </Link>
+        </Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
         <div className={styles.PostBar}>
           {is_owner ? (
