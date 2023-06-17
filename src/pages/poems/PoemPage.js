@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import { axiosReq } from "../../api/axiosDefaults";
 import appStyles from "../../App.module.css";
 import CommentCreateForm from "../comments/CommentCreateForm";
+import Comment from "../comments/Comment";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Poem from "./Poem";
 
@@ -19,11 +20,12 @@ function PoemPage() {
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const [{ data: poem }] = await Promise.all([
+        const [{ data: poem }, { data: comments }] = await Promise.all([
           axiosReq.get(`/poems/${id}`),
+          axiosReq.get(`/comments/?post=${id}`),
         ]);
         setPoem({ results: [poem] });
-        console.log(poem);
+        setComments(comments);
       } catch(err) {
         console.log(err)
       }
@@ -48,6 +50,15 @@ function PoemPage() {
           ) : comments.results.length ? (
             "Comments"
           ) : null}
+          {comments.results.length ? (
+            comments.results.map((comment) => (
+              <Comment key={comment.id} {...comment} />
+            ))
+          ) : currentUser ? (
+            <span>No comments yet, be the first to comment!</span>
+          ) : (
+            <span>No comments yet</span>
+          )}
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
