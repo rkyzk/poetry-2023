@@ -22,7 +22,7 @@ function PoemPage() {
       try {
         const [{ data: poem }, { data: comments }] = await Promise.all([
           axiosReq.get(`/poems/${id}`),
-          axiosReq.get(`/comments/?post=${id}`),
+          axiosReq.get(`/comments/?poem=${id}`),
         ]);
         setPoem({ results: [poem] });
         setComments(comments);
@@ -43,7 +43,7 @@ function PoemPage() {
             <CommentCreateForm
               profile_id={currentUser.profile_id}
               profileImage={profile_image}
-              post={id}
+              poem={id}
               setPoem={setPoem}
               setComments={setComments}
             />
@@ -52,7 +52,12 @@ function PoemPage() {
           ) : null}
           {comments.results.length ? (
             comments.results.map((comment) => (
-              <Comment key={comment.id} {...comment} />
+              <Comment
+                key={comment.id}
+                setPoem={setPoem}
+                setComments={setComments}
+                {...comment}
+              />
             ))
           ) : currentUser ? (
             <span>No comments yet, be the first to comment!</span>
