@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import CommentEditForm from "./CommentEditForm";
 import { Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
@@ -21,6 +22,7 @@ const Comment = (props) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+  const [showEditForm, setShowEditForm] = useState(false);
 
   const handleDelete = async () => {
     try {
@@ -44,7 +46,7 @@ const Comment = (props) => {
   };
 
   return (
-    <div>
+    <>
       <hr />
       <Media>
         <Link to={`/profiles/${profile_id}`}>
@@ -53,16 +55,27 @@ const Comment = (props) => {
         <Media.Body className="align-self-center ml-2">
           <span className={styles.Owner}>{owner}</span>
           <span className={styles.Date}>{updated_at}</span>
-          {is_owner && (
-            <MoreDropdown
-              handleEdit={() => {}}
-              handleDelete={handleDelete}
-            />
+          {showEditForm ? (
+            <CommentEditForm
+            id={id}
+            profile_id={profile_id}
+            content={content}
+            profileImage={profile_image}
+            setComments={setComments}
+            setShowEditForm={setShowEditForm}
+          />
+          ) : (
+            <p>{content}</p>
           )}
-          <p>{content}</p>
         </Media.Body>
+        {is_owner && !showEditForm && (
+          <MoreDropdown
+            handleEdit={() => setShowEditForm(true)}
+            handleDelete={handleDelete}
+          />
+        )}
       </Media>
-    </div>
+    </>
   );
 };
 
