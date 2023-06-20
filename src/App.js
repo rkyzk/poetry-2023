@@ -11,6 +11,8 @@ import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PoemsPage from "./pages/poems/PoemsPage";
 import PoemPage from "./pages/poems/PoemPage";
 import PoemEditForm from "./pages/poems/PoemEditForm";
+import ProfilesPage from "./pages/profiles/ProfilesPage";
+import ProfilePage from "./pages/profiles/ProfilePage";
 
 
 function App() {
@@ -34,7 +36,17 @@ function App() {
             exact
             path="/liked"
             render={() => <PoemsPage
-                            filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`} />} />     
+                            filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`} />} />
+          <Route
+            exact
+            path="/profiles/:id/following"
+            render={() => (
+              <ProfilesPage
+                filter={`owner__following__followed__profile=${profile_id}&ordering=-owner__following__created_at&`}
+              />
+            )}
+          />
+          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
           <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />
           <Route exact path="/poems/:id" render={() => <PoemPage />} />       
