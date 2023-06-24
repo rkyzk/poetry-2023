@@ -95,7 +95,7 @@ const Poem = (props) => {
             {title}
           </Link>
         </Card.Title>}
-        {content && <Card.Text>{content}</Card.Text>}
+        {content && <Card.Text>{content.substring(0, 60)}</Card.Text>}
         <div className={styles.PostBar}>
           {is_owner ? (
             <OverlayTrigger

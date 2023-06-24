@@ -6,9 +6,12 @@ import Container from "react-bootstrap/Container";
 import { axiosReq } from "../../api/axiosDefaults";
 import appStyles from "../../App.module.css";
 import CommentCreateForm from "../comments/CommentCreateForm";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Comment from "../comments/Comment";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Poem from "./Poem";
+import Asset from "../../components/Asset";
+import { fetchMoreData } from "../../utils/utils";
 
 function PoemPage() {
   const { id } = useParams();
@@ -51,14 +54,20 @@ function PoemPage() {
             "Comments"
           ) : null}
           {comments.results.length ? (
-            comments.results.map((comment) => (
+            <InfiniteScroll
+              children={comments.results.map((comment) => (
               <Comment
                 key={comment.id}
+                {...comment}
                 setPoem={setPoem}
                 setComments={setComments}
-                {...comment}
               />
-            ))
+              ))}
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={() => fetchMoreData(comments, setComments)}
+            />
           ) : currentUser ? (
             <span>No comments yet, be the first to comment!</span>
           ) : (

@@ -10,7 +10,7 @@ const NavBarSecond = () => {
   const currentUser = useCurrentUser();
 
   return (
-    <Navbar className={styles.NavBarSecond} expand="md">
+    <Navbar className={styles.NavBarSecond} expand="md" fixed="top">
       <Container>
         <NavDropdown title="Poems" id="nav-dropdown">
           <NavDropdown.Item>
@@ -22,6 +22,9 @@ const NavBarSecond = () => {
           <NavDropdown.Item>Poems by Categories</NavDropdown.Item>
           <NavDropdown.Item>Search</NavDropdown.Item>
         </NavDropdown>
+        <NavLink className={styles.NavLink} to="/poems/create">
+          Write Poems
+        </NavLink>
       </Container>
     </Navbar>
   );

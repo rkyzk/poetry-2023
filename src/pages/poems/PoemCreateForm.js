@@ -36,12 +36,13 @@ function PoemCreateForm() {
     formData.append("content", content);
     try {
       const { data } = await axiosReq.post('/poems/', formData);
+      console.log(data.id)
       history.push(`/poems/${data.id}`);
     } catch (err){
-      console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
+      console.log(err);
     }
   };
 
