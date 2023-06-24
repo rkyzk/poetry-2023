@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -7,7 +6,6 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
-
 import styles from "../../styles/PoemCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -38,7 +36,6 @@ function PoemEditForm() {
         console.log(err);
       }
     };
-
     handleMount();
   }, [history, id]);
 
@@ -52,10 +49,8 @@ function PoemEditForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-
     formData.append("title", title);
     formData.append("content", content);
-
     try {
       await axiosReq.put(`/poems/${id}`, formData);
       history.push(`/poems/${id}`);
@@ -68,7 +63,8 @@ function PoemEditForm() {
   };
 
   const textFields = (
-    <div className="text-center">
+    <div>
+      <h2>Revise your poem</h2>
       <Form.Group>
         <Form.Label>Title</Form.Label>
         <Form.Control
@@ -99,15 +95,14 @@ function PoemEditForm() {
           {message}
         </Alert>
       ))}
-
+      <Button className={`${btnStyles.Button} ${btnStyles.Olive}`} type="submit">
+        save
+      </Button>
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.Olive} ml-2`}
         onClick={() => history.goBack()}
       >
         cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        save
       </Button>
     </div>
   );

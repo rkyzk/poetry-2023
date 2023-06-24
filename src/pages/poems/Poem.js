@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/Post.module.css";
+import styles from "../../styles/Poem.module.css";
 import { useHistory } from "react-router";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -74,27 +74,30 @@ const Poem = (props) => {
   return (
     <Card className={styles.Poem}>
       <Card.Body>
-        <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${profile_id}`}>
-            {owner}
-          </Link>
-          <div className="d-flex align-items-center">
-            <span>{updated_at}</span>
-            {is_owner && poemPage && (
-              <MoreDropdown
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-              />
-            )}
-          </div>
-        </Media>
-      </Card.Body>
-      <Card.Body>
-        {title && <Card.Title className="text-center">
+        {title && <Card.Title>
           <Link to={`/poems/${id}`}>
             {title}
           </Link>
         </Card.Title>}
+        <span>
+        {is_owner && poemPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                className="ml-3"
+              />
+            )}
+        </span>
+        <Media className="justify-content-end">
+          <Link to={`/profiles/${profile_id}`}>
+            {owner}
+          </Link>
+          <div className="ml-3">
+            <span>{updated_at}</span>
+          </div>
+        </Media>
+      </Card.Body>
+      <Card.Body>     
         {content && <Card.Text>{content.substring(0, 60)}</Card.Text>}
         <div className={styles.PostBar}>
           {is_owner ? (
@@ -122,7 +125,7 @@ const Poem = (props) => {
           )}
           {likes_count}
           <Link to={`/poems/${id}`}>
-            <i className="far fa-comments" />
+            <i className="far fa-comments ml-2" />
           </Link>
           {comments_count}
         </div>

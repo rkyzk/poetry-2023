@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-// import styles from "../../styles/PoemCreateEditForm.module.css";
+import styles from "../../styles/PoemCreateEditForm.module.css";
 // import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
@@ -82,14 +82,20 @@ function PoemCreateForm() {
             {message}		
           </Alert>
       ))}
-      <Button variant="primary" type="submit" name="poem" value="publish">
-        Publish
-      </Button>
-      <Button variant="primary" type="submit" name="poem" value="save">
+      <Button 
+        className={`${btnStyles.Button} ${btnStyles.Olive} mt-2`}
+        type="submit"
+      >
         Save as Draft
       </Button>
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.Olive} ml-2 mt-2`}
+        type="submit"
+      >
+        Publish
+      </Button>
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.Olive} ml-2 mt-2`}
         onClick={() => history.goBack()}
       >
        Cancel

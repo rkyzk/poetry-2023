@@ -1,6 +1,6 @@
 import React from "react"; // removed { useContext }
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
@@ -87,9 +87,10 @@ const NavBar = () => {
       <Container>
         <NavLink exact activeClassName={styles.Active} to="/">
           <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
+            <img src={logo} alt="logo" height="70" />
           </Navbar.Brand>
         </NavLink>
+        <h1 className="mt-4">Your Poetry</h1>
         <Navbar.Toggle
           ref={ref}
           aria-controls="basic-navbar-nav"

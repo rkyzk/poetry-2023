@@ -1,0 +1,24 @@
+.Poem {
+  background-color: #f8f8f8;
+  border: 1px solid #dadadf;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  color: #333;
+}
+  
+.Poem figure,
+  h5 {
+    margin: 0 0;
+  }
+  
+  .Heart {
+    color: #e49e7e;
+  }
+  
+  .Heart:hover {
+    color: #2142b2;
+  }
+  
+  .HeartOutline:hover {
+    color: #e49e7e;
+  }

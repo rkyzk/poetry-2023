@@ -25,13 +25,15 @@ function App() {
       <Container className={styles.Main}>
         <Switch>
           <Route exact path="/" render={() => <h1>Home page</h1>} />
+          <Route exact path="/contact" render={() => <h1>Contact</h1>} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path="/contact" render={() => <h1>Contact</h1>} />
-          <Route exact
-                 path="/my-poems"
-                 render={() => <PoemsPage
-                                 filter={`owner__profile=${profile_id}&`} />} />
+          <Route
+            exact
+            path="/my-poems"
+            render={() => <PoemsPage
+                            filter={`owner__profile=${profile_id}&`} />}
+          />
           <Route
             exact
             path="/liked"

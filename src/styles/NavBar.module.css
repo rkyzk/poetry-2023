@@ -1,12 +1,22 @@
 .NavBar {
-  background-color: #ffffff;
-  border: 1px solid #dadadf;
+  background-color: #f8f8f8;
 }
   
 .Active {
-  color: rgb(32, 67, 162);
+  text-decoration: underline;
 }
   
 .Navlink:hover {
   text-decoration: underline;
+  color:rgb(10, 10, 90);
+}
+
+h1 {
+  font-family: 'Bacasime Antique', sans-serif;
+  color:rgb(10, 10, 90);
+}
+
+.NavLink {
+  font-family: 'Nanum Myeongj';
+  color: rgb(51, 93, 151);
 }
