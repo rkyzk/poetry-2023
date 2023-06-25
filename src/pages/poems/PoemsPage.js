@@ -6,12 +6,14 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import Poem from "./Poem";
-// import Asset from "../../components/Asset";
+import Asset from "../../components/Asset";
 
 // import appStyles from "../../App.module.css";
 // import styles from "../../styles/PostsPage.module.css";
 import { useLocation } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
 
 
 function PoemsPage({ filter = "" }) {
@@ -40,9 +42,15 @@ function PoemsPage({ filter = "" }) {
         {hasLoaded ? (
           <>
             {poems.results.length ? (
-              poems.results.map((poem) => (
-                <Poem key={poem.id} {...poem} setPoems={setPoems} />
-              ))
+              <InfiniteScroll
+                children={poems.results.map((poem) => (
+                  <Poem key={poem.id} {...poem} setPoems={setPoems} />
+                ))}
+                dataLength={poems.results.length}
+                loader={<Asset spinner />}
+                hasMore={!!poems.next}
+                next={() => fetchMoreData(poems, setPoems)}
+              />
             ) : (
               <p>No results found.</p>
             )}
