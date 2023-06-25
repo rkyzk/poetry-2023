@@ -25,7 +25,6 @@ const Poem = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
-
   const handleEdit = () => {
     history.push(`/poems/${id}/edit`);
   }
