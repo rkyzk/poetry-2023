@@ -21,7 +21,6 @@ function PoemEditForm() {
     content: "",
   });
   const { title, content } = poemData;
-
   const history = useHistory();
   const { id } = useParams();
 

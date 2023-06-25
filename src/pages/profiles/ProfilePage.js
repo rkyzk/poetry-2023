@@ -4,7 +4,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/ProfilePage.module.css"
 import btnStyles from "../../styles/Button.module.css";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Avatar from "../../components/Avatar";
@@ -12,7 +12,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import Poem from "../poems/Poem";
 import Asset from "../../components/Asset";
-import { followHelper } from "../../utils/utils";
+import { followHelper, unfollowHelper } from "../../utils/utils";
 
 
 function ProfilePage() {
@@ -24,6 +24,7 @@ function ProfilePage() {
   const { owner, poems_count, following_id, display_name, image, about_me, created_at } = profile;
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+  const history = useHistory();
 
   const handleFollow = async () => {
     try {
@@ -40,6 +41,21 @@ function ProfilePage() {
       console.log(err);
     }
   };
+
+  const handleUnfollow = async () => {
+    try {
+      await axiosRes.delete(`/followers/${following_id}/`);
+      setProfilesData((prevProfiles) => ({
+        ...prevProfiles,
+        results: prevProfiles.results.map((profile) => {
+          unfollowHelper(profile, following_id)
+        })
+      }));
+      history.push(`/profiles/${id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,7 +100,7 @@ function ProfilePage() {
             { currentUser && !is_owner && 
               (profile?.following_id ? (
                 <Button
-                  onClick={() => {}}
+                  onClick={handleUnfollow}
                   className={`${btnStyles.Button} ${btnStyles.Olive}`}
                 >
                   unfollow
