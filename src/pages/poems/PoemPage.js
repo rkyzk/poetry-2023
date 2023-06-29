@@ -19,16 +19,17 @@ function PoemPage() {
   const currentUser = useCurrentUser();
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
- 
+
   useEffect(() => {
     const handleMount = async () => {
       try {
         const [{ data: poem }, { data: comments }] = await Promise.all([
           axiosReq.get(`/poems/${id}`),
-          axiosReq.get(`/comments/?poem=${id}`),
+          axiosReq.get(`/comments/?poem__id=${id}`),
         ]);
         setPoem({ results: [poem] });
         setComments(comments);
+        console.log(comments);
       } catch(err) {
         console.log(err)
       }

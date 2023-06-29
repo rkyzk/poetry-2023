@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Poem from "./Poem";
 import Asset from "../../components/Asset";
 
@@ -16,15 +16,17 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 
 
-function PoemsPage({ filter = "" }) {
+function PoemsPage({ filter="" }) {
   const [poems, setPoems] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
+  console.log(filter);
 
   useEffect(() => {
     const fetchPoems = async () => {
       try {
         const { data } = await axiosReq.get(`/poems/?${filter}`);
+        console.log(data);
         setPoems(data);
         setHasLoaded(true);
       } catch (err) {

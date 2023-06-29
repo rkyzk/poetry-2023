@@ -31,8 +31,8 @@ function App() {
           <Route
             exact
             path="/my-poems"
-            render={() => <PoemsPage
-                            filter={`owner__profile=${profile_id}&`} />}
+            render={() => <PoemsPage 
+                            filter={`owner__profile=${profile_id}&ordering=-likes__created_at&`} />}
           />
           <Route
             exact

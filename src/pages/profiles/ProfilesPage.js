@@ -10,7 +10,7 @@ import Asset from "../../components/Asset";
 
 
 function ProfilesPage({ filter = "" }) {
-  const [profiles, setProfiles] = useState({ results: [] })
+  const [profiles, setProfiles] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {

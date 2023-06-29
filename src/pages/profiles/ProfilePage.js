@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row, Button } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/ProfilePage.module.css"
 import btnStyles from "../../styles/Button.module.css";
@@ -18,20 +17,25 @@ import { followHelper, unfollowHelper } from "../../utils/utils";
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const { id } = useParams();
-  const [profilesData, setProfilesData] = useState({ results: [] });
+  const [profileData, setProfileData] = useState({
+    profiles: { results: [] },
+    featuredProfiles: { results: [] }
+  });
   const [profilePoemsData, setProfilePoemsData] = useState({ results: [] });
-  const [profile, setProfile] = useState({ results: [] });
-  const { owner, poems_count, following_id, display_name, image, about_me, created_at } = profile;
+  const history = useHistory();
+  const [profile] = profileData.profiles.results;
+  const owner = profile?.owner
+  const following_id = profile?.following_id
+
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
-  const history = useHistory();
 
   const handleFollow = async () => {
     try {
       const { data } = await axiosRes.post("/followers/", {
         followed: id,
       });
-      setProfilesData((prevProfiles) => ({
+      setProfileData((prevProfiles) => ({
         ...prevProfiles,
         results: prevProfiles.results.map((profile) => {
         followHelper(profile, id, data.id)
@@ -45,7 +49,7 @@ function ProfilePage() {
   const handleUnfollow = async () => {
     try {
       await axiosRes.delete(`/followers/${following_id}/`);
-      setProfilesData((prevProfiles) => ({
+      setProfileData((prevProfiles) => ({
         ...prevProfiles,
         results: prevProfiles.results.map((profile) => {
           unfollowHelper(profile, following_id)
@@ -64,7 +68,11 @@ function ProfilePage() {
           axiosReq.get(`/profiles/${id}/`),
           axiosReq.get(`/poems/?owner__profile=${id}`)
         ]);
-        setProfile(profile);
+        console.log(profilePoemsData);
+        setProfileData((prevState) => ({
+          ...prevState,
+          profiles: { results: [profile] },
+        }));
         setProfilePoemsData({ results: [profilePoemsData]});
         setHasLoaded(true);
       } catch (err) {
@@ -124,7 +132,11 @@ function ProfilePage() {
       {profilePoemsData.results.length? (
         <InfiniteScroll
           children={profilePoemsData.results.map((poem) => (
-            <Poem key={poem.id} {...poem} setPoems={setProfilePoemsData}/>
+            <Poem
+              key={poem.id}
+              {...poem}
+              setPoems={setProfilePoemsData}
+            />
           ))}
           dataLength={profilePoemsData.results.length}
           loader={<Asset spinner />}
