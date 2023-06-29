@@ -13,6 +13,7 @@ import PoemPage from "./pages/poems/PoemPage";
 import PoemEditForm from "./pages/poems/PoemEditForm";
 import ProfilesPage from "./pages/profiles/ProfilesPage";
 import ProfilePage from "./pages/profiles/ProfilePage";
+import NewPoems from "./pages/poems_lists/NewPoems";
 
 
 function App() {
@@ -51,7 +52,8 @@ function App() {
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
           <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />
-          <Route exact path="/poems/:id" render={() => <PoemPage />} />       
+          <Route exact path="/poems/:id" render={() => <PoemPage />} />
+          <Route exact path="/new-poems" render={() => <NewPoems />} />       
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

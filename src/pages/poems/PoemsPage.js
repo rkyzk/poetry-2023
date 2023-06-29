@@ -39,9 +39,8 @@ function PoemsPage({ filter="" }) {
   }, [filter, pathname]);
 
   return (
-    <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <FeaturedProfiles mobile />
+    <>
+      <FeaturedProfiles mobile />
         {hasLoaded ? (
           <>
             {poems.results.length ? (
@@ -61,11 +60,7 @@ function PoemsPage({ filter="" }) {
         ) : (
           <p>spinner</p>
         )}
-      </Col>
-      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <FeaturedProfiles />
-      </Col>
-    </Row>
+    </>
   );
 }
 
