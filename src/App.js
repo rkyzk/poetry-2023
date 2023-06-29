@@ -32,7 +32,7 @@ function App() {
             exact
             path="/my-poems"
             render={() => <PoemsPage 
-                            filter={`owner__profile=${profile_id}&ordering=-likes__created_at&`} />}
+                            filter={`owner__profile=${profile_id}&ordering=-created_at&`} />}
           />
           <Route
             exact
@@ -44,7 +44,7 @@ function App() {
             path="/profiles/:id/following"
             render={() => (
               <ProfilesPage
-                filter={`owner__following__followed__profile=${profile_id}&ordering=-owner__following__created_at&`}
+                filter={`owner__followed__owner__profile=${profile_id}&ordering=-owner__following__created_at&`}
               />
             )}
           />

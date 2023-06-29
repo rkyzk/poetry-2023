@@ -1,18 +1,19 @@
 import React from "react";
-import { Card } from 'react-bootstrap';
 import styles from "../../styles/ProfilePartial.module.css";
+import btnStyles from "../../styles/Button.module.css";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 
-
 const ProfilePartial = (props) => {
-  const { profile, imageSize = 55 } = props;
-  const { id, image, display_name } = profile;
+  const { profile, mobile, imageSize = 55 } = props;
+  console.log(profile.following_id);
+  const { id, display_name, image } = profile;
+  const currentUser = useCurrentUser();
 
   return (
-    <Card>
     <div
-      className="my-3 d-flex align-items-center"
+      className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}
     >
       <div>
         <Link className="align-self-center" to={`/profiles/${id}`}>
@@ -20,10 +21,22 @@ const ProfilePartial = (props) => {
         </Link>
       </div>
       <div className={`mx-2 ${styles.WordBreak}`}>
-        <strong>{display_name}</strong>
+        <Link className="align-self-center" to={`/profiles/${id}`}>
+          <strong>{display_name}</strong>
+        </Link>
+      </div>
+      <div className={`text-right ${!mobile && "ml-auto"}`}>
+        { currentUser ? (
+            profile.follwoing_id ? (
+              <span>You're following this poet</span>
+            ) : (
+              <></>
+            )) : (
+              <></>
+            )
+        }
       </div>
     </div>
-    </Card>
   );
 };
 

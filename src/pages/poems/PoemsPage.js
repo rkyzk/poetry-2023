@@ -14,6 +14,7 @@ import { useLocation } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
+import FeaturedProfiles from "../profiles/FeaturedProfiles";
 
 
 function PoemsPage({ filter="" }) {
@@ -26,8 +27,8 @@ function PoemsPage({ filter="" }) {
     const fetchPoems = async () => {
       try {
         const { data } = await axiosReq.get(`/poems/?${filter}`);
-        console.log(data);
         setPoems(data);
+        console.log(data);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
@@ -40,7 +41,7 @@ function PoemsPage({ filter="" }) {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles mobile</p>
+        <FeaturedProfiles mobile />
         {hasLoaded ? (
           <>
             {poems.results.length ? (
@@ -62,7 +63,7 @@ function PoemsPage({ filter="" }) {
         )}
       </Col>
       <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <p>Popular profiles for desktop</p>
+        <FeaturedProfiles />
       </Col>
     </Row>
   );
