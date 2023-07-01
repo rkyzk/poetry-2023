@@ -1,87 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Row, Button } from "react-bootstrap";
-import appStyles from "../../App.module.css";
-import styles from "../../styles/ProfilePage.module.css"
-import btnStyles from "../../styles/Button.module.css";
-import { useParams, useHistory } from "react-router";
-import { axiosReq, axiosRes } from "../../api/axiosDefaults";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import Avatar from "../../components/Avatar";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchMoreData } from "../../utils/utils";
-import Poem from "../poems/Poem";
+import { Col, Row, Card, Container, Button } from "react-bootstrap";
 import Asset from "../../components/Asset";
-import { followHelper, unfollowHelper } from "../../utils/utils";
-
+import styles from "../../styles/ProfilePage.module.css";
+import appStyles from "../../App.module.css";
+import btnStyles from "../../styles/Button.module.css";
+import FeaturedProfiles from "./FeaturedProfiles";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { useParams } from "react-router";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
+import {
+  useProfileData,
+  useSetProfileData,
+} from "../../contexts/ProfileDataContext";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Poem from "../poems/Poem";
+import { fetchMoreData } from "../../utils/utils";
+import Avatar from "../../components/Avatar";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
-  const { id } = useParams();
-  const [profileData, setProfileData] = useState({
-    profiles: { results: [] },
-    featuredProfiles: { results: [] }
-  });
-  const [profilePoemsData, setProfilePoemsData] = useState({ results: [] });
-  const history = useHistory();
-  const [profile] = profileData.profiles.results;
-  const owner = profile?.owner
-  const following_id = profile?.following_id
-
+  const [profilePoems, setProfilePoems] = useState({ results: [] });
+  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   const currentUser = useCurrentUser();
-  const is_owner = currentUser?.username === owner;
+  const { id } = useParams();
 
-  const handleFollow = async () => {
-    try {
-      const { data } = await axiosRes.post("/followers/", {
-        followed: id,
-      });
-      setProfileData((prevProfiles) => ({
-        ...prevProfiles,
-        results: prevProfiles.results.map((profile) => {
-        followHelper(profile, id, data.id)
-        })
-      }));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const { pageProfile } = useProfileData();
 
-  const handleUnfollow = async () => {
-    try {
-      await axiosRes.delete(`/followers/${following_id}/`);
-      setProfileData((prevProfiles) => ({
-        ...prevProfiles,
-        results: prevProfiles.results.map((profile) => {
-          unfollowHelper(profile, following_id)
-        })
-      }));
-      history.push(`/profiles/${id}`);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  const [profile] = pageProfile.results;
+  const is_owner = currentUser?.username === profile?.owner;
+  const following_id = profile?.following_id;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [{ data: profile }, { data: profilePoemsData }] = await Promise.all([
-          axiosReq.get(`/profiles/${id}/`),
-          axiosReq.get(`/poems/?owner__profile=${id}`)
-        ]);
-        console.log(profilePoemsData);
+        const [{ data: pageProfile }, { data: profilePoems }] =
+          await Promise.all([
+            axiosReq.get(`/profiles/${id}/`),
+            axiosReq.get(`/poems/?owner__profile=${id}`),
+          ]);
+
         setProfileData((prevState) => ({
           ...prevState,
-          profiles: { results: [profile] },
+          pageProfile: { results: [pageProfile] },
         }));
-        setProfilePoemsData({ results: [profilePoemsData]});
+        setProfilePoems(profilePoems);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
     };
-    setHasLoaded(false);
     fetchData();
-  }, [id]);
+  }, [id, setProfileData]);
 
   const mainProfile = (
     <>
@@ -106,16 +75,16 @@ function ProfilePage() {
             <span>followers</span>
             <div>{profile?.about_me}</div>
             { currentUser && !is_owner && 
-              (profile?.following_id ? (
+              (following_id ? (
                 <Button
-                  onClick={handleUnfollow}
+                  onClick={() => handleUnfollow(profile)}
                   className={`${btnStyles.Button} ${btnStyles.Olive}`}
                 >
                   unfollow
                 </Button>
               ) : (
                 <Button
-                  onClick={handleFollow}
+                  onClick={() => handleFollow(profile)}
                   className={`${btnStyles.Button} ${btnStyles.Olive}`}
                 >
                   follow
@@ -124,36 +93,48 @@ function ProfilePage() {
         </Card.Body>
       </Card>
     </>
-  )
+  );
 
-  const profilePoems = (
+  const mainProfilePoems = (
     <>
-      <div>Poems by this Writer</div>
-      {profilePoemsData.results.length? (
+      <hr />
+      <p className="text-center">Poems by {profile?.display_name}</p>
+      <hr />
+      {profilePoems.results.length ? (
         <InfiniteScroll
-          children={profilePoemsData.results.map((poem) => (
-            <Poem
-              key={poem.id}
-              {...poem}
-              setPoems={setProfilePoemsData}
-            />
+          children={profilePoems.results.map((poem) => (
+            <Poem key={poem.id} {...poem} setPosts={setProfilePoems} />
           ))}
-          dataLength={profilePoemsData.results.length}
+          dataLength={profilePoems.results.length}
           loader={<Asset spinner />}
-          hasMore={!!profilePoemsData.next}
-          next={() => fetchMoreData(profilePoemsData, setProfilePoemsData)}
+          hasMore={!!profilePoems.next}
+          next={() => fetchMoreData(profilePoems, setProfilePoems)}
         />
       ) : (
-        <p>No published poems yet</p>
+        <p>No poems found</p>
       )}
     </>
-  )
+  );
 
   return (
-    <>
-      {mainProfile}
-      {profilePoems}
-    </>
+    <Row>
+      <Col className="py-2 p-0 p-lg-2" lg={8}>
+        <FeaturedProfiles mobile />
+        <Container className={appStyles.Content}>
+          {hasLoaded ? (
+            <>
+              {mainProfile}
+              {mainProfilePoems}
+            </>
+          ) : (
+            <Asset spinner />
+          )}
+        </Container>
+      </Col>
+      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
+        <FeaturedProfiles />
+      </Col>
+    </Row>
   );
 }
 

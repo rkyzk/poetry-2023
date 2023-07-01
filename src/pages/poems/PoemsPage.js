@@ -40,8 +40,7 @@ function PoemsPage({ filter="" }) {
 
   return (
     <>
-      <FeaturedProfiles mobile />
-        {hasLoaded ? (
+      {hasLoaded ? (
           <>
             {poems.results.length ? (
               <InfiniteScroll

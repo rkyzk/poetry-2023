@@ -6,7 +6,7 @@ import ProfilePartial from "./ProfilePartial";
 import { useProfileData } from "../../contexts/ProfileDataContext";
 
 const FeaturedProfiles = ({ mobile }) => {
-  const featuredProfiles = useProfileData();
+  const { featuredProfiles } = useProfileData();
 
   return (
     <Container
