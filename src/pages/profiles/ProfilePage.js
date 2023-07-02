@@ -1,34 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Card, Container, Button } from "react-bootstrap";
+
+import { Col, Row, Card } from "react-bootstrap";
+import Avatar from "../../components/Avatar";
 import Asset from "../../components/Asset";
+
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+
 import FeaturedProfiles from "./FeaturedProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router";
-import { axiosReq, axiosRes } from "../../api/axiosDefaults";
+import { axiosReq } from "../../api/axiosDefaults";
 import {
   useProfileData,
   useSetProfileData,
 } from "../../contexts/ProfileDataContext";
+import { Button } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Poem from "../poems/Poem";
 import { fetchMoreData } from "../../utils/utils";
-import Avatar from "../../components/Avatar";
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profilePoems, setProfilePoems] = useState({ results: [] });
-  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
+
   const currentUser = useCurrentUser();
   const { id } = useParams();
 
+  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
 
   const [profile] = pageProfile.results;
   const is_owner = currentUser?.username === profile?.owner;
-  const following_id = profile?.following_id;
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +44,6 @@ function ProfilePage() {
             axiosReq.get(`/profiles/${id}/`),
             axiosReq.get(`/poems/?owner__profile=${id}`),
           ]);
-
         setProfileData((prevState) => ({
           ...prevState,
           pageProfile: { results: [pageProfile] },
@@ -75,7 +80,7 @@ function ProfilePage() {
             <span>followers</span>
             <div>{profile?.about_me}</div>
             { currentUser && !is_owner && 
-              (following_id ? (
+              (profile?.following_id ? (
                 <Button
                   onClick={() => handleUnfollow(profile)}
                   className={`${btnStyles.Button} ${btnStyles.Olive}`}
@@ -93,17 +98,19 @@ function ProfilePage() {
         </Card.Body>
       </Card>
     </>
-  );
+  )
 
-  const mainProfilePoems = (
+  const poems = (
     <>
-      <hr />
-      <p className="text-center">Poems by {profile?.display_name}</p>
-      <hr />
-      {profilePoems.results.length ? (
+      <div>Poems by this Writer</div>
+      {profilePoems.results.length? (
         <InfiniteScroll
           children={profilePoems.results.map((poem) => (
-            <Poem key={poem.id} {...poem} setPosts={setProfilePoems} />
+            <Poem
+              key={poem.id}
+              {...poem}
+              setPoems={setProfilePoems}
+            />
           ))}
           dataLength={profilePoems.results.length}
           loader={<Asset spinner />}
@@ -111,30 +118,16 @@ function ProfilePage() {
           next={() => fetchMoreData(profilePoems, setProfilePoems)}
         />
       ) : (
-        <p>No poems found</p>
+        <p>No published poems yet</p>
       )}
     </>
-  );
+  )
 
   return (
-    <Row>
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <FeaturedProfiles mobile />
-        <Container className={appStyles.Content}>
-          {hasLoaded ? (
-            <>
-              {mainProfile}
-              {mainProfilePoems}
-            </>
-          ) : (
-            <Asset spinner />
-          )}
-        </Container>
-      </Col>
-      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        <FeaturedProfiles />
-      </Col>
-    </Row>
+    <>
+      {mainProfile}
+      {poems}
+    </>
   );
 }
 
