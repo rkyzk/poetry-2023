@@ -14,6 +14,9 @@ import PoemEditForm from "./pages/poems/PoemEditForm";
 import ProfilesPage from "./pages/profiles/ProfilesPage";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import NewPoems from "./pages/poems_lists/NewPoems";
+import UsernameForm from "./pages/profiles/UsernameForm";
+import UserPasswordForm from "./pages/profiles/UserPasswordForm";
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 
 
 function App() {
@@ -53,7 +56,22 @@ function App() {
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
           <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />
           <Route exact path="/poems/:id" render={() => <PoemPage />} />
-          <Route exact path="/new-poems" render={() => <NewPoems />} />       
+          <Route exact path="/new-poems" render={() => <NewPoems />} />
+          <Route
+            exact
+            path="/profiles/:id/edit/username"
+            render={() => <UsernameForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit/password"
+            render={() => <UserPasswordForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() => <ProfileEditForm />}
+          />   
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

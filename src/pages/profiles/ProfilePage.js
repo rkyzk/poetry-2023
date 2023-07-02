@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Row, Card } from "react-bootstrap";
 import Avatar from "../../components/Avatar";
 import Asset from "../../components/Asset";
-
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -20,7 +20,6 @@ import { Button } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Poem from "../poems/Poem";
 import { fetchMoreData } from "../../utils/utils";
-import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -71,6 +70,7 @@ function ProfilePage() {
                   <span>{profile?.display_name}</span>
                   <p>Member since {profile?.created_at}</p>
                 </div>
+                {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
               </Col>
             </Row>
           </Card.Title>
