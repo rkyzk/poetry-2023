@@ -25,13 +25,7 @@ const SignUpForm = () => {
     password2: "",
   });
 
-  const [profileData, setProfileData] = useState({
-    display_name: "",
-    about_me: "",
-    favorites: ""
-  });
   const { username, password1, password2 } = signUpData;
-  const { display_name, about_me, favorites } = profileData;
   const history = useHistory();
   const [errors, setErrors] = useState({});
 
@@ -40,17 +34,12 @@ const SignUpForm = () => {
       ...signUpData,
       [event.target.name]: event.target.value,
     });
-    setProfileData({
-      ...profileData,
-      [event.target.name]: event.target.value,
-    });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const { data } = await axios.post('dj-rest-auth/registration/', signUpData);
-      await axiosReq.post(`/profiles/${data.id}`, profileData);
       history.push("/signin");
     } catch(err){
       setErrors(err.response?.data);
@@ -109,39 +98,6 @@ const SignUpForm = () => {
                 {message}
               </Alert>
           ))}
-          <Form.Group controlId="display_name">
-            <Form.Label className="d-none">Display name (if different from username)</Form.Label>
-            <Form.Control
-              className={styles.Input}
-              type="text"
-              placeholder="Display name if different from username"
-              name="display_name"
-              value={display_name}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="about_me">
-            <Form.Label className="d-none">A few things about yourself (optional)</Form.Label>
-            <Form.Control
-              className={styles.Input}
-              type="text"
-              placeholder="A few things about yourself (optional)"
-              name="about_me"
-              value={about_me}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="about_me">
-            <Form.Label className="d-none">Your favorite poems/poets (optional)</Form.Label>
-            <Form.Control
-              className={styles.Input}
-              type="text"
-              placeholder="Your favorite poems/poets"
-              name="favorites"
-              value={favorites}
-              onChange={handleChange}
-            />
-          </Form.Group>
           <Button
             className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
             type="submit"
