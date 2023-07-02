@@ -14,6 +14,7 @@ import {
 } from "react-bootstrap";
 
 function PoemCreateForm() {
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
   const [poemData, setPoemData] = useState({
     title: "",
