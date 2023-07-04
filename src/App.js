@@ -36,8 +36,7 @@ function App() {
             exact
             path="/my-poems"
             render={() => <PoemsPage 
-                            filter={`owner__profile=${profile_id}&ordering=-created_at&`} />}
-          />
+                            filter={`owner__profile=${profile_id}&ordering=-created_at&`} />} />
           <Route
             exact
             path="/liked"
@@ -49,14 +48,15 @@ function App() {
             render={() => (
               <ProfilesPage
                 filter={`owner__followed__owner__profile=${profile_id}&ordering=-owner__following__created_at&`}
-              />
-            )}
+              />)}
           />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
           <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />
           <Route exact path="/poems/:id" render={() => <PoemPage />} />
-          <Route exact path="/new-poems" render={() => <NewPoems />} />
+          <Route
+            exact path="/new-poems"
+            render={() => <NewPoems filter={`status=1&ordering=-created_at&`} />} />
           <Route
             exact
             path="/profiles/:id/edit/username"

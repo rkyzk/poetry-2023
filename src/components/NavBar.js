@@ -7,7 +7,7 @@ import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContex
 import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
-// import { SetCurrentUserContext } from "../App";
+
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -34,7 +34,7 @@ const NavBar = () => {
         </NavDropdown.Item>
         <NavDropdown.Item>
           <NavLink className={styles.NavLink} to="/my-poems">
-            My Poems
+            My poems
           </NavLink>
         </NavDropdown.Item>
         <NavDropdown.Item>
@@ -47,12 +47,6 @@ const NavBar = () => {
             Poems I liked
           </NavLink>
         </NavDropdown.Item>
-         {/* 
-        <NavDropdown.Item>
-          <NavLink className={styles.NavLink}>
-            Profiles I'm following
-          </NavLink> 
-        </NavDropdown.Item> */}
         <NavDropdown.Item>
           <NavLink
             className={styles.NavLink}

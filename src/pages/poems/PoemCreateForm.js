@@ -22,6 +22,7 @@ function PoemCreateForm() {
     content: "",
   });
   const { title, content } = poemData;
+  const [publish, setPublish] = useState(false);
   const history = useHistory();
 
   const handleChange = (event) => {
@@ -36,6 +37,10 @@ function PoemCreateForm() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
+    if (publish) {
+      formData.append("status", 1);
+    }
+
     try {
       const { data } = await axiosReq.post('/poems/', formData);
       console.log(data.id)
@@ -92,6 +97,7 @@ function PoemCreateForm() {
       </Button>
       <Button
         className={`${btnStyles.Button} ${btnStyles.Olive} ml-2 mt-2`}
+        onClick={()=>{setPublish(true)}} 
         type="submit"
       >
         Publish

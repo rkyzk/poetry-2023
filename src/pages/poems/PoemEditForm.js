@@ -1,196 +1,133 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
+ import Form from "react-bootstrap/Form";
+ import Button from "react-bootstrap/Button";
+ import Row from "react-bootstrap/Row";
+ import Col from "react-bootstrap/Col";
+ import Container from "react-bootstrap/Container";
+ import Alert from "react-bootstrap/Alert";
+ import Image from "react-bootstrap/Image";
 
-import { axiosReq } from "../../api/axiosDefaults";
-import {
-  useCurrentUser,
-  useSetCurrentUser,
-} from "../../contexts/CurrentUserContext";
+ import styles from "../../styles/PoemCreateEditForm.module.css";
+ import appStyles from "../../App.module.css";
+ import btnStyles from "../../styles/Button.module.css";
 
-import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
+ import { useHistory, useParams } from "react-router";
+ import { axiosReq } from "../../api/axiosDefaults";
 
-const ProfileEditForm = () => {
-  const currentUser = useCurrentUser();
-  const setCurrentUser = useSetCurrentUser();
-  const { id } = useParams();
-  const history = useHistory();
-  const imageFile = useRef();
+ function PoemEditForm() {
+   const [errors, setErrors] = useState({});
 
-  const [profileData, setProfileData] = useState({
-    display_name: "",
-    about_me: "",
-    favorites: "",
-    image: "",
-  });
-  const { display_name, about_me, favorites, image } = profileData;
-  const [errors, setErrors] = useState({});
+   const [poemData, setPoemData] = useState({
+     title: "",
+     content: "",
+   });
+   const { title, content } = poemData;
 
-  useEffect(() => {
-    const handleMount = async () => {
-      if (currentUser?.profile_id?.toString() === id) {
-        try {
-          const { data } = await axiosReq.get(`/profiles/${id}/`);
-          const { display_name, about_me, favorites, image } = data;
-          setProfileData({ display_name, about_me, favorites, image });
-        } catch (err) {
-          console.log(err);
-          history.push("/");
-        }
-      } else {
-        history.push("/");
-      }
-    };
+   const history = useHistory();
+   const { id } = useParams();
 
-    handleMount();
-  }, [currentUser, history, id]);
+   useEffect(() => {
+     const handleMount = async () => {
+       try {
+         const { data } = await axiosReq.get(`/poems/${id}`);
+         const { title, content, is_owner, status } = data;
 
-  const handleChange = (event) => {
-    setProfileData({
-      ...profileData,
-      [event.target.name]: event.target.value,
-    });
-  };
+         is_owner ? setPoemData({ title, content }) : history.push("/");
+       } catch (err) {
+         console.log(err);
+       }
+     };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append("display_name", display_name);
-    formData.append("about_me", about_me);
-    formData.append("favorites", favorites);
+     handleMount();
+   }, [history, id]);
 
-    if (imageFile?.current?.files[0]) {
-      formData.append("image", imageFile?.current?.files[0]);
-    }
+   const handleChange = (event) => {
+     setPoemData({
+       ...poemData,
+       [event.target.name]: event.target.value,
+     });
+   };
 
-    try {
-      const { data } = await axiosReq.put(`/profiles/${id}/`, formData);
-      setCurrentUser((currentUser) => ({
-        ...currentUser,
-        profile_image: data.image,
-      }));
-      history.goBack();
-    } catch (err) {
-      console.log(err);
-      setErrors(err.response?.data);
-    }
-  };
+   const handleSubmit = async (event) => {
+     event.preventDefault();
+     const formData = new FormData();
 
-  const textFields = (
-    <>
-      <Form.Group>
-        <Form.Label>display name</Form.Label>
-        <Form.Control
-          as="textarea"
-          value={display_name}
-          onChange={handleChange}
-          name="display_name"
-          rows={1}
-        />
-      </Form.Group>
-      {errors?.display_name?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-      <Form.Group>
-        <Form.Label>Tell us a few things about yourself</Form.Label>
-        <Form.Control
-          as="textarea"
-          value={about_me}
-          onChange={handleChange}
-          name="about_me"
-          rows={6}
-        />
-      </Form.Group>
-      {errors?.about_me?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-      <Form.Group>
-        <Form.Label>favorite poems/poets</Form.Label>
-        <Form.Control
-          as="textarea"
-          value={favorites}
-          onChange={handleChange}
-          name="favorites"
-          rows={6}
-        />
-      </Form.Group>
-      {errors?.favorites?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
+     formData.append("title", title);
+     formData.append("content", content);
 
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => history.goBack()}
-      >
-        cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        save
-      </Button>
-    </>
-  );
+     try {
+       await axiosReq.put(`/poems/${id}`, formData);
+       history.push(`/poems/${id}`);
+     } catch (err) {
+       console.log(err);
+       if (err.response?.status !== 401) {
+         setErrors(err.response?.data);
+       }
+     }
+   };
 
-  return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={6}>
-          <Container className={appStyles.Content}>
-            <Form.Group>
-              {image && (
-                <figure>
-                  <Image src={image} fluid />
-                </figure>
-              )}
-              {errors?.image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
-              <div>
-                <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn my-auto`}
-                  htmlFor="image-upload"
-                >
-                  Change the image
-                </Form.Label>
-              </div>
-              <Form.File
-                id="image-upload"
-                ref={imageFile}
-                accept="image/*"
-                onChange={(e) => {
-                  if (e.target.files.length) {
-                    setProfileData({
-                      ...profileData,
-                      image: URL.createObjectURL(e.target.files[0]),
-                    });
-                  }
-                }}
-              />
-            </Form.Group>
-            <div className="d-md-none">{textFields}</div>
-          </Container>
-        </Col>
-        <Col md={5} lg={6} className="d-none d-md-block p-0 p-md-2 text-center">
-          <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-      </Row>
-    </Form>
-  );
-};
+   const textFields = (
+     <div className="text-center">
+       <Form.Group>
+         <Form.Label>Title</Form.Label>
+         <Form.Control
+           type="text"
+           name="title"
+           value={title}
+           onChange={handleChange}
+         />
+       </Form.Group>
+       {errors?.title?.map((message, idx) => (
+         <Alert variant="warning" key={idx}>
+           {message}
+         </Alert>
+       ))}
 
-export default ProfileEditForm;
+       <Form.Group>
+         <Form.Label>Content</Form.Label>
+         <Form.Control
+           as="textarea"
+           rows={10}
+           name="content"
+           value={content}
+           onChange={handleChange}
+         />
+       </Form.Group>
+       {errors?.content?.map((message, idx) => (
+         <Alert variant="warning" key={idx}>
+           {message}
+         </Alert>
+       ))}
+
+       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+         save
+       </Button>
+       {/* fix status to Boolean */}
+       <Button
+         className={`${btnStyles.Button} ${btnStyles.Blue}`}
+         onClick={() => {}}
+         type="submit"
+        >
+         publish
+       </Button>
+       <Button
+         className={`${btnStyles.Button} ${btnStyles.Blue}`}
+         onClick={() => history.goBack()}
+       >
+         cancel
+       </Button>
+       
+     </div>
+   );
+
+   return (
+     <Form onSubmit={handleSubmit}>
+       <Container>
+           <div>{textFields}</div>
+       </Container>
+     </Form>
+   );
+ }
+
+ export default PoemEditForm; 

@@ -28,7 +28,6 @@ function PoemsPage({ filter="" }) {
       try {
         const { data } = await axiosReq.get(`/poems/?${filter}`);
         setPoems(data);
-        console.log(data);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);

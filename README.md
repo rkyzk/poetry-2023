@@ -9,5 +9,6 @@ npm install axios
 
 bugs
 nav link hover underline
+If I like and unlike "NaN" instead of 0
 
 font-family in App.css

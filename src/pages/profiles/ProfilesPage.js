@@ -17,29 +17,30 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 function ProfilesPage({ filter = "" }) {
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [profiles, setProfiles] = useState({ results: [] });
   const currentUser = useCurrentUser();
-
-  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
-  const { pageProfile } = useProfileData();
+  const { handleFollow, handleUnfollow } = useSetProfileData();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProfiles = async () => {
       try {
-        const { data: profiles } =
-          await axiosReq.get(`/profiles/?${filter}`);
-        const array = [profiles.results[0], profiles.results[1]];
-        console.log(array);
-        setProfileData((prevState) => ({
-          ...prevState,
-          pageProfile: { results: array },
-        }));
-
+        const { data } = await axiosReq.get(
+          `/profiles/?${filter}`
+        );
+        setProfiles(data);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
+    }
+    setHasLoaded(false);
+    const timer = setTimeout(() => {
+      fetchProfiles();
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
     };
-    fetchData();
   }, [filter]);
 
     return (
@@ -48,15 +49,15 @@ function ProfilesPage({ filter = "" }) {
         <Col>
           {hasLoaded ? (
             <>
-              {pageProfile.results.length ? (
+              {profiles.results.length ? (
                 <InfiniteScroll
-                  children={pageProfile.results.map((profile) => (
-                    <ProfilePartial key={profile.id} {...profile} />
+                  children={profiles.results.map((profile) => (
+                    <ProfilePartial key={profile.id} profile={profile} />
                   ))}
-                  dataLength={pageProfile.results.length}
+                  dataLength={profiles.results.length}
                   loader={<Asset spinner />}
-                  hasMore={!!pageProfile.next}
-                  next={() => fetchMoreData(pageProfile, setProfileData)}
+                  hasMore={!!profiles.next}
+                  next={() => fetchMoreData(profiles, setProfiles)}
                 />
               ) : (
                 <p>You haven't followed any profiles.</p>

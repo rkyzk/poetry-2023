@@ -26,12 +26,12 @@ const ProfileEditForm = () => {
   const imageFile = useRef();
 
   const [profileData, setProfileData] = useState({
-    name: "",
-    content: "",
+    display_name: "",
+    about_me: "",
+    favorites: "",
     image: "",
   });
-  const { name, content, image } = profileData;
-
+  const { display_name, about_me, favorites, image } = profileData;
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -39,8 +39,8 @@ const ProfileEditForm = () => {
       if (currentUser?.profile_id?.toString() === id) {
         try {
           const { data } = await axiosReq.get(`/profiles/${id}/`);
-          const { name, content, image } = data;
-          setProfileData({ name, content, image });
+          const { display_name, about_me, favorites, image } = data;
+          setProfileData({ display_name, about_me, favorites, image });
         } catch (err) {
           console.log(err);
           history.push("/");
@@ -63,8 +63,9 @@ const ProfileEditForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("content", content);
+    formData.append("display_name", display_name);
+    formData.append("about_me", about_me);
+    formData.append("favorites", favorites);
 
     if (imageFile?.current?.files[0]) {
       formData.append("image", imageFile?.current?.files[0]);
@@ -86,21 +87,51 @@ const ProfileEditForm = () => {
   const textFields = (
     <>
       <Form.Group>
-        <Form.Label>Bio</Form.Label>
+        <Form.Label>display name</Form.Label>
         <Form.Control
           as="textarea"
-          value={content}
+          value={display_name}
           onChange={handleChange}
-          name="content"
-          rows={7}
+          name="display_name"
+          rows={1}
         />
       </Form.Group>
-
-      {errors?.content?.map((message, idx) => (
+      {errors?.display_name?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
+      <Form.Group>
+        <Form.Label>Tell us a few things about yourself</Form.Label>
+        <Form.Control
+          as="textarea"
+          value={about_me}
+          onChange={handleChange}
+          name="about_me"
+          rows={6}
+        />
+      </Form.Group>
+      {errors?.about_me?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+      <Form.Group>
+        <Form.Label>favorite poems/poets</Form.Label>
+        <Form.Control
+          as="textarea"
+          value={favorites}
+          onChange={handleChange}
+          name="favorites"
+          rows={6}
+        />
+      </Form.Group>
+      {errors?.favorites?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}

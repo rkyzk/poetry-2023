@@ -19,7 +19,7 @@ const FeaturedProfiles = ({ mobile }) => {
           <p>Featured profiles</p>
           {mobile ? (
             <div className="d-flex justify-content-around">
-              {featuredProfiles.results.slice(0, 4).map((profile) => (
+              {featuredProfiles.results.map((profile) => (
                 <ProfilePartial key={profile.id} profile={profile} mobile />
               ))}
             </div>

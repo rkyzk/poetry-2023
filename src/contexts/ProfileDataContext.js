@@ -67,7 +67,7 @@ export const ProfileDataProvider = ({ children }) => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(
-          "/profiles/?ordering=-followers_count"
+          "/profiles/?featured_flag=1"
         );
         setProfileData((prevState) => ({
           ...prevState,
