@@ -65,17 +65,15 @@ const NavBar = () => {
   const loggedOut = (
     <>
       <NavLink
-        className={styles.NavLink}
+        className={`${styles.NavLink} mr-3`}
         activeClassName={styles.Active}
-        className="mr-3"
         to="/signin"
       >
         Sign in
       </NavLink>
       <NavLink
-        className={styles.NavLink}
+        className={`${styles.NavLink} mr-3`}
         activeClassName={styles.Active}
-        className="mr-3"
         to="/signup"
       >
         Register
@@ -101,16 +99,14 @@ const NavBar = () => {
           <Nav className="ml-auto text-left">
             <NavLink
               exact
-              className={styles.NavLink}
+              className={`${styles.NavLink} mr-3`}
               activeClassName={styles.Active}
-              className="mr-3"
               to="/"
             >
               Home
             </NavLink>
             <NavLink
-              className={styles.NavLink}
-              className="mr-3"
+              className={`${styles.NavLink} mr-3`}
               activeClassName={styles.Active}
               to="/contact"
             >

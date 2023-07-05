@@ -6,7 +6,7 @@
   text-decoration: underline;
 }
   
-.Navlink:hover {
+.NavLink:hover {
   text-decoration: underline;
   color:rgb(10, 10, 90);
 }
@@ -18,5 +18,6 @@ h1 {
 
 .NavLink {
   font-family: 'Nanum Myeongj';
+  font-size: 1.2rem;
   color: rgb(51, 93, 151);
 }

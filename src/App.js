@@ -17,6 +17,7 @@ import NewPoems from "./pages/poems_lists/NewPoems";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+import Home from "./pages/poems_lists/Home";
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
       <NavBarSecond />
       <Container className={styles.Main}>
         <Switch>
-          <Route exact path="/" render={() => <h1>Home page</h1>} />
+          <Route exact path="/" render={() => <Home />} />
           <Route exact path="/contact" render={() => <h1>Contact</h1>} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />

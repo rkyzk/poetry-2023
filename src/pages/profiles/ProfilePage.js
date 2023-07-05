@@ -75,7 +75,10 @@ function ProfilePage() {
             <span>poems</span>
             {profile?.followers_count}
             <span>followers</span>
+            <div className="text-muted">About me:</div>
             <div>{profile?.about_me}</div>
+            <div className="text-muted">My favorite poets/poems:</div>
+            <div>{profile?.favorites}</div>
             { currentUser && !is_owner && 
               (profile?.following_id ? (
                 <Button
