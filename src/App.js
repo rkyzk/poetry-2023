@@ -50,7 +50,7 @@ function App() {
               <ProfilesPage
                 filter={`owner__followed__owner__profile=${profile_id}&ordering=-owner__following__created_at&`}
               />)}
-          />
+            />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
           <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />

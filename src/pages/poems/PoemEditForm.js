@@ -31,7 +31,7 @@ import React, { useEffect, useState } from "react";
      const handleMount = async () => {
        try {
          const { data } = await axiosReq.get(`/poems/${id}`);
-         const { title, content, is_owner, status } = data;
+         const { title, content, is_owner, published } = data;
 
          is_owner ? setPoemData({ title, content }) : history.push("/");
        } catch (err) {
@@ -55,7 +55,7 @@ import React, { useEffect, useState } from "react";
 
      formData.append("title", title);
      formData.append("content", content);
-
+     
      try {
        await axiosReq.put(`/poems/${id}`, formData);
        history.push(`/poems/${id}`);
@@ -103,14 +103,14 @@ import React, { useEffect, useState } from "react";
        <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
          save
        </Button>
-       {/* fix status to Boolean */}
-       <Button
-         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-         onClick={() => {}}
-         type="submit"
-        >
-         publish
-       </Button>
+  
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.Blue}`}
+          onClick={() => {}}
+          type="submit"
+          >
+          publish
+        </Button>
        <Button
          className={`${btnStyles.Button} ${btnStyles.Blue}`}
          onClick={() => history.goBack()}

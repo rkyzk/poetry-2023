@@ -29,56 +29,51 @@ function PoemPage() {
         ]);
         setPoem({ results: [poem] });
         setComments(comments);
-        console.log(comments);
       } catch(err) {
         console.log(err)
       }
     }
+    console.log(poem.results[0]);
     handleMount();
   }, [id]);
 
   return (
     <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles for mobile</p>
-        <Poem {...poem.results[0]} setPoems={setPoem} poemPage />
-        <Container className={appStyles.Content}>
-          {currentUser ? (
-            <CommentCreateForm
-              profile_id={currentUser.profile_id}
-              profileImage={profile_image}
-              poem={id}
+      <Container className={appStyles.Content}>
+      <Poem {...poem.results[0]} setPoems={setPoem} poemPage />
+        {currentUser ? (
+          <CommentCreateForm
+            profile_id={currentUser.profile_id}
+            profileImage={profile_image}
+            poem={id}
+            setPoem={setPoem}
+            setComments={setComments}
+          />
+        ) : comments.results.length ? (
+          "Comments"
+        ) : null}
+        {comments.results.length ? (
+          <InfiniteScroll
+            children={comments.results.map((comment) => (
+            <Comment
+              key={comment.id}
+              {...comment}
               setPoem={setPoem}
               setComments={setComments}
             />
-          ) : comments.results.length ? (
-            "Comments"
-          ) : null}
-          {comments.results.length ? (
-            <InfiniteScroll
-              children={comments.results.map((comment) => (
-              <Comment
-                key={comment.id}
-                {...comment}
-                setPoem={setPoem}
-                setComments={setComments}
-              />
-              ))}
-              dataLength={comments.results.length}
-              loader={<Asset spinner />}
-              hasMore={!!comments.next}
-              next={() => fetchMoreData(comments, setComments)}
-            />
-          ) : currentUser ? (
-            <span>No comments yet, be the first to comment!</span>
-          ) : (
-            <span>No comments yet</span>
-          )}
-        </Container>
-      </Col>
-      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        Popular profiles for desktop
-      </Col>
+            ))}
+            dataLength={comments.results.length}
+            loader={<Asset spinner />}
+            hasMore={!!comments.next}
+            next={() => fetchMoreData(comments, setComments)}
+          />
+        ) : currentUser ? (
+          <span>No comments yet, be the first to comment!</span>
+        ) : (
+          <span>No comments yet</span>
+        )}
+      </Container>
+     
     </Row>
   );
 }

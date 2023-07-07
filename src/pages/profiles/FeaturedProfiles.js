@@ -2,9 +2,9 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import Asset from "../../components/Asset";
-import ProfilePartial from "./ProfilePartial";
+import Profile from "./Profile";
 import { useProfileData } from "../../contexts/ProfileDataContext";
-
+{/*
 const FeaturedProfiles = ({ mobile }) => {
   const { featuredProfiles } = useProfileData();
 
@@ -36,4 +36,4 @@ const FeaturedProfiles = ({ mobile }) => {
   );
 };
 
-export default FeaturedProfiles;
+export default FeaturedProfiles; */}

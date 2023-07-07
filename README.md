@@ -13,6 +13,8 @@ If I like and unlike "NaN" instead of 0
 
 font-family in App.css
 
+"Style Home"
+
 
 ### Media
 Profile images 

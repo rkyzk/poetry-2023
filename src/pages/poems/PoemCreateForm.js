@@ -35,15 +35,18 @@ function PoemCreateForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
+    console.log(content);
     formData.append("title", title);
     formData.append("content", content);
+    // for(var pair of formData.entries()) {
+    //  console.log(`${pair[0]}: ${pair[1]}`);
+    // }
     if (publish) {
-      formData.append("status", 1);
+      formData.append("published", true);
     }
 
     try {
       const { data } = await axiosReq.post('/poems/', formData);
-      console.log(data.id)
       history.push(`/poems/${data.id}`);
     } catch (err){
       if (err.response?.status !== 401) {
