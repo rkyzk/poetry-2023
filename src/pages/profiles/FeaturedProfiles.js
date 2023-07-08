@@ -3,10 +3,10 @@ import { Container } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import Asset from "../../components/Asset";
 import Profile from "./Profile";
-import { useProfileData } from "../../contexts/ProfileDataContext";
-{/*
+import { useFeaturedProfilesData } from "../../contexts/FeaturedProfilesDataContext";
+
 const FeaturedProfiles = ({ mobile }) => {
-  const { featuredProfiles } = useProfileData();
+  const featuredProfilesData = useFeaturedProfilesData();
 
   return (
     <Container
@@ -14,18 +14,18 @@ const FeaturedProfiles = ({ mobile }) => {
         mobile && "d-lg-none text-center mb-3"
       }`}
     >
-      {featuredProfiles.results.length ? (
+      {featuredProfilesData.results.length ? (
         <>
           <p>Featured profiles</p>
           {mobile ? (
             <div className="d-flex justify-content-around">
-              {featuredProfiles.results.map((profile) => (
-                <ProfilePartial key={profile.id} profile={profile} mobile />
+              {featuredProfilesData.results.map((profile) => (
+                <Profile key={profile.id} {...profile} mobile />
               ))}
             </div>
           ) : (
-            featuredProfiles.results.map((profile) => (
-              <ProfilePartial key={profile.id} profile={profile} />
+            featuredProfilesData.results.map((profile) => (
+              <Profile key={profile.id} {...profile} />
             ))
           )}
         </>
@@ -36,4 +36,4 @@ const FeaturedProfiles = ({ mobile }) => {
   );
 };
 
-export default FeaturedProfiles; */}
+export default FeaturedProfiles;

@@ -14,14 +14,12 @@ import { useLocation } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
-import FeaturedProfiles from "../profiles/FeaturedProfiles";
 
 
 function PoemsPage({ filter="" }) {
   const [poems, setPoems] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
-  console.log(filter);
 
   useEffect(() => {
     const fetchPoems = async () => {

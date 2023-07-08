@@ -57,7 +57,7 @@ function App() {
           <Route exact path="/poems/:id" render={() => <PoemPage />} />
           <Route
             exact path="/new-poems"
-            render={() => <NewPoems filter={`status=1&ordering=-created_at&`} />} />
+            render={() => <NewPoems />} />
           <Route
             exact
             path="/profiles/:id/edit/username"

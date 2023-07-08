@@ -6,7 +6,7 @@ import { Card, Media, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
-import { MoreDropdown } from "../../components/MoreDropdown";
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 const Profile = (props) => {
   const {
@@ -21,13 +21,11 @@ const Profile = (props) => {
     favorites,
     created_at,
     profilePage,
-    setProfiles,
+    setProfiles
   } = props;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
-  const history = useHistory();
-
 
   const handleFollow = async () => {
     try {
@@ -64,57 +62,66 @@ const Profile = (props) => {
   return (
     <Card>
       <Card.Body>
-        <Media className="align-items-center justify-content-between">
+        <Media className="align-items-center">
           {!profilePage ? (
           <Link to={`/profiles/${id}`}>
             <Avatar src={image} height={55} />
-            {display_name}
+            <h3 className="ml-4">{display_name}</h3>
           </Link>
           ) : (
             <>
-              <Avatar src={image} height={80} />
-              {display_name}
+              <Avatar src={image} height={120} />
+              <h3 className="ml-4">{display_name}</h3>
             </>
           )}
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center ml-4">
             <span>Member since {created_at}</span>
-            {/* {is_owner && profilePage && (
-              <MoreDropdown />
-            )} */}
+            {is_owner && profilePage && (
+                <ProfileEditDropdown id={id} />
+            )}
           </div>
         </Media>
       </Card.Body>
       {profilePage && (
         <Card.Body>
-            <div>About me</div>
-            {about_me && {about_me}}
-            <div>Favorites</div>
-            {favorites && {favorites}}
+            {about_me && (
+              <>
+                <div className="text-muted">About me</div>
+                {about_me})
+              </>)
+            }
+            {favorites && (
+              <>
+                <div className="text-muted">Favorites</div>
+                {favorites}
+              </>)}
             <div>
-                <span>{poems_count} poems</span>
-                <span>{followers_count} followers</span>
+              <span>{poems_count} poems</span>
+              <span className="ml-2">{followers_count} followers</span>
             </div>
         </Card.Body>
       )}
-      <div>
-        {currentUser &&
-          !is_owner &&
-          (following_id ? (
-            <Button
-              className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-              onClick={() => handleUnfollow()}
-            >
-              unfollow
-            </Button>
-            ) : (
-              <Button
-                className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={() => handleFollow()}
-              >
-                follow
-              </Button>
+      {currentUser &&
+        !is_owner &&
+        (following_id ? (
+        <Card.Body>
+          <Button
+            className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
+            onClick={() => handleUnfollow()}
+          >
+            unfollow
+          </Button>
+        </Card.Body>
+        ) : (
+          <Card.Body>
+          <Button
+            className={`${btnStyles.Button} ${btnStyles.Black}`}
+            onClick={() => handleFollow()}
+          >
+            follow
+          </Button>
+        </Card.Body>
         ))}
-      </div>
     </Card>
   );
 };

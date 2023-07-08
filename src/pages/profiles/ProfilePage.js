@@ -20,8 +20,7 @@ function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profileData, setProfileData] = useState({ results: [] });
   const [profilePoems, setProfilePoems] = useState({ results: [] });
-  const currentUser = useCurrentUser();
-  // const is_owner = currentUser?.username === profileData?.results[0].owner;
+
 
   useEffect(() => {
     const handleMount = async () => {
@@ -66,7 +65,11 @@ function ProfilePage() {
 
   return (
     <Container>
-      <Profile {...profileData.results[0]} setProfiles={setProfileData} profilePage />
+      <Profile
+        {...profileData.results[0]}
+        setProfiles={setProfileData}
+        profilePage
+      />
       {poems}
   </Container> 
   );
