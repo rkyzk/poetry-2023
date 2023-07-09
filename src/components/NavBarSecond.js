@@ -13,16 +13,18 @@ const NavBarSecond = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <NavDropdown className={`ml-4 ${styles.NavLink}`} title="Poems" id="nav-dropdown">
-              <NavDropdown.Item>
-                <NavLink className={styles.NavLink} to="/new-poems">
+              <NavDropdown.Item className={styles.NavLink} to="/new-poems">
                   New Poems
-                </NavLink>
               </NavDropdown.Item>
               <NavDropdown.Item className={styles.NavLink} to="/popular-poems">
-                Popular Poems
+                  Popular Poems
               </NavDropdown.Item>
-              <NavDropdown.Item className={styles.NavLink}>Poems by Categories</NavDropdown.Item>
-              <NavDropdown.Item className={styles.NavLink}>Search</NavDropdown.Item>
+              <NavDropdown.Item className={styles.NavLink}>
+                  Poems by Categories
+              </NavDropdown.Item>
+              <NavDropdown.Item className={styles.NavLink} to="/search">
+                Search
+              </NavDropdown.Item>
             </NavDropdown>
             <NavLink className={`${styles.NavLink}`} to="/poems/create">
               Write Poems

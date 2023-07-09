@@ -15,15 +15,21 @@ function PoemsPageWithProfiles(props) {
   let startDate;
   let filter;
 
+  // For new poems page, filter by published in the past 14 days
   if (page === "newPoems") {
     /* set filter for new poems page */
     startDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * 14).toISOString().substring(0, 10);           
     filter = `published=1&published_at__date__gte=${startDate}&ordering=-published_at`;
   }
+  // For popular poems page, filter by published in the past 30 days and order by descending likes_count
   if (page === "popularPoems") {
     startDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString().substring(0, 10);           
     filter = `published=1&published_at__date__gte=${startDate}&ordering=-likes_count`;
   }
+  // For poems by categories page, filter by category
+  // if (category !== "") {
+  //   filter = `published=1&category=${category}ordering=-published_at`;
+  // }
 
   return (
     <>

@@ -18,6 +18,7 @@ import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import Home from "./pages/poems_lists/Home";
 import PoemsPageWithProfiles from "./pages/poems_lists/PoemsPageWithProfiles";
+import Search from "./pages/poems_lists/Search";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
           <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />
           <Route exact path="/poems/:id" render={() => <PoemPage />} />
+          <Route exact path="/search" render={() => <Search />} />
           <Route
             exact path="/new-poems"
             render={() => <PoemsPageWithProfiles

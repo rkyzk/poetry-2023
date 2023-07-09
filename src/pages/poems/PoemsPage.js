@@ -16,16 +16,17 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 
 
-function PoemsPage({ filter="" }) {
+function PoemsPage({ filter }) {
   const [poems, setPoems] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
-
+  console.log(filter);
   useEffect(() => {
     const fetchPoems = async () => {
       try {
         const { data } = await axiosReq.get(`/poems/?${filter}`);
         setPoems(data);
+        console.log(data);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
