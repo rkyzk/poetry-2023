@@ -10,19 +10,27 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import PoemsPage from "../poems/PoemsPage";
 
-function NewPoems() {
+function PoemsPageWithProfiles(props) {
+  const { page, heading } = props;
+  let startDate;
+  let filter;
 
-  /* set filter for new poems page */
-  let startDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * 14).toISOString().substring(0, 10);           
-  let filter = `published=1&published_at__date__gte=${startDate}`;
-  // add ordering later!  need to redeploy api
+  if (page === "newPoems") {
+    /* set filter for new poems page */
+    startDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * 14).toISOString().substring(0, 10);           
+    filter = `published=1&published_at__date__gte=${startDate}&ordering=-published_at`;
+  }
+  if (page === "popularPoems") {
+    startDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString().substring(0, 10);           
+    filter = `published=1&published_at__date__gte=${startDate}&ordering=-likes_count`;
+  }
 
   return (
     <>
       <Row>
         <Col className="py-2 p-0 p-lg-2" lg={8}>
          <FeaturedProfiles mobile />
-         <h2>New Poems (published in previous 2 weeks)</h2>
+         <h2>{heading}</h2>
           <PoemsPage filter={filter} />
         </Col>
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
@@ -33,4 +41,4 @@ function NewPoems() {
   );
 }
 
-export default NewPoems;
+export default PoemsPageWithProfiles;

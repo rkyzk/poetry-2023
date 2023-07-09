@@ -23,6 +23,10 @@ import React, { useEffect, useState } from "react";
      content: "",
    });
    const { title, content } = poemData;
+   // published tells if the poem has been published.
+   const [published, setPublished] = useState(false);
+   // publish will be set true, if user decides to publish the poem
+   const [publish, setPublish] = useState(false);
 
    const history = useHistory();
    const { id } = useParams();
@@ -32,7 +36,7 @@ import React, { useEffect, useState } from "react";
        try {
          const { data } = await axiosReq.get(`/poems/${id}`);
          const { title, content, is_owner, published } = data;
-
+         published && setPublished(true)
          is_owner ? setPoemData({ title, content }) : history.push("/");
        } catch (err) {
          console.log(err);
@@ -55,7 +59,9 @@ import React, { useEffect, useState } from "react";
 
      formData.append("title", title);
      formData.append("content", content);
-     
+     if (publish || published) {
+      formData.append("published", true);
+     }
      try {
        await axiosReq.put(`/poems/${id}`, formData);
        history.push(`/poems/${id}`);
@@ -68,7 +74,7 @@ import React, { useEffect, useState } from "react";
    };
 
    const textFields = (
-     <div className="text-center">
+     <div className="ml-2">
        <Form.Group>
          <Form.Label>Title</Form.Label>
          <Form.Control
@@ -103,14 +109,15 @@ import React, { useEffect, useState } from "react";
        <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
          save
        </Button>
-  
+      {!published && (
         <Button
           className={`${btnStyles.Button} ${btnStyles.Blue}`}
-          onClick={() => {}}
+          onClick={()=>{setPublish(true)}} 
           type="submit"
           >
           publish
         </Button>
+      )}
        <Button
          className={`${btnStyles.Button} ${btnStyles.Blue}`}
          onClick={() => history.goBack()}

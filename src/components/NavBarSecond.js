@@ -18,7 +18,9 @@ const NavBarSecond = () => {
                   New Poems
                 </NavLink>
               </NavDropdown.Item>
-              <NavDropdown.Item className={styles.NavLink}>Popular Poems</NavDropdown.Item>
+              <NavDropdown.Item className={styles.NavLink} to="/popular-poems">
+                Popular Poems
+              </NavDropdown.Item>
               <NavDropdown.Item className={styles.NavLink}>Poems by Categories</NavDropdown.Item>
               <NavDropdown.Item className={styles.NavLink}>Search</NavDropdown.Item>
             </NavDropdown>

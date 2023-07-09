@@ -5,7 +5,15 @@
   margin-bottom: 16px;
   color: #333;
 }
-  
+
+.LinkText {
+  color:#333;
+}
+
+.LinkText:hover {
+  text-decoration: underline;
+}
+
 .Poem figure,
   h5 {
     margin: 0 0;

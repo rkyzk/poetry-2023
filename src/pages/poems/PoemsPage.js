@@ -54,7 +54,7 @@ function PoemsPage({ filter="" }) {
             )}
           </>
         ) : (
-          <p>spinner</p>
+          <Asset spinner />
         )}
     </>
   );

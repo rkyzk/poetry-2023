@@ -12,12 +12,13 @@ const Poem = (props) => {
     id,
     owner,
     profile_id,
+    profile_name,
     comments_count,
     likes_count,
     like_id,
     title,
     content,
-    updated_at,
+    published_at,
     poemPage,
     setPoems,
   } = props;
@@ -73,31 +74,46 @@ const Poem = (props) => {
   return (
     <Card className={styles.Poem}>
       <Card.Body>
-        {title && <Card.Title>
-          <Link to={`/poems/${id}`}>
+        {title && poemPage ? (
+          <Card.Title className="styles.LinkText">
             {title}
-          </Link>
-        </Card.Title>}
-        <span>
-        {is_owner && poemPage && (
+          </Card.Title>
+        ) : (
+          <Card.Title className="styles.LinkText">
+            <Link to={`/poems/${id}`}>
+              {title}
+            </Link>
+          </Card.Title>
+        )}
+        <div className="d-flex justify-content-between">
+          <span className="styles.LinkText">
+            <Link to={`/profiles/${profile_id}`}>
+              {profile_name}
+            </Link>
+          </span>
+          <span className="ml-5 justify-content-end">
+            {published_at ? (
+                <>Published on {published_at}</>
+              ) : (
+                <>Not published yet</>    
+              )
+            }
+            {is_owner && poemPage && (
               <MoreDropdown
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
                 className="ml-3"
               />
             )}
-        </span>
-        <Media className="justify-content-end">
-          <Link to={`/profiles/${profile_id}`}>
-            {owner}
-          </Link>
-          <div className="ml-3">
-            <span>{updated_at}</span>
-          </div>
-        </Media>
+          </span>
+        </div>       
       </Card.Body>
       <Card.Body>     
-        {content && <Card.Text>{content.substring(0, 60)}</Card.Text>}
+        {content && !poemPage ? (
+          <Card.Text>{content.substring(0, 60)}</Card.Text>
+        ) : (
+          <Card.Text>{content}</Card.Text>
+        )}
         <div className={styles.PostBar}>
           {is_owner ? (
             <OverlayTrigger

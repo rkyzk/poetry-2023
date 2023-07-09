@@ -13,11 +13,11 @@ import PoemPage from "./pages/poems/PoemPage";
 import PoemEditForm from "./pages/poems/PoemEditForm";
 import ProfilesPage from "./pages/profiles/ProfilesPage";
 import ProfilePage from "./pages/profiles/ProfilePage";
-import NewPoems from "./pages/poems_lists/NewPoems";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import Home from "./pages/poems_lists/Home";
+import PoemsPageWithProfiles from "./pages/poems_lists/PoemsPageWithProfiles";
 
 
 function App() {
@@ -57,7 +57,14 @@ function App() {
           <Route exact path="/poems/:id" render={() => <PoemPage />} />
           <Route
             exact path="/new-poems"
-            render={() => <NewPoems />} />
+            render={() => <PoemsPageWithProfiles
+                            page={"newPoems"}
+                            heading={"New Poems (published in past 14 days"} />} />
+          <Route
+            exact path="/popular-poems"
+            render={() => <PoemsPageWithProfiles
+                            page={"popularPoems"}
+                            heading={"Popular Poems (published in past 30 days)"}/>} />
           <Route
             exact
             path="/profiles/:id/edit/username"
