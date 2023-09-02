@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 /**
  * Return the sign in form.
@@ -19,6 +20,8 @@ function SignInForm() {
   });
   /** destructure 'signInData' */
   const { username, password } = signInData;
+  /** stores info about which pages the user has visited. */
+  const history = useHistory();
 
   /** stores errors */
   const [errors, setErrors] = useState({});
@@ -39,7 +42,7 @@ function SignInForm() {
     >
       <Container className="p-4">
         <h1 className={styles.Header}>sign in</h1>
-        <Form>
+        <Form handleSubmit={handleSubmit}>
           <Form.Group controlId="username">
             <Form.Label className="d-none">Username</Form.Label>
             <Form.Control

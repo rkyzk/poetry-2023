@@ -5,4 +5,9 @@ const instance = axios.create({
 });
 instance.defaults.headers.common["Content-Type"] = "multipart/form-data";
 
+/** create two instances of axios to attach interceptors
+    for requests and responses. */
+export const axiosReq = axios.create();
+export const axiosRes = axios.create();
+
 export default instance;

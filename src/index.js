@@ -7,7 +7,9 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <Router>
-    <App />
+    <CurrentUserProvider>
+      <App />
+    </CurrentUserProvider>
   </Router>,
   document.getElementById("root")
 );
