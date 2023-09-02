@@ -6,6 +6,11 @@ import { axiosReq } from "../../api/axiosDefaults";
 import Poem from "./Poem";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import CommentCreateForm from "../comments/CommentCreateForm";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Comment from "../comments/Comment";
+import Asset from "../../components/Asset";
+import { fetchMoreData } from "../../utils/utils";
 
 /**
  * Return content of individual poem pages.
@@ -54,6 +59,40 @@ function PoemPage() {
               setPoem={setPoem}
               setComments={setComments}
             />
+          )}
+          {comments.results.length ? (
+            <InfiniteScroll
+              children={comments.results.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  {...comment}
+                  setPoem={setPoem}
+                  setComments={setComments}
+                />
+              ))}
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={() => fetchMoreData(comments, setComments)}
+            />
+          ) : currentUser ? (
+            <>
+              {/* If no comments and if logged in,
+                    display the following */}
+              <span>No comments yet, be the first to comment!</span>
+            </>
+          ) : (
+            <>
+              {/* If no comments and if not logged in,
+                    display the following */}
+              <span>
+                No comments yet.
+                <Link className="ml-2 mr-2" to="/signin">
+                  Sign in
+                </Link>
+                to leave a comment.
+              </span>
+            </>
           )}
         </Col>
       </Row>
