@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { axiosReq } from "../../api/axiosDefaults";
+import Poem from "./Poem";
 
 /**
  * Return content of individual poem pages.
@@ -30,13 +31,11 @@ function PoemPage() {
     handleMount();
   }, [id]);
 
-  console.log(poem.results[0]);
   return (
     <>
       <Row className="h-100">
-        <Col className="mt-3" md={{ span: 8, offset: 2 }}>
-          <p>{poem?.results[0].title}</p>
-          <p>{poem?.results[0].content}</p>
+        <Col className="mt-3" lg={{ span: 8, offset: 2 }}>
+          <Poem {...poem.results[0]} setPoems={setPoem} poemPage />
         </Col>
       </Row>
     </>
