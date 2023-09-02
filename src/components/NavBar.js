@@ -25,6 +25,7 @@ const NavBar = () => {
   const setCurrentUser = useSetCurrentUser();
 
   const [myMenu, setMyMenu] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleCloseMyMenu = () => {
     setTimeout(() => {
@@ -37,6 +38,22 @@ const NavBar = () => {
     if (myMenu === false) {
       setMyMenu(true);
       document.addEventListener("mouseup", handleCloseMyMenu);
+    }
+  };
+
+  const handleCloseBurger = (event) => {
+    if (event.target.id !== "my-menu" && event.target.id !== "my-menu-icon") {
+      setTimeout(() => {
+        setExpanded(false);
+        document.removeEventListener("mouseup", handleCloseBurger);
+      }, 100);
+    }
+  };
+
+  const handleToggle = () => {
+    if (expanded === false) {
+      setExpanded(true);
+      document.addEventListener("mouseup", handleCloseBurger);
     }
   };
 
@@ -67,11 +84,15 @@ const NavBar = () => {
       <Avatar src={currentUser?.profile_image} height={40} navbar />
       <button
         className={`${styles.DropdownBtn} pl-0`}
-        id="nav-my-space"
+        id="my-menu"
         onClick={() => handleMyMenu()}
       >
         {currentUser?.username}
-        <i className="fa fa-angle-down ml-2" aria-hidden="true"></i>
+        <i
+          className="fa fa-angle-down ml-2"
+          aria-hidden="true"
+          id="my-menu-icon"
+        ></i>
       </button>
       {/* if the button is clicked, the dropdown menu will be shown. */}
       {myMenu && (
@@ -131,7 +152,12 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar className={styles.NavBar} expand="md" fixed="top">
+    <Navbar
+      expanded={expanded}
+      className={styles.NavBar}
+      expand="md"
+      fixed="top"
+    >
       <Container>
         <NavLink exact activeClassName={styles.Active} to="/">
           <Navbar.Brand className={styles.Logo}>
@@ -139,7 +165,11 @@ const NavBar = () => {
           </Navbar.Brand>
         </NavLink>
         <h1 className="mt-4">Your Poetry</h1>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" id="navbar-toggle">
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          id="navbar-toggle"
+          onClick={() => handleToggle()}
+        >
           <i className={`${styles.Burger} fa-solid fa-bars`}></i>
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
