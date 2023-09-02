@@ -1,15 +1,89 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/media/poems-logo.png";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 /**
  *  Render the first navbar on top right.
  */
 const NavBar = () => {
+  /** get the info of logged in user. */
+  const currentUser = useCurrentUser();
+
+  const [myMenu, setMyMenu] = useState(false);
+
+  /**
+   * Nav link items will be displayed when logged in.
+   * 'setExpanded(false)' will close the dropdown menu.
+   */
+  const loggedIn = (
+    <>
+      <p className="mt-3">avatar</p>
+      <button
+        className={`${styles.DropdownBtn}`}
+        id="nav-my-space"
+        onClick={() => setMyMenu(!myMenu)}
+      >
+        {currentUser?.username}
+        <i className="fa fa-angle-down ml-2" aria-hidden="true"></i>
+      </button>
+      {/* if the button is clicked, the dropdown menu will be shown. */}
+      {myMenu && (
+        <div className={styles.DropdownBox}>
+          <div className="mt-1">
+            <NavLink to="#" className={styles.NavDropdownItem}>
+              My Profile
+            </NavLink>
+          </div>
+          <div>
+            <NavLink to="#" className={styles.NavDropdownItem}>
+              My poems
+            </NavLink>
+          </div>
+          <div>
+            <NavLink className={styles.NavDropdownItem} to="#">
+              Poets I'm following
+            </NavLink>
+          </div>
+          <div>
+            <NavLink className={styles.NavDropdownItem} to="#">
+              Poems I like
+            </NavLink>
+          </div>
+          <div>
+            <NavLink className={styles.NavDropdownItem} to="/">
+              Sign out
+            </NavLink>
+          </div>
+        </div>
+      )}
+    </>
+  );
+
+  /** Nav link items to be displayed when logged out */
+  const loggedOut = (
+    <>
+      <NavLink
+        className={`${styles.NavLink} mr-3`}
+        activeClassName={styles.Active}
+        to="/signin"
+      >
+        Sign in
+      </NavLink>
+      <NavLink
+        className={`${styles.NavLink} mr-3`}
+        activeClassName={styles.Active}
+        to="/signup"
+      >
+        Sign up
+      </NavLink>
+    </>
+  );
+
   return (
     <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container>
@@ -30,12 +104,8 @@ const NavBar = () => {
             <NavLink exact className={`${styles.NavLink} mr-3`} to="#">
               Contact
             </NavLink>
-            <NavLink exact className={`${styles.NavLink} mr-3`} to="/signin">
-              Sign in
-            </NavLink>
-            <NavLink exact className={`${styles.NavLink} mr-3`} to="/signup">
-              Sign up
-            </NavLink>
+            {/* If logged in, display 'loggedIn' if not, 'loggedOut'. */}
+            {currentUser ? loggedIn : loggedOut}
           </Nav>
         </Navbar.Collapse>
       </Container>

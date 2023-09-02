@@ -24,9 +24,95 @@
   margin-top: 20px;
 }
 
+.Dropdown {
+  z-index: 3;
+}
+
+.NavBar .NavDropdownItem {
+  font-size: 1rem;
+  font-family: "Nanum Myeongj";
+  color: rgb(51, 93, 151);
+  margin-left: 10px;
+}
+
+.DropdownBox {
+  border: solid 1px #ccc;
+  padding: 7px 10px;
+  background-color: #fff;
+  position: absolute;
+  top: 80px;
+  right: 10%;
+}
+
+.NavBar .DropdownBtn {
+  background-color: #f8f8f8;
+  outline: none;
+  border: none;
+  font-family: "Nanum Myeongj";
+  color: rgb(51, 93, 151);
+  font-size: 1.2rem;
+  margin-top: 15px;
+}
+
+.NavBar .DropdownBtn:hover {
+  background-color: #f8f8f8;
+  color: rgb(51, 93, 151);
+  text-decoration: underline;
+  outline: none;
+  border: none;
+}
+
+.NavBar .DropdownBtn:active {
+  background-color: #f8f8f8;
+  color: rgb(51, 93, 151);
+  outline: none;
+  border: none;
+}
+
 @media screen and (max-width: 767px) {
+  .NavToggle {
+    background-color: #fff;
+    width: 150px;
+    text-align: left;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
   .NavLink {
     margin-top: 0;
+  }
+
+  .Dropdown a {
+    margin-top: 0;
+  }
+
+  .NavBar .DropdownBtn {
+    width: 80px;
+    padding: 0;
+    margin-top: 0;
+    margin-left: -4px;
+    background-color: #fff;
+    outline: none;
+  }
+
+  .NavBar .DropdownBtn:hover {
+    background-color: #fff;
+    color: rgb(51, 93, 151);
+  }
+
+  .NavBar .DropdownBtn:active {
+    background-color: #fff;
+    color: rgb(51, 93, 151);
+  }
+
+  .DropdownBox {
+    border: solid 1px #ccc;
+    padding: 7px 10px;
+    background-color: #fff;
+    position: absolute;
+    color: rgb(51, 93, 151);
+    top: 220px;
+    right: 10%;
   }
 }
 
