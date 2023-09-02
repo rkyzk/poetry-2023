@@ -1,17 +1,12 @@
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: "https://poetry-drf-2023-7a30acbcd67e.herokuapp.com/",
-});
-instance.defaults.headers.common["Content-Type"] = "multipart/form-data";
+/** set the base URL for axios requests */
+axios.defaults.baseURL = "https://poetry-6c31c94e3988.herokuapp.com/";
+axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
+// To avoid any CORS errors when sending cookies
+axios.defaults.withCredentials = true;
 
 /** create two instances of axios to attach interceptors
     for requests and responses. */
-export const axiosReq = axios.create({
-  baseURL: "https://poetry-drf-2023-7a30acbcd67e.herokuapp.com/",
-});
-export const axiosRes = axios.create({
-  baseURL: "https://poetry-drf-2023-7a30acbcd67e.herokuapp.com/",
-});
-
-export default instance;
+export const axiosReq = axios.create();
+export const axiosRes = axios.create();

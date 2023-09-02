@@ -114,6 +114,7 @@ function PoemCreateForm() {
             className={`${styles.Category} ml-3`}
             name="category"
             value={category}
+            defaultValue="other"
             onChange={handleChange}
             custom
           >
@@ -122,7 +123,7 @@ function PoemCreateForm() {
             <option>people</option>
             <option>humor</option>
             <option>haiku</option>
-            <option selected>other</option>
+            <option>other</option>
           </Form.Control>
         </Form.Group>
         {errors?.category?.map((message, idx) => (

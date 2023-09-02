@@ -9,7 +9,9 @@ import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../contexts/CurrentUserContext";
+import { removeTokenTimestamp } from "../utils/utils";
 import Avatar from "./Avatar";
+import axios from "axios";
 
 /**
  *  Render the first navbar on top right.
@@ -22,6 +24,24 @@ const NavBar = () => {
   const [myMenu, setMyMenu] = useState(false);
   /** get the function to set current user info */
   const setCurrentUser = useSetCurrentUser();
+
+  /**
+   * Sign out a user.
+   * Close the drop down menu, set currenUser to null,
+   * notify the user and remove the token time stamp.
+   */
+  const handleSignOut = async () => {
+    try {
+      // request the backend to log out the user
+      await axios.post("dj-rest-auth/logout/");
+      // set curretUser to null.
+      setCurrentUser(null);
+      // remove the token time stamp.
+      removeTokenTimestamp();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   /**
    * Nav link items will be displayed when logged in.
@@ -62,7 +82,11 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div>
-            <NavLink className={styles.NavDropdownItem} to="/">
+            <NavLink
+              className={styles.NavDropdownItem}
+              to="/"
+              onClick={handleSignOut}
+            >
               Sign out
             </NavLink>
           </div>

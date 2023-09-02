@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
-import axios from "../../api/axiosDefaults";
+import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 /**

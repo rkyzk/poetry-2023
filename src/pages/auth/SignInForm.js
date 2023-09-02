@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import axios from "../../api/axiosDefaults";
+import { setTokenTimestamp } from "../../utils/utils";
+import axios from "axios";
 
 /**
  * Return the sign in form.
@@ -50,6 +51,7 @@ function SignInForm() {
       const { data } = await axios.post("dj-rest-auth/login/", signInData);
       // set the data of the logged in user to 'currentUser'.
       setCurrentUser(data.user);
+      setTokenTimestamp(data);
       history.push("/");
     } catch (err) {
       // Set errors in 'errors'
