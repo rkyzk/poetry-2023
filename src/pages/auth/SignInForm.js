@@ -4,15 +4,19 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { Link } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "../../api/axiosDefaults";
 
 /**
  * Return the sign in form.
  */
 function SignInForm() {
+  /** get the function to set current user info to a variable. */
+  const setCurrentUser = useSetCurrentUser();
   /** 'signInData' will store data entered by users  */
   const [signInData, setSignInData] = useState({
     username: "",
@@ -34,6 +38,25 @@ function SignInForm() {
     });
   };
 
+  /**
+   * Post the data entered by users to the backend.
+   * If posting is successful, set 'currentUser' the data
+   * of logged in user.  Set the token time stamp and
+   * redirect to "Home."
+   */
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post("dj-rest-auth/login/", signInData);
+      // set the data of the logged in user to 'currentUser'.
+      setCurrentUser(data.user);
+      history.push("/");
+    } catch (err) {
+      // Set errors in 'errors'
+      setErrors(err.response?.data);
+    }
+  };
+
   return (
     <Col
       className="my-auto p-0 p-md-2"
@@ -42,7 +65,7 @@ function SignInForm() {
     >
       <Container className="p-4">
         <h1 className={styles.Header}>sign in</h1>
-        <Form handleSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Form.Group controlId="username">
             <Form.Label className="d-none">Username</Form.Label>
             <Form.Control
