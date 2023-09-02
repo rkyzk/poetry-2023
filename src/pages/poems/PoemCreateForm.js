@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import styles from "../../styles/PoemCreateForm.module.css";
+import styles from "../../styles/PoemCreateEditForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import Form from "react-bootstrap/Form";
@@ -107,12 +107,11 @@ function PoemCreateForm() {
             {message}
           </Alert>
         ))}
-        <Form.Group contorlId="category">
+        <Form.Group controlId="category">
           <Form.Label className="my-1 mr-2">Category</Form.Label>
           <Form.Control
             as="select"
             className={`${styles.Category} ml-3`}
-            id="category"
             name="category"
             value={category}
             onChange={handleChange}
