@@ -2,19 +2,26 @@ import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
+import logo from "../assets/media/poems-logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
-import logo from "../assets/media/poems-logo.png";
-import { useCurrentUser } from "../contexts/CurrentUserContext";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../contexts/CurrentUserContext";
+import Avatar from "./Avatar";
 
 /**
  *  Render the first navbar on top right.
+ *  Adjust displayed link items depending on the logged in status.
  */
 const NavBar = () => {
   /** get the info of logged in user. */
   const currentUser = useCurrentUser();
 
   const [myMenu, setMyMenu] = useState(false);
+  /** get the function to set current user info */
+  const setCurrentUser = useSetCurrentUser();
 
   /**
    * Nav link items will be displayed when logged in.
@@ -22,9 +29,9 @@ const NavBar = () => {
    */
   const loggedIn = (
     <>
-      <p className="mt-3">avatar</p>
+      <Avatar src={currentUser?.profile_image} height={40} navbar />
       <button
-        className={`${styles.DropdownBtn}`}
+        className={`${styles.DropdownBtn} pl-0`}
         id="nav-my-space"
         onClick={() => setMyMenu(!myMenu)}
       >
@@ -87,7 +94,7 @@ const NavBar = () => {
   return (
     <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container>
-        <NavLink exact to="/">
+        <NavLink exact activeClassName={styles.Active} to="/">
           <Navbar.Brand className={styles.Logo}>
             <img src={logo} alt="logo" />
           </Navbar.Brand>
@@ -97,11 +104,16 @@ const NavBar = () => {
           <i className={`${styles.Burger} fa-solid fa-bars`}></i>
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-            <NavLink exact className={`${styles.NavLink} mr-3`} to="/">
+          <Nav className={`${styles.NavToggle} ml-auto`}>
+            <NavLink
+              exact
+              className={`${styles.NavLink} mr-3`}
+              activeClassName={styles.Active}
+              to="/"
+            >
               Home
             </NavLink>
-            <NavLink exact className={`${styles.NavLink} mr-3`} to="#">
+            <NavLink className={`${styles.NavLink} mr-3`} to="#">
               Contact
             </NavLink>
             {/* If logged in, display 'loggedIn' if not, 'loggedOut'. */}
