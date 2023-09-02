@@ -18,15 +18,36 @@ const NavBarSecond = () => {
   const currentUser = useCurrentUser();
   /** get the URL of the current page. */
   const { pathname } = useLocation();
-
+  /** expanded tells wheather the menu bar is expanded/not.
+      setExpanded will change the expanded value.
+      ref stores info of the element if inside the menu has been clicked */
+  const [poemsMenu, setPoemsMenu] = useState(false);
   /** On signin and singup pages set hide true so this component won't appear. */
   let hide = pathname === "/signin" || pathname === "/signup";
+  const [expanded, setExpanded] = useState(false);
 
-  const [poemsMenu, setPoemsMenu] = useState(false);
+  const handleClosePoemsMenu = () => {
+    setTimeout(() => {
+      setPoemsMenu(false);
+      document.removeEventListener("mouseup", handleClosePoemsMenu);
+    }, 100);
+  };
+
+  const handlePoemsMenu = () => {
+    if (poemsMenu === false) {
+      setPoemsMenu(true);
+      document.addEventListener("mouseup", handleClosePoemsMenu);
+    }
+  };
 
   return (
     !hide && (
-      <Navbar className={styles.NavBarSecond} expand="md" fixed="top">
+      <Navbar
+        expanded={expanded}
+        className={styles.NavBarSecond}
+        expand="md"
+        fixed="top"
+      >
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-second-nav">
             <i className="fa-solid fa-bars"></i>
@@ -36,9 +57,14 @@ const NavBarSecond = () => {
               <button
                 className={`${styles.NavLink} ${styles.PoemsDropdown}`}
                 id="poems-dropdown"
+                onClick={() => handlePoemsMenu()}
               >
                 Poems
-                <i className="fa fa-angle-down ml-2" aria-hidden="true"></i>
+                <i
+                  className="fa fa-angle-down ml-2"
+                  aria-hidden="true"
+                  id="dropdown-icon"
+                ></i>
               </button>
               {poemsMenu && (
                 <div className={`${styles.PoemsMenu} py-2`}>
