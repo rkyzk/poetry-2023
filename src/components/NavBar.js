@@ -25,7 +25,21 @@ const NavBar = () => {
   const setCurrentUser = useSetCurrentUser();
 
   const [myMenu, setMyMenu] = useState(false);
-  console.log(myMenu);
+
+  const handleCloseMyMenu = () => {
+    setTimeout(() => {
+      setMyMenu(false);
+      document.removeEventListener("mouseup", handleCloseMyMenu);
+    }, 100);
+  };
+
+  const handleMyMenu = () => {
+    if (myMenu === false) {
+      setMyMenu(true);
+      document.addEventListener("mouseup", handleCloseMyMenu);
+    }
+  };
+
   /**
    * Sign out a user.
    * Close the drop down menu, set currenUser to null,
@@ -54,7 +68,7 @@ const NavBar = () => {
       <button
         className={`${styles.DropdownBtn} pl-0`}
         id="nav-my-space"
-        onClick={() => setMyMenu(!myMenu)}
+        onClick={() => handleMyMenu()}
       >
         {currentUser?.username}
         <i className="fa fa-angle-down ml-2" aria-hidden="true"></i>
