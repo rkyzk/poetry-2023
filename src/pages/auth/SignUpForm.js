@@ -2,17 +2,21 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
+import axios from "../../api/axiosDefaults";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 /**
  * Return sign up form.
  */
 const SignUpForm = () => {
+  /** stores info about which pages the user has visited. */
+  const history = useHistory();
+
   /** registerData will store data entered by users. */
   const [registerData, setRegisterData] = useState({
     username: "",
@@ -35,6 +39,21 @@ const SignUpForm = () => {
     });
   };
 
+  /**
+   * Send the data entered by users to the backend.
+   * Redirect the user to signin page.
+   */
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post("dj-rest-auth/registration/", registerData);
+      history.push("/signin");
+    } catch (err) {
+      // set errors
+      setErrors(err.response?.data);
+    }
+  };
+
   return (
     <Col
       className="my-auto py-2 p-md-2"
@@ -43,7 +62,7 @@ const SignUpForm = () => {
     >
       <Container className="p-4">
         <h1 className={styles.Header}>sign up</h1>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group controlId="username">
             <Form.Label className="d-none">username</Form.Label>
             <Form.Control
