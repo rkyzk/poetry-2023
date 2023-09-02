@@ -21,10 +21,11 @@ const NavBar = () => {
   /** get the info of logged in user. */
   const currentUser = useCurrentUser();
 
-  const [myMenu, setMyMenu] = useState(false);
   /** get the function to set current user info */
   const setCurrentUser = useSetCurrentUser();
 
+  const [myMenu, setMyMenu] = useState(false);
+  console.log(myMenu);
   /**
    * Sign out a user.
    * Close the drop down menu, set currenUser to null,

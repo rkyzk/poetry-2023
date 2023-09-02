@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { axiosRes } from "../../api/axiosDefaults";
 
 /**
  * Return poem data including title, content or excerpt,
@@ -37,6 +37,8 @@ const Poem = (props) => {
     published_at,
     /** If called from poem page */
     poemPage,
+    /** function to update poems */
+    setPoems,
   } = props;
 
   /** get currentUser from CurrentUserContext. */
@@ -44,6 +46,56 @@ const Poem = (props) => {
   /** is_owner tells if the current user is the owner of the poem. */
   const is_owner = currentUser?.username === owner;
   /** get the pathname */
+
+  /**
+   * Request the backend to make a new 'Like' object.
+   * Adjust likes count on the front end.
+   */
+  const handleLike = async () => {
+    try {
+      // Post 'like' data to the backend.
+      const { data } = await axiosRes.post("/likes/", { poem: id });
+      // Adjust the number of likes.
+      setPoems((prevPoems) => ({
+        ...prevPoems,
+        results: prevPoems.results.map((poem) => {
+          return poem.id === id
+            ? { ...poem, likes_count: poem.likes_count + 1, like_id: data.id }
+            : poem;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /**
+   * Request the backend to delete 'Like' object.
+   * Adjust likes count on the front end.
+   */
+  const handleUnlike = async () => {
+    try {
+      // Reaquest 'Like' object to be deleted in the backend.
+      await axiosRes.delete(`/likes/${like_id}`);
+      // Adjust the number of likes.
+      setPoems((prevPoems) => ({
+        ...prevPoems,
+        results: prevPoems.results.map((poem) => {
+          return poem.id === id
+            ? poem.likes_count === 1
+              ? { ...poem, likes_count: 0, like_id: null }
+              : {
+                  ...poem,
+                  likes_count: poem.likes_count - 1,
+                  like_id: null,
+                }
+            : poem;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Card className={styles.Poem}>
@@ -87,19 +139,19 @@ const Poem = (props) => {
               placement="top"
               overlay={<Tooltip>You can't like your own poem!</Tooltip>}
             >
-              <i className="far fa-heart" />
+              <i className={`far fa-heart ${styles.Heart}`} />
             </OverlayTrigger>
           ) : like_id ? (
-            <span>
+            <span onClick={handleUnlike}>
               {/* If like_id exists, handleUnlike will be fired,
                   when the icon is clicked. */}
               <i className={`fas fa-heart ${styles.Heart}`} />
             </span>
           ) : currentUser ? (
-            <span>
+            <span onClick={handleLike}>
               {/* If like_id doesn't exist and the user is logged in, 
                     the poem will be liked. */}
-              <i className={`far fa-heart ${styles.HeartOutline}`} />
+              <i className={`far fa-heart ${styles.Heart}`} />
             </span>
           ) : (
             <OverlayTrigger
@@ -108,7 +160,7 @@ const Poem = (props) => {
             >
               {/* If the user isn't logged in, tell them:
                 'log in to like poems' */}
-              <i className="far fa-heart" />
+              <i className={`far fa-heart ${styles.Heart}`} />
             </OverlayTrigger>
           )}
           <span className="ml-1">{likes_count}</span>
