@@ -84,7 +84,7 @@ const NavBarSecond = () => {
               {currentUser && (
                 <NavLink
                   className={`${styles.NavLink} ${styles.NavItems} mt-2`}
-                  to="#"
+                  to="/poems/create"
                 >
                   Write Poems
                 </NavLink>
