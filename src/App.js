@@ -39,6 +39,17 @@ function App() {
               />
             )}
           />
+          <Route
+            exact
+            path="/liked"
+            render={() => (
+              <PoemsPage
+                filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
+                heading="Poems I like"
+                message="You haven't liked any poems yet."
+              />
+            )}
+          />
           <Route render={() => <h1>Page not found</h1>} />
         </Switch>
       </Container>

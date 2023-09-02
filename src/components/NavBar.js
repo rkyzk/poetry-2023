@@ -78,7 +78,7 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div>
-            <NavLink className={styles.NavDropdownItem} to="#">
+            <NavLink className={styles.NavDropdownItem} to="/liked">
               Poems I like
             </NavLink>
           </div>
