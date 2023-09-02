@@ -68,7 +68,7 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div>
-            <NavLink to="#" className={styles.NavDropdownItem}>
+            <NavLink to="/my-poems" className={styles.NavDropdownItem}>
               My poems
             </NavLink>
           </div>
