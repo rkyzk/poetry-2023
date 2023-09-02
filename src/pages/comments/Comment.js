@@ -8,6 +8,7 @@ import styles from "../../styles/Comment.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../../components/MoreDropdown";
 import CommentEditForm from "../comments/CommentEditForm";
+import { axiosRes } from "../../api/axiosDefaults";
 
 /**
  * Return Comment component.
@@ -31,6 +32,24 @@ const Comment = (props) => {
   const is_owner = currentUser?.username === owner;
   /** showEditForm will be set true if the edit form should be displayed. */
   const [showEditForm, setShowEditForm] = useState(false);
+
+  /**
+   * Delete comment in the backend.
+   * Adjust the comment count in the front end.
+   */
+  const handleDeleteComment = async () => {
+    try {
+      // send request to delete the comment with the id.
+      await axiosRes.delete(`/comments/${id}`);
+      // delete the comment from the comments array.
+      setComments((prevComments) => ({
+        ...prevComments,
+        results: prevComments.results.filter((comment) => comment.id !== id),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -72,7 +91,10 @@ const Comment = (props) => {
         </Media.Body>
         {/* Display three dots for the owner, if the edit form is not displayed. */}
         {is_owner && !showEditForm && (
-          <MoreDropdown handleEdit={() => setShowEditForm(true)} />
+          <MoreDropdown
+            handleEdit={() => setShowEditForm(true)}
+            handleDeleteComment={() => handleDeleteComment()}
+          />
         )}
       </Media>
     </>
