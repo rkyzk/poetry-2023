@@ -21,6 +21,7 @@ function App() {
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
           <Route exact path="/poems/:id" render={() => <PoemPage />} />
+          <Route render={() => <h1>Page not found</h1>} />
         </Switch>
       </Container>
     </div>
