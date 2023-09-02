@@ -31,12 +31,15 @@ function PoemPage() {
     /** get the data of the poem and the comments and set them to variables */
     const handleMount = async () => {
       try {
-        // get the data of the poem
-        const [{ data: poem }] = await Promise.all([
+        // get the data of the poem and the comments about the poem
+        const [{ data: poem }, { data: comments }] = await Promise.all([
           axiosReq.get(`/poems/${id}`),
+          axiosReq.get(`/comments/?poem__id=${id}`),
         ]);
         // store the data to 'poem'
         setPoem({ results: [poem] });
+        // store the data to 'comments'
+        setComments(comments);
       } catch (err) {
         console.log(err);
       }
