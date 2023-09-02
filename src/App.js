@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import SignInForm from "./pages/auth/SignInForm";
 import SignUpForm from "./pages/auth/SignUpForm";
 import PoemCreateForm from "./pages/poems/PoemCreateForm";
+import PoemPage from "./pages/poems/PoemPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
+          <Route exact path="/poems/:id" render={() => <PoemPage />} />
         </Switch>
       </Container>
     </div>

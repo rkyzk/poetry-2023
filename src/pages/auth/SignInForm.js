@@ -4,13 +4,12 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { setTokenTimestamp } from "../../utils/utils";
-import axios from "axios";
 
 /**
  * Return the sign in form.
@@ -27,7 +26,6 @@ function SignInForm() {
   const { username, password } = signInData;
   /** stores info about which pages the user has visited. */
   const history = useHistory();
-
   /** stores errors */
   const [errors, setErrors] = useState({});
 
@@ -51,6 +49,7 @@ function SignInForm() {
       const { data } = await axios.post("dj-rest-auth/login/", signInData);
       // set the data of the logged in user to 'currentUser'.
       setCurrentUser(data.user);
+      // set token time statmp.
       setTokenTimestamp(data);
       history.push("/");
     } catch (err) {
