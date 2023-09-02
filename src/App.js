@@ -4,6 +4,7 @@ import Home from "./pages/poems/Home";
 import NavBar from "./components/NavBar";
 import Container from "react-bootstrap/Container";
 import SignInForm from "./pages/auth/SignInForm";
+import SignUpForm from "./pages/auth/SignUpForm";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Container className={styles.Main}>
         <Switch>
           <Route exact path="/signin" render={() => <SignInForm />} />
+          <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/" render={() => <Home />} />
         </Switch>
       </Container>
