@@ -30,7 +30,7 @@ const NavBar = () => {
             <NavLink exact className={`${styles.NavLink} mr-3`} to="#">
               Contact
             </NavLink>
-            <NavLink exact className={`${styles.NavLink} mr-3`} to="#">
+            <NavLink exact className={`${styles.NavLink} mr-3`} to="/signin">
               Sign in
             </NavLink>
             <NavLink exact className={`${styles.NavLink} mr-3`} to="#">
