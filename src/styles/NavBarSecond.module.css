@@ -1,0 +1,113 @@
+.NavBarSecond {
+  margin-top: 100px;
+  background-color: #f8f8f8;
+  z-index: 1;
+}
+
+.NavBarSecond .NavToggle .NavLink a {
+  font-family: "Nanum Myeongj";
+  color: rgb(35, 78, 139);
+}
+
+.NavBarSecond .NavToggle .NavLink {
+  font-family: "Nanum Myeongj";
+  color: rgb(35, 78, 139);
+}
+
+.NavLink:hover {
+  text-decoration: underline;
+  color: rgb(10, 10, 90);
+}
+
+.NavDropdownItem {
+  margin-left: 10px;
+}
+
+.PoemsDropdown {
+  width: 77px;
+  padding: 0;
+  margin-left: 15px;
+  background-color: #f8f8f8;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  margin-top: 8px;
+}
+
+.NavBarSecond .PoemsDropdown:hover {
+  background-color: #f8f8f8;
+  color: rgb(10, 10, 90);
+  border: none;
+  outline: none;
+  text-decoration: underline;
+}
+
+.NavBarSecond .PoemsDropdown:active {
+  background-color: #f8f8f8;
+  color: rgb(10, 10, 90);
+  border: none;
+  outline: none;
+  text-decoration: underline;
+}
+
+.PoemsMenu {
+  width: 160px;
+  background-color: #fff;
+  border: solid 1px #ccc;
+  position: absolute;
+  top: 50px;
+  left: 60px;
+  font-size: 1rem;
+}
+
+.PoemsMenu a {
+  color: rgb(35, 78, 139);
+}
+
+.NavItems {
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .NavToggle {
+    background-color: #fff;
+    width: 180px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+  }
+
+  .NavItems {
+    margin-left: 0;
+  }
+
+  .PoemsDropdown {
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border: none;
+    outline: none;
+  }
+
+  .PoemsDropdown:hover {
+    background-color: #fff;
+    border: none;
+    outline: none !important;
+  }
+
+  .PoemsDropdown:active {
+    background-color: #fff;
+    border: none;
+    outline: none;
+  }
+
+  .PoemsMenu {
+    top: 50px;
+    left: 30%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .PoemsMenu {
+    left: 40%;
+  }
+}
