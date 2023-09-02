@@ -3,6 +3,7 @@ import Alert from "react-bootstrap/Alert";
 import Col from "react-bootstrap/Col";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import Asset from "../../components/Asset";
 
 /**
  * Get data of poems and return the list of poems.
@@ -59,7 +60,7 @@ function PoemsPage({ filter, message = "No results found", heading }) {
           )}
         </>
       ) : (
-        <p>spinner</p>
+        <Asset />
       )}
     </Col>
   );
