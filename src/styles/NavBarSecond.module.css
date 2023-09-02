@@ -104,6 +104,14 @@
     top: 50px;
     left: 30%;
   }
+
+  .NavBarSecond .NavLink {
+    font-size: 1rem;
+  }
+
+  .NavBarSecond .NavToggle button {
+    margin-left: -5px;
+  }
 }
 
 @media screen and (max-width: 500px) {

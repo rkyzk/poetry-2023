@@ -40,6 +40,25 @@ const NavBarSecond = () => {
     }
   };
 
+  const handleCloseBurger = (event) => {
+    if (
+      event.target.id !== "poems-dropdown" &&
+      event.target.id !== "dropdown-icon"
+    ) {
+      setTimeout(() => {
+        setExpanded(false);
+        document.removeEventListener("mouseup", handleCloseBurger);
+      }, 100);
+    }
+  };
+
+  const handleToggle = () => {
+    if (expanded === false) {
+      setExpanded(true);
+      document.addEventListener("mouseup", handleCloseBurger);
+    }
+  };
+
   return (
     !hide && (
       <Navbar
@@ -49,7 +68,10 @@ const NavBarSecond = () => {
         fixed="top"
       >
         <Container>
-          <Navbar.Toggle aria-controls="basic-navbar-second-nav">
+          <Navbar.Toggle
+            aria-controls="basic-navbar-second-nav"
+            onClick={() => handleToggle()}
+          >
             <i className="fa-solid fa-bars"></i>
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-second-nav">
