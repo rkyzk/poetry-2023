@@ -1,4 +1,26 @@
 import jwtDecode from "jwt-decode";
+import { axiosReq } from "../api/axiosDefaults";
+
+/**
+ * Get the next elements in the array of data
+ * and set them to 'resource'.
+ * @param {} resource
+ * @param {} setResource
+ */
+export const fetchMoreData = async (resource, setResource) => {
+  try {
+    const { data } = await axiosReq.get(resource.next);
+    setResource((prevResource) => ({
+      ...prevResource,
+      next: data.next,
+      results: data.results.reduce((acc, cur) => {
+        return acc.some((accResult) => accResult.id === cur.id)
+          ? acc
+          : [...acc, cur];
+      }, prevResource.results),
+    }));
+  } catch (err) {}
+};
 
 /**
  * Set refresh token time stamp in the local storage.

@@ -3,7 +3,10 @@ import Alert from "react-bootstrap/Alert";
 import Col from "react-bootstrap/Col";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../components/Asset";
+import Poem from "./Poem";
+import { fetchMoreData } from "../../utils/utils";
 
 /**
  * Get data of poems and return the list of poems.
@@ -50,7 +53,15 @@ function PoemsPage({ filter, message = "No results found", heading }) {
           {/* If there's no error message, and the data has loaded,
             display the data. */}
           {poems.results.length ? (
-            <p>poems</p>
+            <InfiniteScroll
+              children={poems.results.map((poem) => (
+                <Poem key={poem.id} {...poem} setPoems={setPoems} />
+              ))}
+              dataLength={poems.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!poems.next}
+              next={() => fetchMoreData(poems, setPoems)}
+            />
           ) : (
             <>
               {/* If there's no poem that matches the filter,
