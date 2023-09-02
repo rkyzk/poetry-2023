@@ -8,6 +8,7 @@ import SignInForm from "./pages/auth/SignInForm";
 import SignUpForm from "./pages/auth/SignUpForm";
 import PoemCreateForm from "./pages/poems/PoemCreateForm";
 import PoemPage from "./pages/poems/PoemPage";
+import PoemEditForm from "./pages/poems/PoemEditForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
           <Route exact path="/poems/:id" render={() => <PoemPage />} />
+          <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />
           <Route render={() => <h1>Page not found</h1>} />
         </Switch>
       </Container>

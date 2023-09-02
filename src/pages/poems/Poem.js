@@ -6,7 +6,9 @@ import Row from "react-bootstrap/Row";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { Link } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
+import { axiosRes, axiosReq } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 /**
  * Return poem data including title, content or excerpt,
@@ -45,7 +47,8 @@ const Poem = (props) => {
   const currentUser = useCurrentUser();
   /** is_owner tells if the current user is the owner of the poem. */
   const is_owner = currentUser?.username === owner;
-  /** get the pathname */
+
+  const history = useHistory();
 
   /**
    * Request the backend to make a new 'Like' object.
@@ -97,6 +100,20 @@ const Poem = (props) => {
     }
   };
 
+  /** delete a poem from the backend,
+      hide confirmation modal and send the user to 'My Poems' page. */
+  const handleDelete = async () => {
+    try {
+      await axiosReq.delete(`/poems/${id}`);
+      history.push("/my-poems");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /** Display PoemEdit page. */
+  const handleEdit = () => history.push(`/poems/${id}/edit`);
+
   return (
     <Card className={styles.Poem}>
       <Card.Body className="pr-5">
@@ -105,6 +122,15 @@ const Poem = (props) => {
             <Card.Title className={`${styles.Title} mb-0 ml-2`}>
               {title && title}
             </Card.Title>
+            {/* If the current user is the owner of the poem,
+                display three dots for editing */}
+            {is_owner && (
+              <MoreDropdown
+                className="ml-auto"
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </Row>
           <span className={`${styles.Text} ml-4`}>
             by
