@@ -16,6 +16,7 @@ import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfilesPage from "./pages/profiles/ProfilesPage";
+import PoemsPageWithProfiles from "./pages/poems/PoemsPageWithProfiles";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -55,6 +56,11 @@ function App() {
                 message="You haven't liked any poems yet."
               />
             )}
+          />
+          <Route
+            exact
+            path="/new-poems"
+            render={() => <PoemsPageWithProfiles page={"newPoems"} />}
           />
           <Route
             exact

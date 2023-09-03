@@ -15,11 +15,9 @@ import { useFeaturedProfilesData } from "../../contexts/FeaturedProfilesDataCont
 const FeaturedProfiles = ({ mobile }) => {
   const { featuredProfilesData, errMessage } = useFeaturedProfilesData();
   return (
-    <Container>
+    <Container className={`${styles.Mobile} ${mobile && "d-lg-none mb-3"}`}>
       <h3 className={`${styles.Heading} text-center`}>Featured profiles</h3>
-      {errMessage ? (
-        <Alert variant="warning">{errMessage}</Alert>
-      ) : featuredProfilesData.results.length ? (
+      {featuredProfilesData.results.length ? (
         <>
           {/* For screen sizes below 768px, display the profiles
               side to side and give 'mobile' props.
@@ -38,6 +36,8 @@ const FeaturedProfiles = ({ mobile }) => {
             ))
           )}
         </>
+      ) : errMessage ? (
+        <Alert variant="warning">{errMessage}</Alert>
       ) : (
         <Asset spinner />
       )}
