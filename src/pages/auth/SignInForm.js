@@ -10,6 +10,7 @@ import { Link, useHistory } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { setTokenTimestamp } from "../../utils/utils";
+import { useRedirect } from "../../hooks/useRedirect";
 
 /**
  * Return the sign in form.
@@ -17,6 +18,8 @@ import { setTokenTimestamp } from "../../utils/utils";
 function SignInForm() {
   /** get the function to set current user info to a variable. */
   const setCurrentUser = useSetCurrentUser();
+  /** Redirect logged in users. */
+  useRedirect("loggedIn");
   /** 'signInData' will store data entered by users  */
   const [signInData, setSignInData] = useState({
     username: "",

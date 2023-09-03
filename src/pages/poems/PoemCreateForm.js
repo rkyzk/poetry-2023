@@ -29,6 +29,8 @@ function PoemCreateForm() {
   const history = useHistory();
 
   const currentUser = useCurrentUser();
+  // redirect logged out users to home page.
+  useRedirect("loggedOut");
   const user_id = currentUser?.pk;
   // stores feedback message
   var msg;

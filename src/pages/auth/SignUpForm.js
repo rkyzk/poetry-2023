@@ -9,11 +9,14 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useRedirect } from "../../hooks/useRedirect";
 
 /**
  * Return sign up form.
  */
 const SignUpForm = () => {
+  /** Redirect logged in users. */
+  useRedirect("loggedIn");
   /** stores info about which pages the user has visited. */
   const history = useHistory();
 
