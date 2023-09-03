@@ -11,6 +11,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Comment from "../comments/Comment";
 import Asset from "../../components/Asset";
 import { fetchMoreData } from "../../utils/utils";
+import { Alert } from "react-bootstrap";
+import ConfirmationModal from "../../components/ConfirmationModal";
 
 /**
  * Return content of individual poem pages.
@@ -26,6 +28,13 @@ function PoemPage() {
   const profile_image = currentUser?.profile_image;
   /** stores comments about the poem */
   const [comments, setComments] = useState({ results: [] });
+  /** stores error messages */
+  const [errMsg, setErrMsg] = useState("");
+  /** if set true, showModal will cause confirmation modal to show up. */
+  const [showModal, setShowModal] = useState(false);
+
+  /**  the function set the showModal to false */
+  const hideConfirmationModal = () => setShowModal(false);
 
   useEffect(() => {
     /** get the data of the poem and the comments and set them to variables */
@@ -41,64 +50,80 @@ function PoemPage() {
         // store the data to 'comments'
         setComments(comments);
       } catch (err) {
-        console.log(err);
+        err.response.status == 404 &&
+          setErrMsg("The poem with the given ID was not found.");
       }
     };
     handleMount();
-  }, [id]);
+  }, [id, showModal]);
 
   return (
     <>
       <Row className="h-100">
-        <Col className="mt-3" lg={{ span: 8, offset: 2 }}>
-          <Poem {...poem.results[0]} setPoems={setPoem} poemPage />
-          {/* If logged in, display comment form.
-                If not, display the heading 'Comments' if there are any comments. */}
-          {currentUser && (
-            <CommentCreateForm
-              profile_id={currentUser.profile_id}
-              profileImage={profile_image}
-              poem={id}
-              setPoem={setPoem}
-              setComments={setComments}
-            />
-          )}
-          {comments.results.length ? (
-            <InfiniteScroll
-              children={comments.results.map((comment) => (
-                <Comment
-                  key={comment.id}
-                  {...comment}
+        <Col className="mt-3" md={{ span: 8, offset: 2 }}>
+          {/* if there are errors, dislay the error message, otherwise display the poem. */}
+          {errMsg ? (
+            <Alert variant="warning" key={errMsg}>
+              {errMsg}
+            </Alert>
+          ) : (
+            <>
+              <Poem
+                {...poem.results[0]}
+                setPoems={setPoem}
+                poemPage
+                setShowModal={setShowModal}
+              />
+              {/* If logged in, display comment form.
+                    If not, display the heading 'Comments' if there are any comments. */}
+              {currentUser && (
+                <CommentCreateForm
+                  profile_id={currentUser.profile_id}
+                  profileImage={profile_image}
+                  poem={id}
                   setPoem={setPoem}
                   setComments={setComments}
                 />
-              ))}
-              dataLength={comments.results.length}
-              loader={<Asset spinner />}
-              hasMore={!!comments.next}
-              next={() => fetchMoreData(comments, setComments)}
-            />
-          ) : currentUser ? (
-            <>
-              {/* If no comments and if logged in,
+              )}
+              {comments.results.length ? (
+                <InfiniteScroll
+                  children={comments.results.map((comment) => (
+                    <Comment
+                      key={comment.id}
+                      {...comment}
+                      setPoem={setPoem}
+                      setComments={setComments}
+                    />
+                  ))}
+                  dataLength={comments.results.length}
+                  loader={<Asset spinner />}
+                  hasMore={!!comments.next}
+                  next={() => fetchMoreData(comments, setComments)}
+                />
+              ) : currentUser ? (
+                <>
+                  {/* If no comments and if logged in,
                     display the following */}
-              <span>No comments yet, be the first to comment!</span>
-            </>
-          ) : (
-            <>
-              {/* If no comments and if not logged in,
+                  <span>No comments yet, be the first to comment!</span>
+                </>
+              ) : (
+                <>
+                  {/* If no comments and if not logged in,
                     display the following */}
-              <span>
-                No comments yet.
-                <Link className="ml-2 mr-2" to="/signin">
-                  Sign in
-                </Link>
-                to leave a comment.
-              </span>
+                  <span>
+                    No comments yet.
+                    <Link className="ml-2 mr-2" to="/signin">
+                      Sign in
+                    </Link>
+                    to leave a comment.
+                  </span>
+                </>
+              )}
             </>
           )}
         </Col>
       </Row>
+      <ConfirmationModal show={showModal} id={id} setShowModal={setShowModal} />
     </>
   );
 }

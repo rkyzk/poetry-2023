@@ -41,6 +41,8 @@ const Poem = (props) => {
     poemPage,
     /** function to update poems */
     setPoems,
+    /** function to set showModal */
+    setShowModal,
   } = props;
 
   /** get currentUser from CurrentUserContext. */
@@ -128,7 +130,7 @@ const Poem = (props) => {
               <MoreDropdown
                 className="ml-auto"
                 handleEdit={handleEdit}
-                handleDelete={handleDelete}
+                setShowModal={setShowModal}
               />
             )}
           </Row>
