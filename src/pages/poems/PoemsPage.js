@@ -7,6 +7,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../components/Asset";
 import Poem from "./Poem";
 import { fetchMoreData } from "../../utils/utils";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import styles from "../../styles/Poemspage.module.css";
 
 /**
  * Get data of poems and return the list of poems.

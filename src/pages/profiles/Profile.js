@@ -32,6 +32,8 @@ const Profile = (props) => {
     following_id,
     imageSize = 55,
     created_at,
+    about_me,
+    favorites,
     mobile,
     featured,
     setProfiles,
@@ -212,6 +214,37 @@ const Profile = (props) => {
               </Col>
               <Col>{is_owner && <ProfileEditDropdown id={id} />}</Col>
             </Row>
+            <div className="mt-3 ml-3">
+              {/* display the user info (the name, the date joinged etc)
+                below the avatar for screen sizes below 490px
+                className ProfileInfoSmall will be displayed only below 490px. */}
+              <div className={`${styles.ProfileInfoSmall}`}>
+                <Link className={styles.ProfileLink} to={`/profiles/${id}`}>
+                  <h3 className={`${styles.ProfileName}`}>{display_name}</h3>
+                </Link>
+                <p className={`${styles.ProfileText} mb-0`}>
+                  Member since {created_at}
+                  <br />
+                  {poems_count} poems
+                  <span className="ml-2">{followers_count} followers</span>
+                </p>
+              </div>
+              {/* On individual profile page, display about me and favorites. */}
+              {page === "profilePage" && about_me && about_me !== "null" && (
+                <p className={`${styles.ProfileLabel} mt-3`}>
+                  <span className="text-muted">About me:</span>
+                  <br />
+                  {about_me}
+                </p>
+              )}
+              {page === "profilePage" && favorites && favorites !== "null" && (
+                <p className={`${styles.ProfileLabel} mt-3`}>
+                  <span className="text-muted">My favorites:</span>
+                  <br />
+                  {favorites}
+                </p>
+              )}
+            </div>
           </>
         )}
         {/* if not mobile, if logged in, and if the owner of the profile,
