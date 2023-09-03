@@ -9,7 +9,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
-import { useSetFeaturedProfilesData } from "../../contexts/FeaturedProfilesDataContext";
 
 /**
  * Return Profile component.
@@ -29,6 +28,7 @@ const Profile = (props) => {
         following_id will be present, otherwise 'none'. */
     following_id,
     imageSize = 55,
+    created_at,
     mobile,
     featured,
   } = props;
@@ -86,7 +86,32 @@ const Profile = (props) => {
             </Media>
           </>
         ) : (
-          <>{/* ProfilesPage or ProfilePage */}</>
+          <>
+            {/* ProfilePage */}
+            <Row style={{ height: "100px" }} className="pt-2">
+              <Col xs={4}>
+                <Avatar src={image} height={80} className={`${styles.Img}`} />
+              </Col>
+              {/* display the user info (the name, the date joinged etc)
+                next to the avatar for screen sizes above 490px
+                className ProfileInfo won't be displayed below 490px. */}
+              <Col xs={7} className={styles.ProfileInfo}>
+                <Link className={styles.ProfileLink} to={`/profiles/${id}`}>
+                  <h3 className={`${styles.ProfileName}`}>{display_name}</h3>
+                </Link>
+                <p className={`${styles.ProfileText} mb-0`}>
+                  Member since {created_at}
+                </p>
+                <span className={`${styles.ProfileText}`}>
+                  {poems_count} poems
+                </span>
+                <span className={`${styles.ProfileText} ml-2`}>
+                  {followers_count} followers
+                </span>
+              </Col>
+              <Col>{is_owner && "dropdown button"}</Col>
+            </Row>
+          </>
         )}
         {/* if not mobile, if logged in, and if the owner of the profile,
             display 'You!' tag.  If not the owner, display follow/unfollow
