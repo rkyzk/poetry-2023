@@ -5,11 +5,16 @@ import Container from "react-bootstrap/Container";
 import FeaturedProfiles from "../profiles/FeaturedProfiles";
 import styles from "../../styles/Home.module.css";
 import PoemsPage from "./PoemsPage";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 /**
  * Return the content of "Home" page.
  */
 function Home() {
+  /** get the currentUser info. */
+  const currentUser = useCurrentUser();
+
   /** The heading and the introduction. */
   const intro = (
     <>
@@ -21,9 +26,23 @@ function Home() {
         haven't written a poem before? Doesn't matter. Read some poems, get
         inspired and start writing!
       </p>
+      {/* if not logged in, display invitation to sign up. */}
+      {!currentUser && (
+        <>
+          <span className={`${styles.Intro} mt-0`}>
+            Don't have an account yet?
+          </span>
+          <Link
+            to="/signup"
+            className={`${styles.NavLink} ${styles.Intro} ml-2`}
+          >
+            Sign up
+          </Link>
+          <span className={`${styles.Intro} ml-2`}>here.</span>
+        </>
+      )}
     </>
   );
-
   return (
     <Container>
       <Row>
