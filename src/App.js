@@ -12,6 +12,7 @@ import PoemEditForm from "./pages/poems/PoemEditForm";
 import PoemsPage from "./pages/poems/PoemsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import ProfilePage from "./pages/profiles/ProfilePage";
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -51,6 +52,11 @@ function App() {
                 message="You haven't liked any poems yet."
               />
             )}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() => <ProfileEditForm />}
           />
           <Route render={() => <h1>Page not found</h1>} />
         </Switch>

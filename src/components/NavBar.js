@@ -20,6 +20,7 @@ import axios from "axios";
 const NavBar = () => {
   /** get the info of logged in user. */
   const currentUser = useCurrentUser();
+  const profile_id = currentUser?.profile_id;
 
   /** get the function to set current user info */
   const setCurrentUser = useSetCurrentUser();
@@ -98,7 +99,10 @@ const NavBar = () => {
       {myMenu && (
         <div className={styles.DropdownBox}>
           <div className="mt-1">
-            <NavLink to="#" className={styles.NavDropdownItem}>
+            <NavLink
+              to={`/profiles/${profile_id}`}
+              className={styles.NavDropdownItem}
+            >
               My Profile
             </NavLink>
           </div>
