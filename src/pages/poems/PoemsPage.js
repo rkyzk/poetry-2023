@@ -20,6 +20,11 @@ function PoemsPage({ filter, message = "No results found", heading }) {
   const [errMsg, setErrMsg] = useState("");
   /** get current user info */
   const currentUser = useCurrentUser();
+  /** stores the URL of the current page */
+  const { pathname } = useLocation();
+  /** tells if padding is necessary  */
+  var customPadding;
+  (pathname === "/my-poems" || pathname === "/liked") && (customPadding = true);
 
   /**
    * Get data of poems
@@ -38,10 +43,10 @@ function PoemsPage({ filter, message = "No results found", heading }) {
     // at the beginning make sure hasLoaded is set to false.
     setHasLoaded(false);
     fetchPoems();
-  }, [filter, currentUser]);
+  }, [filter, pathname, currentUser]);
 
   return (
-    <Col>
+    <Col className={`${customPadding && styles.Padding}`}>
       <h2 className="my-2 px-2 text-center">{heading}</h2>
       {/* If there's an error message, display it. */}
       {errMsg ? (

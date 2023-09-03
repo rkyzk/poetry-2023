@@ -157,9 +157,7 @@ function PoemEditForm() {
       {!published && (
         <Button
           className={`${btnStyles.Button} ${btnStyles.Olive} ml-2`}
-          onClick={() => {
-            setPublish(true);
-          }}
+          onClick={() => setPublish(true)}
           type="submit"
         >
           publish

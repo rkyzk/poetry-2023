@@ -11,7 +11,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Comment from "../comments/Comment";
 import Asset from "../../components/Asset";
 import { fetchMoreData } from "../../utils/utils";
-import { Alert } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
 import ConfirmationModal from "../../components/ConfirmationModal";
 
 /**
@@ -32,9 +32,6 @@ function PoemPage() {
   const [errMsg, setErrMsg] = useState("");
   /** if set true, showModal will cause confirmation modal to show up. */
   const [showModal, setShowModal] = useState(false);
-
-  /**  the function set the showModal to false */
-  const hideConfirmationModal = () => setShowModal(false);
 
   useEffect(() => {
     /** get the data of the poem and the comments and set them to variables */
