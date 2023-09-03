@@ -2,6 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import FeaturedProfiles from "../profiles/FeaturedProfiles";
 
 /**
  * Return the content of "Home" page.
@@ -16,7 +17,7 @@ function Home() {
           <p>Featured Poems</p>
         </Col>
         <Col md={4}>
-          <p>Featured Profiles for large screen</p>
+          <FeaturedProfiles />
         </Col>
       </Row>
     </Container>

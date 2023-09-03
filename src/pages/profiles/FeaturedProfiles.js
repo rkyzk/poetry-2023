@@ -1,6 +1,8 @@
 import React from "react";
-import { Container, Row, Col, Alert } from "react-bootstrap";
-import appStyles from "../../App.module.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Alert from "react-bootstrap/Alert";
 import Asset from "../../components/Asset";
 import Profile from "./Profile";
 import styles from "../../styles/FeaturedProfiles.module.css";
@@ -10,7 +12,7 @@ import { useFeaturedProfilesData } from "../../contexts/FeaturedProfilesDataCont
  * Get featured profiles data from FeaturedProfilesDataContext.js
  * and display them.
  */
-const FeaturedProfiles = () => {
+const FeaturedProfiles = ({ mobile }) => {
   const { featuredProfilesData, errMessage } = useFeaturedProfilesData();
   return (
     <Container>
@@ -18,7 +20,24 @@ const FeaturedProfiles = () => {
       {errMessage ? (
         <Alert variant="warning">{errMessage}</Alert>
       ) : featuredProfilesData.results.length ? (
-        <Row>"Profiles"</Row>
+        <>
+          {/* For screen sizes below 768px, display the profiles
+              side to side and give 'mobile' props.
+              For screen size 768px or above, give 'featured' props. */}
+          {mobile ? (
+            <Row>
+              {featuredProfilesData.results.map((profile) => (
+                <Col key={profile.id}>
+                  <Profile {...profile} mobile />
+                </Col>
+              ))}
+            </Row>
+          ) : (
+            featuredProfilesData.results.map((profile) => (
+              <Profile key={profile.id} {...profile} imageSize={55} featured />
+            ))
+          )}
+        </>
       ) : (
         <Asset spinner />
       )}
