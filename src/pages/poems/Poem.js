@@ -6,9 +6,10 @@ import Row from "react-bootstrap/Row";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { Link } from "react-router-dom";
-import { axiosRes, axiosReq } from "../../api/axiosDefaults";
+import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 /**
  * Return poem data including title, content or excerpt,
@@ -19,23 +20,16 @@ const Poem = (props) => {
   const {
     /** poem id */
     id,
-    /** poem owner */
     owner,
-    /** owner's profile name */
     profile_name,
-    /** number of comments */
+    profile_id,
     comments_count,
-    /** number of likes */
     likes_count,
     /** like id, if the current user has liked the poem */
     like_id,
-    /** poem titel */
     title,
-    /** poem content */
     content,
-    /** poem category */
     category,
-    /** poem's published date */
     published_at,
     /** If called from poem page */
     poemPage,
@@ -52,6 +46,12 @@ const Poem = (props) => {
 
   const history = useHistory();
 
+  /** get the pathname */
+  const { pathname } = useLocation();
+
+  /** Display PoemEdit page. */
+  const handleEdit = () => history.push(`/poems/${id}/edit`);
+
   /**
    * Request the backend to make a new 'Like' object.
    * Adjust likes count on the front end.
@@ -60,15 +60,34 @@ const Poem = (props) => {
     try {
       // Post 'like' data to the backend.
       const { data } = await axiosRes.post("/likes/", { poem: id });
-      // Adjust the number of likes.
-      setPoems((prevPoems) => ({
-        ...prevPoems,
-        results: prevPoems.results.map((poem) => {
-          return poem.id === id
-            ? { ...poem, likes_count: poem.likes_count + 1, like_id: data.id }
-            : poem;
-        }),
-      }));
+      /* On popular poems page, update the likes count
+         and rearrange the order of poems by descending number of likes. */
+      if (pathname === "/popular-poems") {
+        setPoems((prevPoems) => ({
+          ...prevPoems,
+          results: prevPoems.results
+            .map((poem) => {
+              return poem.id === id
+                ? {
+                    ...poem,
+                    likes_count: poem.likes_count + 1,
+                    like_id: data.id,
+                  }
+                : poem;
+            })
+            .sort((a, b) => b.likes_count - a.likes_count),
+        }));
+      } else {
+        // On other pages, only adjust the number of likes.
+        setPoems((prevPoems) => ({
+          ...prevPoems,
+          results: prevPoems.results.map((poem) => {
+            return poem.id === id
+              ? { ...poem, likes_count: poem.likes_count + 1, like_id: data.id }
+              : poem;
+          }),
+        }));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -82,39 +101,53 @@ const Poem = (props) => {
     try {
       // Reaquest 'Like' object to be deleted in the backend.
       await axiosRes.delete(`/likes/${like_id}`);
-      // Adjust the number of likes.
-      setPoems((prevPoems) => ({
-        ...prevPoems,
-        results: prevPoems.results.map((poem) => {
-          return poem.id === id
-            ? poem.likes_count === 1
-              ? { ...poem, likes_count: 0, like_id: null }
-              : {
-                  ...poem,
-                  likes_count: poem.likes_count - 1,
-                  like_id: null,
-                }
-            : poem;
-        }),
-      }));
+      // If the page is "Poems I like," remove the poem from the list.
+      if (pathname === "/liked") {
+        setPoems((prevPoems) => ({
+          ...prevPoems,
+          results: prevPoems.results.filter((poem) => {
+            return poem.id !== id;
+          }),
+        }));
+      } else {
+        // On popular poems, adjust the number of likes and the order of the poems.
+        if (pathname === "/popular-poems") {
+          setPoems((prevPoems) => ({
+            ...prevPoems,
+            results: prevPoems.results
+              .map((poem) => {
+                return poem.id === id
+                  ? {
+                      ...poem,
+                      likes_count: poem.likes_count - 1,
+                      like_id: null,
+                    }
+                  : poem;
+              })
+              .sort((a, b) => b.likes_count - a.likes_count),
+          }));
+        } else {
+          // On other pages only adjust the number of likes.
+          setPoems((prevPoems) => ({
+            ...prevPoems,
+            results: prevPoems.results.map((poem) => {
+              return poem.id === id
+                ? poem.likes_count === 1
+                  ? { ...poem, likes_count: 0, like_id: null }
+                  : {
+                      ...poem,
+                      likes_count: poem.likes_count - 1,
+                      like_id: null,
+                    }
+                : poem;
+            }),
+          }));
+        }
+      }
     } catch (err) {
       console.log(err);
     }
   };
-
-  /** delete a poem from the backend,
-      hide confirmation modal and send the user to 'My Poems' page. */
-  const handleDelete = async () => {
-    try {
-      await axiosReq.delete(`/poems/${id}`);
-      history.push("/my-poems");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  /** Display PoemEdit page. */
-  const handleEdit = () => history.push(`/poems/${id}/edit`);
 
   return (
     <Card className={styles.Poem}>
@@ -147,7 +180,7 @@ const Poem = (props) => {
           {/* Link the profile name to the profile page. */}
           <Link
             className={`${styles.LinkText} ml-1`}
-            to="#"
+            to={`/profiles/${profile_id}`}
             aria-label={`go-to-the-profile-page-of-${profile_name}`}
           >
             {profile_name && profile_name}
