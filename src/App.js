@@ -15,6 +15,7 @@ import ProfilePage from "./pages/profiles/ProfilePage";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
+import ProfilesPage from "./pages/profiles/ProfilesPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -52,6 +53,17 @@ function App() {
                 filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
                 heading="Poems I like"
                 message="You haven't liked any poems yet."
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/profiles/:id/following"
+            render={() => (
+              <ProfilesPage
+                filter={`owner__followed__owner__profile=${profile_id}&ordering=-owner__following__created_at&`}
+                message="You haven't followed anyone."
+                page={"profilesPage"}
               />
             )}
           />

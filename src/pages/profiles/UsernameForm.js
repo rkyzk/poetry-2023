@@ -81,13 +81,13 @@ const UsernameForm = () => {
               </Alert>
             ))}
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Blue}`}
+              className={`${btnStyles.Button} ${btnStyles.Turquoise}`}
               onClick={() => history.goBack()}
             >
               cancel
             </Button>
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Blue}`}
+              className={`${btnStyles.Button} ${btnStyles.Turquoise}`}
               type="submit"
             >
               save

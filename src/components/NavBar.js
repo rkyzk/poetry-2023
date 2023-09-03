@@ -112,7 +112,10 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div>
-            <NavLink className={styles.NavDropdownItem} to="#">
+            <NavLink
+              className={styles.NavDropdownItem}
+              to={`/profiles/${profile_id}/following`}
+            >
               Poets I'm following
             </NavLink>
           </div>

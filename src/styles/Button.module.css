@@ -64,3 +64,16 @@
   background-color: rgb(189, 218, 243);
   color: #242a3d;
 }
+
+.Turquoise {
+  background-color: #00d1ff solid;
+  color: #fff;
+}
+
+.Turquoise:hover {
+  background-color: #0b98b8 solid;
+  color: #fff;
+  opacity: 0.8;
+  border-color: transparent;
+  cursor: pointer;
+}

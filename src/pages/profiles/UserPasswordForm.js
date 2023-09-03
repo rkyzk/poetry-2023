@@ -38,7 +38,6 @@ const UserPasswordForm = () => {
   const handleCancel = () => {
     /** go back to "My Profile" */
     history.goBack();
-    toast("You canceled.  The password remains the same.");
   };
 
   useEffect(() => {
@@ -55,7 +54,6 @@ const UserPasswordForm = () => {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
       /** redirect to "My Profile" */
       history.goBack();
-      toast("Your password has been changed");
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -97,14 +95,14 @@ const UserPasswordForm = () => {
               </Alert>
             ))}
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Blue}`}
+              className={`${btnStyles.Button} ${btnStyles.Turquoise}`}
               onClick={handleCancel}
             >
               cancel
             </Button>
             <Button
               type="submit"
-              className={`${btnStyles.Button} ${btnStyles.Blue}`}
+              className={`${btnStyles.Button} ${btnStyles.Turquoise}`}
             >
               save
             </Button>
