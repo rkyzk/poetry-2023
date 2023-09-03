@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 /**
  * Return Profile component.
@@ -109,7 +110,7 @@ const Profile = (props) => {
                   {followers_count} followers
                 </span>
               </Col>
-              <Col>{is_owner && "dropdown button"}</Col>
+              <Col>{is_owner && <ProfileEditDropdown id={id} />}</Col>
             </Row>
           </>
         )}
