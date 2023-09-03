@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import styles from "../../styles/Comment.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../../components/MoreDropdown";
-import CommentEditForm from "../comments/CommentEditForm";
+import CommentEditForm from "./CommentEditForm";
 import { axiosRes } from "../../api/axiosDefaults";
 
 /**
@@ -23,6 +23,7 @@ const Comment = (props) => {
     updated_at,
     content,
     id,
+    setPoem,
     setComments,
   } = props;
 
@@ -41,6 +42,15 @@ const Comment = (props) => {
     try {
       // send request to delete the comment with the id.
       await axiosRes.delete(`/comments/${id}`);
+      // set the comment count of the poem 1 less.
+      setPoem((prevPoem) => ({
+        results: [
+          {
+            ...prevPoem.results[0],
+            comments_count: prevPoem.results[0].comments_count - 1,
+          },
+        ],
+      }));
       // delete the comment from the comments array.
       setComments((prevComments) => ({
         ...prevComments,
@@ -55,7 +65,7 @@ const Comment = (props) => {
     <>
       <hr />
       <Media>
-        <Link to="#">
+        <Link to={`/profiles/${profile_id}`}>
           <Avatar src={profile_image} />
         </Link>
         <Media.Body className="align-self-center ml-2">
@@ -93,7 +103,7 @@ const Comment = (props) => {
         {is_owner && !showEditForm && (
           <MoreDropdown
             handleEdit={() => setShowEditForm(true)}
-            handleDeleteComment={() => handleDeleteComment()}
+            handleDeleteComment={handleDeleteComment}
           />
         )}
       </Media>
