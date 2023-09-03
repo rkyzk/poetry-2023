@@ -10,6 +10,8 @@ import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
+import { axiosRes } from "../../api/axiosDefaults";
+import { useSetFeaturedProfilesData } from "../../contexts/FeaturedProfilesDataContext";
 
 /**
  * Return Profile component.
@@ -32,11 +34,59 @@ const Profile = (props) => {
     created_at,
     mobile,
     featured,
+    setProfiles,
   } = props;
   /** Get logged in user info */
   const currentUser = useCurrentUser();
   /** is_owner is set to True if the logged in user owns the profile. */
   const is_owner = currentUser?.username === owner;
+  /** Get the function to set featured profiles data. */
+  const setFeaturedProfilesData = useSetFeaturedProfilesData();
+
+  /** Send a post request to make Follower object
+      of the user and the followed profile.
+      Adjust the followers count in the front end. */
+  const handleFollow = async () => {
+    try {
+      /** create a Follower object in the backend to record which user followed
+          which profile. */
+      const { data } = await axiosRes.post("/followers/", {
+        followed: user_id,
+      });
+
+      /** adjust the follower count in the profile component on the front end. */
+      setProfiles &&
+        setProfiles((prevProfiles) => ({
+          ...prevProfiles,
+          results: prevProfiles.results.map((profile) => {
+            return profile.user_id === user_id
+              ? {
+                  ...profile,
+                  followers_count: profile.followers_count + 1,
+                  following_id: data.id,
+                }
+              : profile;
+          }),
+        }));
+      /** adjust the followers count in the featured profiles component
+          on the front end. */
+      featured &&
+        setFeaturedProfilesData((prevProfiles) => ({
+          ...prevProfiles,
+          results: prevProfiles.results.map((profile) => {
+            return profile.user_id === user_id
+              ? {
+                  ...profile,
+                  followers_count: profile.followers_count + 1,
+                  following_id: data.id,
+                }
+              : profile;
+          }),
+        }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Card className="mb-1">
@@ -133,6 +183,7 @@ const Profile = (props) => {
           ) : (
             <Button
               className={`${btnStyles.Button} ${btnStyles.Black} mt-2 ml-4`}
+              onClick={() => handleFollow()}
             >
               follow
             </Button>

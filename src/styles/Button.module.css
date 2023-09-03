@@ -53,16 +53,30 @@
   min-width: 75px;
 }
 
-.Black,
-.LightBlue:hover {
+.Black {
   background-color: #242a3d;
   color: aliceblue;
 }
 
-.Black:hover,
+.Black:hover {
+  background-color: rgb(189, 218, 243);
+  color: #242a3d;
+  border-color: transparent;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 .LightBlue {
   background-color: rgb(189, 218, 243);
   color: #242a3d;
+}
+
+.LightBlue:hover {
+  background-color: rgb(36, 74, 105);
+  color: aliceblue;
+  opacity: 0.8;
+  border-color: transparent;
+  cursor: pointer;
 }
 
 .Turquoise {
