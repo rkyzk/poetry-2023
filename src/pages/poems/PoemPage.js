@@ -50,7 +50,7 @@ function PoemPage() {
         // store the data to 'comments'
         setComments(comments);
       } catch (err) {
-        err.response.status == 404 &&
+        err.response.status === 404 &&
           setErrMsg("The poem with the given ID was not found.");
       }
     };

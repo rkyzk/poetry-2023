@@ -38,6 +38,15 @@ function CommentCreateForm(props) {
         ...prevComments,
         results: [data, ...prevComments.results],
       }));
+      // Adjust the number of comments on the front end.
+      setPoem((prevPoem) => ({
+        results: [
+          {
+            ...prevPoem.results[0],
+            comments_count: prevPoem.results[0].comments_count + 1,
+          },
+        ],
+      }));
       setContent("");
     } catch (err) {
       console.log(err);

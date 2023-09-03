@@ -6,14 +6,17 @@ import { BrowserRouter as Router } from "react-router-dom/cjs/react-router-dom.m
 import reportWebVitals from "./reportWebVitals";
 import { CurrentUserProvider } from "./contexts/CurrentUserContext";
 import { FeaturedProfilesDataProvider } from "./contexts/FeaturedProfilesDataContext";
+import { AlertProvider } from "./contexts/AlertContext";
 
 ReactDOM.render(
   <Router>
-    <CurrentUserProvider>
-      <FeaturedProfilesDataProvider>
-        <App />
-      </FeaturedProfilesDataProvider>
-    </CurrentUserProvider>
+    <AlertProvider>
+      <CurrentUserProvider>
+        <FeaturedProfilesDataProvider>
+          <App />
+        </FeaturedProfilesDataProvider>
+      </CurrentUserProvider>
+    </AlertProvider>
   </Router>,
   document.getElementById("root")
 );

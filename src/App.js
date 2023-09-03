@@ -22,6 +22,7 @@ import SearchPoems from "./pages/poems/SearchPoems";
 import SearchProfiles from "./pages/profiles/SearchProfiles";
 import FooterComponent from "./components/FooterComponent";
 import PoemsByCategories from "./pages/poems/PoemsByCategories";
+import AlertComponent from "./components/AlertComponent";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -31,6 +32,7 @@ function App() {
     <div className={styles.App}>
       <NavBar />
       <NavBarSecond />
+      {/* <AlertComponent /> */}
       <Container className={styles.Main}>
         <Switch>
           <Route exact path="/signin" render={() => <SignInForm />} />

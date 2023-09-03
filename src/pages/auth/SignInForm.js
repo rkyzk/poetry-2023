@@ -11,6 +11,7 @@ import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { setTokenTimestamp } from "../../utils/utils";
 import { useRedirect } from "../../hooks/useRedirect";
+import { useSetAlert, useAlert } from "../../contexts/AlertContext";
 
 /**
  * Return the sign in form.
@@ -31,6 +32,8 @@ function SignInForm() {
   const history = useHistory();
   /** stores errors */
   const [errors, setErrors] = useState({});
+  const setAlert = useSetAlert();
+  const { setShow } = useAlert();
 
   /** set data entered by users to 'signInData'. */
   const handleChange = (event) => {
@@ -54,6 +57,8 @@ function SignInForm() {
       setCurrentUser(data.user);
       // set token time statmp.
       setTokenTimestamp(data);
+      setAlert(`Successfully signed in as`);
+      setShow(true);
       history.push("/");
     } catch (err) {
       // Set errors in 'errors'
