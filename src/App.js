@@ -18,6 +18,7 @@ import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfilesPage from "./pages/profiles/ProfilesPage";
 import PoemsPageWithProfiles from "./pages/poems/PoemsPageWithProfiles";
 import Contact from "./pages/other_pages/Contact";
+import SearchPoems from "./pages/poems/SearchPoems";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route exact path="/contact" render={() => <Contact />} />
+          <Route exact path="/search-poems" render={() => <SearchPoems />} />
           <Route
             exact
             path="/my-poems"

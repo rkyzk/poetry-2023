@@ -120,7 +120,7 @@ const NavBarSecond = () => {
                   <div>
                     <NavLink
                       className={styles.NavDropdownItem}
-                      to="#"
+                      to="/search-poems"
                       id="search-poems"
                     >
                       Search Poems
