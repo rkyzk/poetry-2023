@@ -24,6 +24,16 @@ function PoemsPageWithProfiles({ page }) {
     filter = `published=1&published_at__date__gte=${startDate}&ordering=-published_at`;
     heading = "New Poems (published in the past 14 days)";
   }
+  /* For popular poems page, filter poems published in the past 30 days
+     and order them by descending number of likes. */
+  if (page === "popularPoems") {
+    // get the date 30 days ago in YYYY-MM-dd format
+    startDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * 30)
+      .toISOString()
+      .substring(0, 10);
+    filter = `published=1&published_at__date__gte=${startDate}&ordering=-likes_count`;
+    heading = "Popular Poems (published in the past 30 days)";
+  }
 
   return (
     <Row>

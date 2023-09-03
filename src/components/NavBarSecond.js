@@ -102,7 +102,7 @@ const NavBarSecond = () => {
                   <div>
                     <NavLink
                       className={styles.NavDropdownItem}
-                      to="#"
+                      to="/popular-poems"
                       id="popular-poems"
                     >
                       Popular Poems

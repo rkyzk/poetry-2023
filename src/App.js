@@ -64,6 +64,11 @@ function App() {
           />
           <Route
             exact
+            path="/popular-poems"
+            render={() => <PoemsPageWithProfiles page={"popularPoems"} />}
+          />
+          <Route
+            exact
             path="/profiles/:id/following"
             render={() => (
               <ProfilesPage
