@@ -35,6 +35,7 @@ const Profile = (props) => {
     mobile,
     featured,
     setProfiles,
+    page,
   } = props;
   /** Get logged in user info */
   const currentUser = useCurrentUser();
@@ -79,6 +80,55 @@ const Profile = (props) => {
                   ...profile,
                   followers_count: profile.followers_count + 1,
                   following_id: data.id,
+                }
+              : profile;
+          }),
+        }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /** Send a delete request of the Follower object
+      of the user and the profile.
+      Adjust the followers count in the front end. */
+  const handleUnfollow = async () => {
+    try {
+      /** delete the Follower object in the backend. */
+      await axiosRes.delete(`/followers/${following_id}`);
+      /** on "Poets I'm following" page, remove the profile from the list. */
+      page === "profilesPage" &&
+        setProfiles((prevProfiles) => ({
+          ...prevProfiles,
+          results: prevProfiles.results.filter((profile) => {
+            return profile.user_id !== user_id;
+          }),
+        }));
+      /** on "Search Profiles" and individual profile pages,
+          adjust the followers_count.  */
+      (page === "search" || page === "profilePage") &&
+        setProfiles((prevProfiles) => ({
+          ...prevProfiles,
+          results: prevProfiles.results.map((profile) => {
+            return profile.user_id === user_id
+              ? {
+                  ...profile,
+                  followers_count: profile.followers_count - 1,
+                  following_id: null,
+                }
+              : profile;
+          }),
+        }));
+      /** Adjust the followers_count in the featured profiles component. */
+      featured &&
+        setFeaturedProfilesData((prevProfiles) => ({
+          ...prevProfiles,
+          results: prevProfiles.results.map((profile) => {
+            return profile.user_id === user_id
+              ? {
+                  ...profile,
+                  followers_count: profile.followers_count - 1,
+                  following_id: null,
                 }
               : profile;
           }),
@@ -177,6 +227,7 @@ const Profile = (props) => {
           ) : following_id ? (
             <Button
               className={`${btnStyles.Button} ${btnStyles.LightBlue} mt-2 ml-4`}
+              onClick={() => handleUnfollow()}
             >
               unfollow
             </Button>
