@@ -8,12 +8,15 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
+import { useSetFeaturedProfilesData } from "../../contexts/FeaturedProfilesDataContext";
 
 /**
  * Return Poem create form.
  * Display error messages if the input is not valid.
  */
 function PoemCreateForm() {
+  // redirect logged out users to home page.
+  useRedirect("loggedOut");
   // variable for storing error data
   const [errors, setErrors] = useState({});
   // variable for storing input made by users
@@ -30,8 +33,8 @@ function PoemCreateForm() {
   const history = useHistory();
 
   const currentUser = useCurrentUser();
-  // redirect logged out users to home page.
-  useRedirect("loggedOut");
+  // get setFeaturedProfileData
+  const setFeaturedProfilesData = useSetFeaturedProfilesData();
   const user_id = currentUser?.pk;
   // stores feedback message
   var msg;
@@ -44,6 +47,22 @@ function PoemCreateForm() {
       ...poemData,
       [event.target.name]: event.target.value,
     });
+  };
+
+  /*
+   *  Add poems count in featured profiles
+   *  when a new poem has been written
+   *  if the user is featured.
+   */
+  const handlePoemCount = () => {
+    setFeaturedProfilesData((prevProfiles) => ({
+      ...prevProfiles,
+      results: prevProfiles.results.map((profile) => {
+        return profile.id === user_id
+          ? { ...profile, poems_count: profile.poems_count + 1 }
+          : profile;
+      }),
+    }));
   };
 
   /**
@@ -67,6 +86,9 @@ function PoemCreateForm() {
     try {
       // Send the api the data of a new poem
       const { data } = await axiosReq.post("/poems/", formData);
+      /* Add 1 to poems count in the featured profile		
+         if the user is featured. */
+      handlePoemCount();
       // redirect users to the new poem's page.
       history.push(`/poems/${data.id}`);
     } catch (err) {
