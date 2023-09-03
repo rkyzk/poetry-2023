@@ -21,6 +21,7 @@ import Contact from "./pages/other_pages/Contact";
 import SearchPoems from "./pages/poems/SearchPoems";
 import SearchProfiles from "./pages/profiles/SearchProfiles";
 import FooterComponent from "./components/FooterComponent";
+import PoemsByCategories from "./pages/poems/PoemsByCategories";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -77,6 +78,11 @@ function App() {
             exact
             path="/popular-poems"
             render={() => <PoemsPageWithProfiles page={"popularPoems"} />}
+          />
+          <Route
+            exact
+            path="/poems-by-categories"
+            render={() => <PoemsByCategories />}
           />
           <Route
             exact

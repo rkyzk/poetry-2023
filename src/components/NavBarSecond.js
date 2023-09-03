@@ -111,7 +111,7 @@ const NavBarSecond = () => {
                   <div>
                     <NavLink
                       className={styles.NavDropdownItem}
-                      to="#"
+                      to="/poems-by-categories"
                       id="poems-by-cat"
                     >
                       Poems by Categories
