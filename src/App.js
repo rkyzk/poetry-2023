@@ -19,6 +19,7 @@ import ProfilesPage from "./pages/profiles/ProfilesPage";
 import PoemsPageWithProfiles from "./pages/poems/PoemsPageWithProfiles";
 import Contact from "./pages/other_pages/Contact";
 import SearchPoems from "./pages/poems/SearchPoems";
+import SearchProfiles from "./pages/profiles/SearchProfiles";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -39,6 +40,7 @@ function App() {
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route exact path="/contact" render={() => <Contact />} />
           <Route exact path="/search-poems" render={() => <SearchPoems />} />
+          <Route exact path="/search-profiles" render={() => <SearchProfiles />} />
           <Route
             exact
             path="/my-poems"

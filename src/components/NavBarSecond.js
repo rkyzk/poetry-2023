@@ -139,7 +139,7 @@ const NavBarSecond = () => {
               )}
               <NavLink
                 className={`${styles.NavLink} ${styles.NavItems} mt-2`}
-                to="#"
+                to="/search-profiles"
               >
                 Search Profiles
               </NavLink>
