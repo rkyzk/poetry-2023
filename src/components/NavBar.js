@@ -189,7 +189,7 @@ const NavBar = () => {
             >
               Home
             </NavLink>
-            <NavLink className={`${styles.NavLink} mr-3`} to="#">
+            <NavLink className={`${styles.NavLink} mr-3`} to="/contact">
               Contact
             </NavLink>
             {/* If logged in, display 'loggedIn' if not, 'loggedOut'. */}
