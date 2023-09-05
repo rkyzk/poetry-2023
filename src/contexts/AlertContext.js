@@ -1,10 +1,8 @@
 import { createContext, useContext, useState } from "react";
 
 const AlertContext = createContext();
-const SetAlertContext = createContext();
 
 export const useAlert = () => useContext(AlertContext);
-export const useSetAlert = () => useContext(SetAlertContext);
 
 /**
  * Return featured profiles data.
@@ -15,10 +13,10 @@ export const AlertProvider = ({ children }) => {
   const [show, setShow] = useState(false);
 
   return (
-    <AlertContext.Provider value={{ alert, show, setShow }}>
-      <SetAlertContext.Provider value={setAlert}>
-        {children}
-      </SetAlertContext.Provider>
+    <AlertContext.Provider
+      value={{ alert: [alert, setAlert], show: [show, setShow] }}
+    >
+      {children}
     </AlertContext.Provider>
   );
 };

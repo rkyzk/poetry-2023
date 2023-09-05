@@ -8,14 +8,15 @@ import { useEffect } from "react";
  * Return Alert
  */
 const AlertComponent = () => {
-  const { alert, show, setShow } = useAlert();
-  const { setAlert } = useSetAlert();
+  const { alertObj, showObj } = useAlert();
+  const [alert, setAlert] = alertObj;
+  const [show, setShow] = showObj;
 
   useEffect(() => {
     const removeAlert = setTimeout(() => {
       setShow(false);
       setAlert("");
-    }, 500);
+    }, 5000);
     return () => {
       clearTimeout(removeAlert);
     };

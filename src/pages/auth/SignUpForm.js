@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
+import { useAlert } from "../../contexts/AlertContext";
 import axios from "axios";
 import { useRedirect } from "../../hooks/useRedirect";
 
@@ -18,6 +19,10 @@ const SignUpForm = () => {
   useRedirect("loggedIn");
   /** stores info about which pages the user has visited. */
   const history = useHistory();
+
+  const { alertObj, showObj } = useAlert();
+  const [alert, setAlert] = alertObj;
+  const [show, setShow] = showObj;
 
   /** registerData will store data entered by users. */
   const [registerData, setRegisterData] = useState({
@@ -49,7 +54,9 @@ const SignUpForm = () => {
     event.preventDefault();
     try {
       await axios.post("dj-rest-auth/registration/", registerData);
+      setAlert("Your account has been made.");
       history.push("/signin");
+      setShow(true);
     } catch (err) {
       // set errors
       setErrors(err.response?.data);
