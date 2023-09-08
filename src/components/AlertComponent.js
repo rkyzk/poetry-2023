@@ -1,30 +1,27 @@
 import Alert from "react-bootstrap/Alert";
-import Button from "react-bootstrap/Button";
-import btnStyles from "../styles/Button.module.css";
-import { useAlert, useSetAlert } from "../contexts/AlertContext";
+import { useAlert } from "../contexts/AlertContext";
 import { useEffect } from "react";
+import styles from "../styles/AlertComponent.module.css";
+import Row from "react-bootstrap/Row";
 
 /**
  * Return Alert
  */
 const AlertComponent = () => {
-  const { alertObj, showObj } = useAlert();
-  const [alert, setAlert] = alertObj;
-  const [show, setShow] = showObj;
-
+  const { alert, show, hideAlert } = useAlert();
   useEffect(() => {
     const removeAlert = setTimeout(() => {
-      setShow(false);
-      setAlert("");
+      hideAlert();
     }, 5000);
     return () => {
       clearTimeout(removeAlert);
     };
-  }, []);
+  }, [show]);
+  console.log(show);
 
   if (show) {
     return (
-      <Alert variant={"info"} dismissible>
+      <Alert className={styles.AlertMessage} variant={"info"}>
         {alert}
       </Alert>
     );

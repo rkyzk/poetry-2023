@@ -5,18 +5,34 @@ const AlertContext = createContext();
 export const useAlert = () => useContext(AlertContext);
 
 /**
- * Return featured profiles data.
+ *
  */
 export const AlertProvider = ({ children }) => {
-  /** stores data about featured profiles. */
   const [alert, setAlert] = useState("");
   const [show, setShow] = useState(false);
 
+  const showAlert = (message) => {
+    setAlert(message);
+    setShow(true);
+  };
+
+  const hideAlert = () => {
+    setAlert("");
+    setShow(false);
+  };
+
   return (
-    <AlertContext.Provider
-      value={{ alert: [alert, setAlert], show: [show, setShow] }}
-    >
+    <AlertContext.Provider value={{ alert, show, showAlert, hideAlert }}>
       {children}
     </AlertContext.Provider>
   );
+
+  // return (
+  //   // <AlertContext.Provider
+  //   //   value={{ showAlert, hideAlert }}
+  //   // >
+  //   <AlertContext.Provider value={{ alert, show, setAlert, setShow }}>
+  //     {children}
+  //   </AlertContext.Provider>
+  //);
 };

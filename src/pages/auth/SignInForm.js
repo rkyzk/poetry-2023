@@ -33,10 +33,7 @@ function SignInForm() {
   /** stores errors */
   const [errors, setErrors] = useState({});
   // import alert context and setters for alert & show
-  const { value } = useAlert();
-  console.log("hi");
-  console.log(value);
-
+  const { showAlert } = useAlert();
 
   /** set data entered by users to 'signInData'. */
   const handleChange = (event) => {
@@ -60,8 +57,7 @@ function SignInForm() {
       setCurrentUser(data.user);
       // set token time statmp.
       setTokenTimestamp(data);
-      // setAlert(`Successfully signed in as ${data.username}`);
-      // setShow(true);
+      showAlert(`Successfully signed in as ${data.user.username}`);
       history.push("/");
     } catch (err) {
       // Set errors in 'errors'

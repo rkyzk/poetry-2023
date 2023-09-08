@@ -21,7 +21,6 @@ const ConfirmationModal = ({ show, setShowModal, id }) => {
   /** delete a poem from the backend,
       hide confirmation modal and send the user to 'My Poems' page. */
   const handleDeletePoem = async () => {
-    console.log("fired");
     try {
       await axiosReq.delete(`/poems/${id}`);
       setShowModal(false);
