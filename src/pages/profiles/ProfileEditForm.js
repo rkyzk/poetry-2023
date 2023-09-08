@@ -61,7 +61,7 @@ const ProfileEditForm = () => {
       } else {
         /** in case the user is not the owner of the profile,
             redirect to "Home". */
-        // history.push("/");
+        history.push("/");
       }
     };
 
