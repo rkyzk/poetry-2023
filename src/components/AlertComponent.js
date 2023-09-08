@@ -2,7 +2,6 @@ import Alert from "react-bootstrap/Alert";
 import { useAlert } from "../contexts/AlertContext";
 import { useEffect } from "react";
 import styles from "../styles/AlertComponent.module.css";
-import Row from "react-bootstrap/Row";
 
 /**
  * Return Alert

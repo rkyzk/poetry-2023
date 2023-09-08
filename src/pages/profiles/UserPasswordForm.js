@@ -9,6 +9,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
+import { useAlert } from "../../contexts/AlertContext";
 
 /**
  *
@@ -25,6 +26,7 @@ const UserPasswordForm = () => {
   /** destructure the userData */
   const { new_password1, new_password2 } = userData;
   const [errors, setErrors] = useState({});
+  const { showAlert } = useAlert();
 
   /** taken in the user input and set the new passwords to 'userData' */
   const handleChange = (event) => {
@@ -38,6 +40,7 @@ const UserPasswordForm = () => {
   const handleCancel = () => {
     /** go back to "My Profile" */
     history.goBack();
+    showAlert("Update canceld.")
   };
 
   useEffect(() => {
@@ -54,6 +57,7 @@ const UserPasswordForm = () => {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
       /** redirect to "My Profile" */
       history.goBack();
+      showAlert("You password has been changed.");
     } catch (err) {
       setErrors(err.response?.data);
     }

@@ -5,6 +5,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import styles from "../../styles/CommentCreateEditForm.module.css";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
+import { useAlert } from "../../contexts/AlertContext";
 
 /**
  * Return comment form.
@@ -14,6 +15,8 @@ function CommentCreateForm(props) {
   const { poem, setPoem, setComments, profileImage, profile_id } = props;
   /** content stores the comment */
   const [content, setContent] = useState("");
+  /** get the function to show alert messages */
+  const { showAlert } = useAlert();
 
   /** set value entered by users to 'content'. */
   const handleChange = (event) => {
@@ -48,8 +51,9 @@ function CommentCreateForm(props) {
         ],
       }));
       setContent("");
+      showAlert("Your comment has been posted.");
     } catch (err) {
-      console.log(err);
+      showAlert("Something went wrong. Please try again.");
     }
   };
 

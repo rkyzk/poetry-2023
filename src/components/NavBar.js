@@ -12,6 +12,7 @@ import {
 import { removeTokenTimestamp } from "../utils/utils";
 import Avatar from "./Avatar";
 import axios from "axios";
+import { useAlert } from "../contexts/AlertContext";
 
 /**
  *  Render the first navbar on top right.
@@ -27,6 +28,7 @@ const NavBar = () => {
 
   const [myMenu, setMyMenu] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const { showAlert } = useAlert();
 
   const handleCloseMyMenu = () => {
     setTimeout(() => {
@@ -71,8 +73,9 @@ const NavBar = () => {
       setCurrentUser(null);
       // remove the token time stamp.
       removeTokenTimestamp();
+      showAlert("You've signed out.");
     } catch (err) {
-      console.log(err);
+      showAlert("Something went wrong.  Please try again.");
     }
   };
 

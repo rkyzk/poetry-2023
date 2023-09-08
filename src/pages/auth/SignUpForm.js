@@ -20,9 +20,8 @@ const SignUpForm = () => {
   /** stores info about which pages the user has visited. */
   const history = useHistory();
 
-  // const { alertObj, showObj } = useAlert();
-  // const [alert, setAlert] = alertObj;
-  // const [show, setShow] = showObj;
+  // import alert context and setters for alert & show
+  const { showAlert } = useAlert();
 
   /** registerData will store data entered by users. */
   const [registerData, setRegisterData] = useState({
@@ -54,7 +53,7 @@ const SignUpForm = () => {
     event.preventDefault();
     try {
       await axios.post("dj-rest-auth/registration/", registerData);
-      // setAlert("Your account has been made.");
+      showAlert("Your account has been made.");
       history.push("/signin");
     } catch (err) {
       // set errors

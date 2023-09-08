@@ -13,6 +13,7 @@ import Asset from "../../components/Asset";
 import { fetchMoreData } from "../../utils/utils";
 import Alert from "react-bootstrap/Alert";
 import ConfirmationModal from "../../components/ConfirmationModal";
+import { useAlert } from "../../contexts/AlertContext";
 
 /**
  * Return content of individual poem pages.
@@ -48,7 +49,7 @@ function PoemPage() {
         setComments(comments);
       } catch (err) {
         err.response.status === 404 &&
-          setErrMsg("The poem with the given ID was not found.");
+          setErrMsg("Poem with the given ID was not found.");
       }
     };
     handleMount();

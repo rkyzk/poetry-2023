@@ -12,6 +12,7 @@ import {
   useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
+import { useAlert } from "../../contexts/AlertContext";
 
 /**  */
 const UsernameForm = () => {
@@ -27,6 +28,7 @@ const UsernameForm = () => {
   const currentUser = useCurrentUser();
   /** get the function to set current user info. */
   const setCurrentUser = useSetCurrentUser();
+  const { showAlert } = useAlert();
 
   /** When the component is mounted, if the edit page
       belongs to the current user, set username. */
@@ -56,6 +58,7 @@ const UsernameForm = () => {
       }));
       /** Go back to the previous page, "My Profile" */
       history.goBack();
+      showAlert("Your usename has been updated.");
     } catch (err) {
       setErrors(err.response?.data);
     }

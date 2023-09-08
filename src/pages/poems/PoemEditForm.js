@@ -7,6 +7,7 @@ import styles from "../../styles/PoemCreateEditForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useAlert } from "../../contexts/AlertContext";
 
 /**
  * Display the poem to the user and let them
@@ -30,8 +31,9 @@ function PoemEditForm() {
   const history = useHistory();
   // get id from the URL
   const { id } = useParams();
-  // set toast message
-  var message = "The change has been saved";
+  // set flash message
+  var msg = "The change has been saved";
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     /** Get the data of the poem from the backend and display it on the edit form. */
@@ -49,7 +51,7 @@ function PoemEditForm() {
           ? setPoemData({ title, content, category })
           : history.push("/");
       } catch (err) {
-        console.log(err);
+        showAlert("Somethings went wrong. Please try again.");
       }
     };
     handleMount();
@@ -79,13 +81,14 @@ function PoemEditForm() {
        or if it has just been published, set published true */
     (publish || published) && formData.append("published", true);
     // If the poem has been newly published, set the following message.
-    publish && (message = "Your poem has been published.");
+    publish && (msg = "Your poem has been published.");
 
     try {
       // Send the new data to the backend to update the poem.
       await axiosReq.put(`/poems/${id}`, formData);
       // redirect to the pome page.
       history.push(`/poems/${id}`);
+      showAlert(msg);
     } catch (err) {
       // if error is not 401, set error messages
       err.response?.status !== 401 && setErrors(err.response?.data);

@@ -9,6 +9,7 @@ import Alert from "react-bootstrap/Alert";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
 import { useSetFeaturedProfilesData } from "../../contexts/FeaturedProfilesDataContext";
+import { useAlert } from "../../contexts/AlertContext";
 
 /**
  * Return Poem create form.
@@ -31,6 +32,7 @@ function PoemCreateForm() {
   const [publish, setPublish] = useState(false);
   // instantiate history object to store data which url the user has visited.
   const history = useHistory();
+  const { showAlert } = useAlert();
 
   const currentUser = useCurrentUser();
   // get setFeaturedProfileData
@@ -91,6 +93,7 @@ function PoemCreateForm() {
       handlePoemCount();
       // redirect users to the new poem's page.
       history.push(`/poems/${data.id}`);
+      showAlert(msg);
     } catch (err) {
       // if the error is not 'unauthorized, set error data to 'errors'
       err.response?.status !== 401 && setErrors(err.response?.data);

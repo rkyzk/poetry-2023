@@ -42,7 +42,7 @@ function ProfilePage() {
         setProfilePoems(profilePoems);
         setHasLoaded(true);
       } catch (err) {
-        setErrMsg("There was an error.  Please try again later");
+        setErrMsg("Something went wrong.  Please try again later");
       }
     };
     handleMount();

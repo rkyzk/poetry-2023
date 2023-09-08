@@ -33,9 +33,7 @@ function ProfilesPage(props) {
         setProfiles(data);
         setHasLoaded(true);
       } catch (err) {
-        setErrMsg(
-          "There was an error.  The data couldn't be loaded.  Please try again later."
-        );
+        setErrMsg("Something went wrong.  Please try again later.");
       }
     };
     setHasLoaded(false);

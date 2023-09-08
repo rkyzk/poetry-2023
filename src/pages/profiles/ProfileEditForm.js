@@ -13,6 +13,7 @@ import {
   useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
+import { useAlert } from "../../contexts/AlertContext";
 
 /**
  * Get the profile data, display and edit form,
@@ -31,6 +32,7 @@ const ProfileEditForm = () => {
   const history = useHistory();
   /** stores the info of uploaded image file. */
   const imageFile = useRef();
+  const { showAlert } = useAlert();
 
   /** stores the profile data */
   const [profileData, setProfileData] = useState({
@@ -54,7 +56,7 @@ const ProfileEditForm = () => {
           const { display_name, about_me, favorites, image } = data;
           setProfileData({ display_name, about_me, favorites, image });
         } catch (err) {
-          console.log(err);
+          showAlert("Something went wrong.  Please try again.");
         }
       } else {
         /** in case the user is not the owner of the profile,
@@ -102,6 +104,7 @@ const ProfileEditForm = () => {
       }));
       /** Go back to 'My Profile' page. */
       history.goBack();
+      showAlert("Your profile has been updated.");
     } catch (err) {
       setErrors(err.response?.data);
     }

@@ -2,9 +2,9 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { axiosReq } from "../api/axiosDefaults";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useCurrentUser } from "../contexts/CurrentUserContext";
 import styles from "../styles/ConfirmationModal.module.css";
 import btnStyles from "../styles/Button.module.css";
+import { useAlert } from "../contexts/AlertContext";
 
 /**
  * Return Confirmation modal.
@@ -13,10 +13,7 @@ import btnStyles from "../styles/Button.module.css";
 const ConfirmationModal = ({ show, setShowModal, id }) => {
   /** store info on which pages the user has visited. */
   const history = useHistory();
-  /** get the info of the logged-in user. */
-  const currentUser = useCurrentUser();
-  /** store the current user's id */
-  const user_id = currentUser?.pk;
+  const { showAlert } = useAlert();
 
   /** delete a poem from the backend,
       hide confirmation modal and send the user to 'My Poems' page. */
@@ -25,8 +22,9 @@ const ConfirmationModal = ({ show, setShowModal, id }) => {
       await axiosReq.delete(`/poems/${id}`);
       setShowModal(false);
       history.push("/my-poems");
+      showAlert("Your poem has been deleted.");
     } catch (err) {
-      console.log(err);
+      showAlert("Something went wrong.  Please try again.");
     }
   };
 
