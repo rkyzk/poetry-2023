@@ -22,7 +22,7 @@
 
 ---
 
-![your-poetry](./public/documents/media/readme/)
+![your-poetry](./public/documents/media/readme/your-poetry.png)
 
 The app is deployed on Heroku and can be found [here](https://your-poetry-2023-094a4af35547.herokuapp.com/).
 
@@ -81,7 +81,7 @@ I used olive color for most buttons, because the color provides a nice contrast 
 
 **Logo**
 
-<img src="./public/documents/media//readme/logo.png" alt="logo" width="150px" >
+<img src="./public/documents/media/readme/logo.png" alt="logo" width="150px" >
 
 As the logo, I chose a drawing of a quill pen and ink, which suits the website's theme.
 
@@ -103,7 +103,7 @@ I chose a feather icon for the favicon that looks like a quill pen, which is ass
 
 **Navigation Bars**
 
-<img src="./images/readme/NavigationBars.png" alt="navigation bars" width="600px" >
+<img src="./public/documents/media/readme/.png" alt="navigation bars" width="600px" >
 
 _Navigation Bar at the top right_
 
@@ -126,7 +126,7 @@ _Notes about both navigation bars_
 
 **Footer**
 
-<img src="./images/readme/Footer.png" alt="footer" width="600px" >
+<img src="./public/documents/media/readme/" alt="footer" width="600px" >
 - Footer has a dark blue color that matches the color of the text in the app to establish unity in the appearance.
 - Footer offers links to facebook, twitter and Instagram pages.
 
@@ -178,6 +178,8 @@ _Notes about both navigation bars_
 
 **Search Poems**
 
+<img src="./public/documents/media/readme/search-poems.png" alt="search profiles page" width="600px" >
+
 - Users can search poems by entering title, author, keyword, category and/or published date range.
 - Title, author, keyword will search poems that contain the phrase entered by users (not exact match). The search is case insensitive.
 
@@ -206,6 +208,8 @@ _Notes about both navigation bars_
 - Deleting the poem will remove the data from the backend.
 
 **Search Profiles**
+
+<img src="./public/documents/media/readme/search-profiles.png" alt="search profiles page" width="600px" >
 
 - Users can enter a name of the profile and profiles that match will be displayed.
 - The search will start to run one second after the user has stopped typing. (Otherwise the screen will keep flashing while users type letters.)
@@ -250,7 +254,6 @@ _Notes about both navigation bars_
 - react-router-dom@5.3.0 was installed to facilitate component-based routing.
 - axios was installed as means to send requests to and get responses from the API.
 - react-infinite-scroll-component was installed to implement infinite scroll functionality in displaying lists of poems and profiles.
-- react-toastify@9.0.3 was installed to display feedback messages.
 - jwt-decode was installed so that the timestamp within the response can be accessed.
   The timestamp for when the user logged in can be stored in the local storage, and this information is used to know if it’s appropriate to request a token refresh.
 
@@ -348,8 +351,8 @@ https://jigsaw.w3.org/
 
 ### Media
 
-The favicon was taken from [this site](https://icons8.com/icons/set/feather).<br>
-The logo was taken from [this site](https://www.freepik.com/free-vector/hand-drawn-quill-isolated-white-background_2782976.htm#query=quill%20pen%20and%20ink&position=25&from_view=search&track=ais)
+The favicon was taken from https://icons8.com/icons/set/feather.<br>
+The logo was taken from https://www.freepik.com/free-vector/hand-drawn-quill-isolated-white-background_2782976.htm#query=quill%20pen%20and%20ink&position=25&from_view=search&track=ais
 
 I used fonts from Google fonts and icons from Fontawesome.
 
