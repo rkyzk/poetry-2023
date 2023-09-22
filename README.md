@@ -1,6 +1,7 @@
 # Your Poetry
 
 詩をシェアするアプリ。
+デプロイしたアプリは[こちら](https://your-poetry-2023-094a4af35547.herokuapp.com/).
 
 # 目的
 
@@ -13,6 +14,13 @@ JavaScript, HTML/CSS, React, Bootstrap
 
 - 私が作成した Django Rest Framework の API を利用しました。<br>
   https://github.com/rkyzk/drf_api2023
+
+#　本アプリ作成にあたって参考にした資料
+
+- コードインステュート教材の「Moments」<br>
+  https://github.com/Code-Institute-Solutions/moments/tree/a6d063e846e748d68b203b7d8f2d76068a1ccb4a
+
+---
 
 # Your Poetry
 
@@ -380,3 +388,4 @@ I used fonts from Google fonts and icons from Fontawesome.
 Many thanks to my mentor Jubril Akolade and tutors at CI for their dedicated guidance and support.
 
 I learned the methods used in this project from the walk-through project at CI, 'Moments'.<br>
+https://github.com/Code-Institute-Solutions/moments/tree/a6d063e846e748d68b203b7d8f2d76068a1ccb4a
