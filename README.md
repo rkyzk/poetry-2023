@@ -1,5 +1,21 @@
 # Your Poetry
 
+詩をシェアするアプリ。
+
+# 目的
+
+ユーザーは詩を書いて投稿できます。他ユーザーからコメントをもらうことができます。
+好きな詩を「いいね」したり、プロフィールをフォローすることもできます。
+
+# 使用した言語、フレームワーク
+
+JavaScript, HTML/CSS, React, Bootstrap
+
+- 私が作成した Django Rest Framework の API を利用しました。<br>
+  https://github.com/rkyzk/drf_api2023
+
+# Your Poetry
+
 ## CONTENTS
 
 - [Overview](#overview)
@@ -29,6 +45,9 @@ The app is deployed on Heroku and can be found [here](https://your-poetry-2023-0
 ## Overview
 
 Your Poetry offers an interactive platform where users can share their poems and give/get comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems/profiles. In addition users can also make their own profiles to let others know a few things about themselves. The purpose of the app is to offer users opportunities to be creative, to share their art and to inspire others.
+
+For this application, the following API made with Django Rest Framework was used.<br>
+https://github.com/rkyzk/drf_api2023
 
 ## User Stories
 
