@@ -48,7 +48,7 @@ JavaScript, HTML/CSS, React, Bootstrap
 
 ![your-poetry](./public/documents/media/readme/your-poetry.png)
 
-The app is deployed on Heroku and can be found [here](https://your-poetry-2023-094a4af35547.herokuapp.com/).
+The deployed app can be found [here](https://your-poetry-2023-094a4af35547.herokuapp.com/).
 
 ## Overview
 
@@ -130,7 +130,7 @@ I chose a feather icon for the favicon that looks like a quill pen, which is ass
 
 **Navigation Bars**
 
-<img src="./public/documents/media/readme/.png" alt="navigation bars" width="600px" >
+<img src="./public/documents/media/readme/navigation.png" alt="navigation bars" width="600px" >
 
 _Navigation Bar at the top right_
 
@@ -153,13 +153,10 @@ _Notes about both navigation bars_
 
 **Footer**
 
-<img src="./public/documents/media/readme/" alt="footer" width="600px" >
 - Footer has a dark blue color that matches the color of the text in the app to establish unity in the appearance.
 - Footer offers links to facebook, twitter and Instagram pages.
 
 **The Poem component**
-
-<img src="./images/readme/Poem.png" alt="poem component" width="600px" >
 
 - The poem component displays the title, the author, published date, excerpt (the first 60 characters of the content), likes count and comments count of the poem.
 - Users can click the title to go to the individual poem page that displays the full content.
@@ -171,8 +168,6 @@ _Notes about both navigation bars_
 - Clicking the comment icon will redirect users to the individual poem page, so they can leave comments if they are logged in.
 
 **The Profile component**
-
-<img src="./images/readme/Profile.png" alt="profile component" width="600px" >
 
 - The profile component displays the avatar, display name, the date joined, the number of poems written and number of followers. On the individual profile page, an introduction written by the owner (about_me) and their favorite poems and poets (‘favorites’ field) will be displayed as well.
 - If users are logged in, follow/unfollow button will be displayed.
@@ -205,8 +200,6 @@ _Notes about both navigation bars_
 
 **Search Poems**
 
-<img src="./public/documents/media/readme/search-poems.png" alt="search profiles page" width="600px" >
-
 - Users can search poems by entering title, author, keyword, category and/or published date range.
 - Title, author, keyword will search poems that contain the phrase entered by users (not exact match). The search is case insensitive.
 
@@ -228,15 +221,13 @@ _Notes about both navigation bars_
 
 **Delete Poems (No page)**
 
-<img src="./images/readme/ConfirmationModal.png" alt="delete confirmation modal" width="600px" >
+<img src="./images/readme/confirmation-modal.png" alt="delete confirmation modal" width="600px" >
 
 - If users wish to delete their poem, they can click the three dots on the individual poem page and click the trash bin icon.
 - A confirmation modal will be displayed, and the user can choose to delete or cancel.
 - Deleting the poem will remove the data from the backend.
 
 **Search Profiles**
-
-<img src="./public/documents/media/readme/search-profiles.png" alt="search profiles page" width="600px" >
 
 - Users can enter a name of the profile and profiles that match will be displayed.
 - The search will start to run one second after the user has stopped typing. (Otherwise the screen will keep flashing while users type letters.)
