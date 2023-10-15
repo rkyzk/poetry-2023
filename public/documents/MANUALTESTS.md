@@ -1,6 +1,6 @@
 # Manual Tests
 
-As of Sep. 17th, I am still conducting the tests and retaking screen shots.
+I made changes after the app was first made. As of Oct. 15th, I still need to reconduct the tests and take screen shots.
 
 ### Testing If Goals (User Stories) are achieved
 
