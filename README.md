@@ -221,7 +221,7 @@ _Notes about both navigation bars_
 
 **Delete Poems (No page)**
 
-<img src="./images/readme/confirmation-modal.png" alt="delete confirmation modal" width="600px" >
+<img src="./media/readme/confirmation-modal.png" alt="delete confirmation modal" width="600px" >
 
 - If users wish to delete their poem, they can click the three dots on the individual poem page and click the trash bin icon.
 - A confirmation modal will be displayed, and the user can choose to delete or cancel.
