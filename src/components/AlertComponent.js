@@ -16,7 +16,6 @@ const AlertComponent = () => {
       clearTimeout(removeAlert);
     };
   }, [show]);
-  console.log(show);
 
   if (show) {
     return (

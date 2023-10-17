@@ -54,7 +54,7 @@ The deployed app can be found [here](https://your-poetry-2023-094a4af35547.herok
 
 Your Poetry offers an interactive platform where users can share their poems and give/get comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems/profiles. In addition users can also make their own profiles to let others know a few things about themselves. The purpose of the app is to offer users opportunities to be creative, to share their art and to inspire others.
 
-For this application, the following API made with Django Rest Framework was used.<br>
+For this application, I used the following API built using Django REST Framework.<br>
 https://github.com/rkyzk/drf_api2023
 
 ## User Stories
@@ -221,7 +221,7 @@ _Notes about both navigation bars_
 
 **Delete Poems (No page)**
 
-<img src="./media/readme/confirmation-modal.png" alt="delete confirmation modal" width="600px" >
+<img src="./public/documents/media/readme/confirmation-modal.png" alt="delete confirmation modal" width="600px" >
 
 - If users wish to delete their poem, they can click the three dots on the individual poem page and click the trash bin icon.
 - A confirmation modal will be displayed, and the user can choose to delete or cancel.
