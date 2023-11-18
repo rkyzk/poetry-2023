@@ -44,6 +44,10 @@
   right: 10%;
 }
 
+.NavBar > div > button {
+  border: none;
+}
+
 .NavBar .DropdownBtn {
   background-color: #f8f8f8;
   outline: none;
@@ -80,6 +84,10 @@
 
   .NavLink {
     margin-top: 0;
+  }
+
+  .NavBar .NavToggle a {
+    font-size: 1rem;
   }
 
   .Dropdown a {

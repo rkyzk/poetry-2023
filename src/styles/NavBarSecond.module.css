@@ -4,6 +4,14 @@
   z-index: 1;
 }
 
+.NavBarSecond > div > button {
+  border: none;
+}
+
+.NavBarSecond .NavToggle {
+  padding: 7px 7px;
+}
+
 .NavBarSecond .NavToggle .NavLink a {
   font-family: "Nanum Myeongj";
   color: rgb(35, 78, 139);
@@ -71,7 +79,7 @@
 @media screen and (max-width: 767px) {
   .NavToggle {
     background-color: #fff;
-    width: 180px;
+    width: 120px;
     border: 1px solid #ccc;
     padding-left: 10px;
   }
@@ -102,7 +110,7 @@
 
   .PoemsMenu {
     top: 50px;
-    left: 30%;
+    left: 27%;
   }
 
   .NavBarSecond .NavLink {
@@ -111,11 +119,5 @@
 
   .NavBarSecond .NavToggle button {
     margin-left: -5px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .PoemsMenu {
-    left: 40%;
   }
 }
