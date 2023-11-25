@@ -56,6 +56,7 @@ const NavBar = () => {
   const handleToggle = () => {
     if (expanded === false) {
       setExpanded(true);
+      console.log(setExpanded);
       document.addEventListener("mouseup", handleCloseBurger);
     }
   };
@@ -80,7 +81,7 @@ const NavBar = () => {
   };
 
   /**
-   * Nav link items will be displayed when logged in.
+   * Nav link items will be displayed while logged in.
    * 'setExpanded(false)' will close the dropdown menu.
    */
   const loggedIn = (

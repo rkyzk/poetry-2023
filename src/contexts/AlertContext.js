@@ -5,7 +5,7 @@ const AlertContext = createContext();
 export const useAlert = () => useContext(AlertContext);
 
 /**
- *
+ * Alert context for displaying error messages.
  */
 export const AlertProvider = ({ children }) => {
   const [alert, setAlert] = useState("");
@@ -26,13 +26,4 @@ export const AlertProvider = ({ children }) => {
       {children}
     </AlertContext.Provider>
   );
-
-  // return (
-  //   // <AlertContext.Provider
-  //   //   value={{ showAlert, hideAlert }}
-  //   // >
-  //   <AlertContext.Provider value={{ alert, show, setAlert, setShow }}>
-  //     {children}
-  //   </AlertContext.Provider>
-  //);
 };

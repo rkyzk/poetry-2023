@@ -40,7 +40,7 @@ const UserPasswordForm = () => {
   const handleCancel = () => {
     /** go back to "My Profile" */
     history.goBack();
-    showAlert("Update canceld.")
+    showAlert("Update canceld.");
   };
 
   useEffect(() => {
@@ -99,14 +99,14 @@ const UserPasswordForm = () => {
               </Alert>
             ))}
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Turquoise}`}
+              className={`${btnStyles.Button} ${btnStyles.Olive}`}
               onClick={handleCancel}
             >
               cancel
             </Button>
             <Button
               type="submit"
-              className={`${btnStyles.Button} ${btnStyles.Turquoise}`}
+              className={`${btnStyles.Button} ${btnStyles.Olive}`}
             >
               save
             </Button>

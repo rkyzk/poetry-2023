@@ -89,15 +89,22 @@ export function ProfileEditDropdown({ id }) {
           onClick={() => history.push(`/profiles/${id}/edit/username`)}
           aria-label="edit-username"
         >
-          <i className="far fa-id-card" />
+          <i className={`far fa-id-card ${styles.Icons}`} />
           change username
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit/password`)}
           aria-label="edit-password"
         >
-          <i className="fas fa-key" />
+          <i className={`fas fa-key ${styles.Icons}`} />
           change password
+        </Dropdown.Item>
+        <Dropdown.Item
+          // onClick={() => }
+          aria-label="delete-account"
+        >
+          <i className={`fa-solid fa-delete-left ${styles.Icons}`} />
+          delete my account
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

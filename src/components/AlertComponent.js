@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import styles from "../styles/AlertComponent.module.css";
 
 /**
- * Return Alert
+ * Return Alert component
  */
 const AlertComponent = () => {
   const { alert, show, hideAlert } = useAlert();

@@ -1,7 +1,8 @@
 import styles from "../styles/FooterComponent.module.css";
 
 /**
- * Return Footer component.
+ * Return Footer component with links to
+ * facebook, twitter and instagram
  */
 const FooterComponent = () => {
   return (
