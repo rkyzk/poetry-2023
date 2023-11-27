@@ -23,6 +23,7 @@ import SearchProfiles from "./pages/profiles/SearchProfiles";
 import FooterComponent from "./components/FooterComponent";
 import PoemsByCategories from "./pages/poems/PoemsByCategories";
 import AlertComponent from "./components/AlertComponent";
+import ModalComponent from "./components/ModalComponent";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -116,6 +117,7 @@ function App() {
         </Switch>
       </Container>
       <FooterComponent />
+      <ModalComponent />
     </div>
   );
 }

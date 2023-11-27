@@ -2,6 +2,7 @@ import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { useHistory } from "react-router";
+import { useModal } from "../contexts/ModalContext";
 
 /**
  * Set the three dots to forwardRef.
@@ -23,11 +24,16 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
  * Return a dropdown menu for editing/deleting poems and comments
  * shown as three dots.
  */
-export const MoreDropdown = ({
-  handleEdit,
-  setShowModal,
-  handleDeleteComment,
-}) => {
+export const MoreDropdown = ({ handleEdit, poemId, handleDeleteComment }) => {
+  const { showConfModal } = useModal();
+  let obj, objId;
+  if (poemId) {
+    obj = "poem";
+    objId = poemId;
+  } else {
+    obj = "profile";
+  }
+
   return (
     <Dropdown className="ml-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
@@ -42,14 +48,10 @@ export const MoreDropdown = ({
         >
           <i className="fas fa-edit" />
         </Dropdown.Item>
-        {/* If a poem will be deleted, setShowModal is passed down,
-            so a confirmation modal will be displayed.
-            If a comment will be deleted, handleDeleteComment will be fired
-            without a confirmation. */}
-        {setShowModal ? (
+        {poemId ? (
           <Dropdown.Item
             className={styles.DropdownItem}
-            onClick={() => setShowModal(true)}
+            onClick={() => showConfModal(obj, objId)}
             aria-label="delete"
           >
             <i className="fas fa-trash-alt" />

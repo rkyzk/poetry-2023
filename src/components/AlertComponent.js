@@ -15,7 +15,7 @@ const AlertComponent = () => {
     return () => {
       clearTimeout(removeAlert);
     };
-  }, [show]);
+  }, [show, hideAlert]);
   if (show) {
     return (
       <Alert className={styles.AlertMessage} variant={"info"}>
