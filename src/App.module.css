@@ -7,6 +7,7 @@ h2 {
   font-family: "Nanum Myeongj";
   color: rgb(10, 10, 90);
   font-size: 1.2rem;
+  position: relative;
 }
 
 .Main {

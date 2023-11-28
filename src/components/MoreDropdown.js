@@ -26,13 +26,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
  */
 export const MoreDropdown = ({ handleEdit, poemId, handleDeleteComment }) => {
   const { showConfModal } = useModal();
-  let obj, objId;
-  if (poemId) {
-    obj = "poem";
-    objId = poemId;
-  } else {
-    obj = "profile";
-  }
+  let obj = "poem";
 
   return (
     <Dropdown className="ml-auto" drop="left">
@@ -51,7 +45,7 @@ export const MoreDropdown = ({ handleEdit, poemId, handleDeleteComment }) => {
         {poemId ? (
           <Dropdown.Item
             className={styles.DropdownItem}
-            onClick={() => showConfModal(obj, objId)}
+            onClick={() => showConfModal(obj, poemId)}
             aria-label="delete"
           >
             <i className="fas fa-trash-alt" />
@@ -77,6 +71,8 @@ export const MoreDropdown = ({ handleEdit, poemId, handleDeleteComment }) => {
 export function ProfileEditDropdown({ id }) {
   /** stores info on which pages the user has been to. */
   const history = useHistory();
+  const { showConfModal } = useModal();
+  let obj = "profile and account";
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={ThreeDots} />
@@ -102,7 +98,7 @@ export function ProfileEditDropdown({ id }) {
           change password
         </Dropdown.Item>
         <Dropdown.Item
-          // onClick={() => }
+          onClick={() => showConfModal(obj, id)}
           aria-label="delete-account"
         >
           <i className={`fa-solid fa-delete-left ${styles.Icons}`} />

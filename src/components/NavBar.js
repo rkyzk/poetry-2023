@@ -19,7 +19,7 @@ import { useAlert } from "../contexts/AlertContext";
  *  Adjust displayed link items depending on the logged in status.
  */
 const NavBar = () => {
-  /** get the info of logged in user. */
+  /** get info of logged in user. */
   const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id;
 
@@ -56,7 +56,6 @@ const NavBar = () => {
   const handleToggle = () => {
     if (expanded === false) {
       setExpanded(true);
-      console.log(setExpanded);
       document.addEventListener("mouseup", handleCloseBurger);
     }
   };
@@ -169,38 +168,36 @@ const NavBar = () => {
       expand="md"
       fixed="top"
     >
-      <Container>
-        <NavLink exact activeClassName={styles.Active} to="/">
-          <Navbar.Brand className={styles.Logo}>
-            <img src={logo} alt="logo" />
-          </Navbar.Brand>
-        </NavLink>
-        <h1 className="mt-4">Your Poetry</h1>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          id="navbar-toggle"
-          onClick={() => handleToggle()}
-        >
-          <i className={`${styles.Burger} fa-solid fa-bars`}></i>
-        </Navbar.Toggle>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className={`${styles.NavToggle} ml-auto`}>
-            <NavLink
-              exact
-              className={`${styles.NavLink} mr-3`}
-              activeClassName={styles.Active}
-              to="/"
-            >
-              Home
-            </NavLink>
-            <NavLink className={`${styles.NavLink} mr-3`} to="/contact">
-              Contact
-            </NavLink>
-            {/* If logged in, display 'loggedIn' if not, 'loggedOut'. */}
-            {currentUser ? loggedIn : loggedOut}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+      <NavLink exact activeClassName={styles.Active} to="/">
+        <Navbar.Brand className={styles.Logo}>
+          <img src={logo} alt="logo" />
+        </Navbar.Brand>
+      </NavLink>
+      <h1 className="mt-4">Your Poetry</h1>
+      <Navbar.Toggle
+        aria-controls="basic-navbar-nav"
+        id="navbar-toggle"
+        onClick={() => handleToggle()}
+      >
+        <i className={`${styles.Burger} fa-solid fa-bars`}></i>
+      </Navbar.Toggle>
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className={`${styles.NavToggle} ml-auto`}>
+          <NavLink
+            exact
+            className={`${styles.NavLink} mr-3`}
+            activeClassName={styles.Active}
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink className={`${styles.NavLink} mr-3`} to="/contact">
+            Contact
+          </NavLink>
+          {/* If logged in, display 'loggedIn' if not, 'loggedOut'. */}
+          {currentUser ? loggedIn : loggedOut}
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 };
