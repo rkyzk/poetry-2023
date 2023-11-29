@@ -94,11 +94,10 @@
     width: 120px;
     text-align: left;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 10px 10px 10px 17px;
     position: absolute;
     top: 65px;
     right: 50px;
-    opacity: 0.9;
   }
 
   .NavLink {
@@ -109,7 +108,7 @@
     font-size: 1rem;
   }
 
-  .Dropdown a {
+  .NavBar .Dropdown a {
     margin-top: 0;
   }
 
@@ -127,15 +126,15 @@
     outline: none;
   }
 
-  /* .NavBar .DropdownBtn:hover {
+  .NavBar .DropdownBtn:hover {
     background-color: #fff;
-    color: rgb(51, 93, 151);
-  } */
+    color: rgb(21, 40, 65);
+  }
 
-  /* .NavBar .DropdownBtn:active {
+  .NavBar .DropdownBtn:active {
     background-color: #fff;
     color: rgb(51, 93, 151);
-  } */
+  }
 
   .DropdownBox {
     /* border: solid 1px #ccc; */

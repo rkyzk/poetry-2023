@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import logo from "../assets/media/poems-logo.png";
 import styles from "../styles/NavBar.module.css";
@@ -30,6 +29,7 @@ const NavBar = () => {
   const [expanded, setExpanded] = useState(false);
   const { showAlert } = useAlert();
 
+  /** close my menu ('my profile,' 'my poems'...etc) */
   const handleCloseMyMenu = () => {
     setTimeout(() => {
       setMyMenu(false);
@@ -37,13 +37,16 @@ const NavBar = () => {
     }, 100);
   };
 
+  /** open my menu if it's closed originally */
   const handleMyMenu = () => {
     if (myMenu === false) {
       setMyMenu(true);
+      // add event listener so the menu will be closed after the next click
       document.addEventListener("mouseup", handleCloseMyMenu);
     }
   };
 
+  /** close the burger menu */
   const handleCloseBurger = (event) => {
     if (event.target.id !== "my-menu" && event.target.id !== "my-menu-icon") {
       setTimeout(() => {
@@ -53,9 +56,11 @@ const NavBar = () => {
     }
   };
 
+  /** open burger menu */
   const handleToggle = () => {
     if (expanded === false) {
       setExpanded(true);
+      // add an eventlistener so the burger closes after the next click
       document.addEventListener("mouseup", handleCloseBurger);
     }
   };
