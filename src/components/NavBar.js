@@ -41,7 +41,8 @@ const NavBar = () => {
   const handleMyMenu = () => {
     if (myMenu === false) {
       setMyMenu(true);
-      // add event listener so the menu will be closed after the next click
+      /** add event listener so the menu will be closed 
+          after the next click (anywhere on the page) */
       document.addEventListener("mouseup", handleCloseMyMenu);
     }
   };

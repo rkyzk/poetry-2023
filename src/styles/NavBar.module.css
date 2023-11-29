@@ -30,7 +30,7 @@
 }
 
 .NavBar .NavDropdownItem {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-family: "Nanum Myeongj";
   color: rgb(35, 63, 103);
   margin-left: 10px;
@@ -76,11 +76,11 @@
 
 @media screen and (max-width: 950px) {
   .NavBar {
-    padding: 0 70px;
+    padding: 0 60px;
   }
 
   .DropdownBox {
-    right: 70px;
+    right: 60px;
   }
 }
 

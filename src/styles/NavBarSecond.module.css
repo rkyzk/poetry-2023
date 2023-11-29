@@ -1,11 +1,13 @@
 .NavBarSecond {
   margin-top: 100px;
   background-color: #f8f8f8;
+  padding-left: 100px;
   z-index: 1;
 }
 
-.NavBarSecond > div > button {
+.NavBarSecond button {
   border: none;
+  outline: none;
 }
 
 .NavBarSecond .NavToggle {
@@ -64,7 +66,7 @@
   border: solid 1px #ccc;
   position: absolute;
   top: 50px;
-  left: 60px;
+  left: 110px;
   font-size: 1rem;
 }
 
@@ -76,8 +78,18 @@
   margin-left: 20px;
 }
 
+@media screen and (max-width: 950px) {
+  .NavBarSecond {
+    padding-left: 60px;
+  }
+
+  .PoemsMenu {
+    left: 60px;
+  }
+}
+
 @media screen and (max-width: 767px) {
-  .NavToggle {
+  .NavBarSecond .NavToggle {
     background-color: #fff;
     width: 120px;
     border: 1px solid #ccc;
@@ -88,7 +100,7 @@
     margin-left: 0;
   }
 
-  .PoemsDropdown {
+  .NavBarSecond .PoemsDropdown {
     padding: 0;
     margin: 0;
     background-color: #fff;
@@ -96,21 +108,19 @@
     outline: none;
   }
 
-  .PoemsDropdown:hover {
+  .NavBarSecond .PoemsDropdown:hover {
     background-color: #fff;
-    border: none;
-    outline: none !important;
   }
 
-  .PoemsDropdown:active {
+  .NavBarSecond .PoemsDropdown:active {
     background-color: #fff;
     border: none;
     outline: none;
   }
 
-  .PoemsMenu {
+  .NavBarSecond .PoemsMenu {
     top: 37px;
-    left: 27%;
+    left: 180px;
   }
 
   .NavBarSecond .NavLink {
@@ -119,5 +129,29 @@
 
   .NavBarSecond .NavToggle button {
     margin-left: -5px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .NavBarSecond {
+    padding-left: 35px;
+  }
+
+  .NavBarSecond .PoemsMenu {
+    left: 155px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .NavBarSecond {
+    padding-left: 20px;
+  }
+
+  .NavBarSecond .PoemsMenu {
+    left: 140px;
+  }
+
+  .NavBarSecond .NavToggle {
+    left: 20px;
   }
 }
