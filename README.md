@@ -48,13 +48,13 @@ JavaScript, HTML/CSS, React, Bootstrap
 
 ![your-poetry](./public/documents/media/readme/your-poetry.png)
 
-The deployed app can be found [here](https://your-poetry-2023-094a4af35547.herokuapp.com/).
+Link to the live site of this app: https://your-poetry-2023-094a4af35547.herokuapp.com
 
 ## Overview
 
 Your Poetry offers an interactive platform where users can share their poems and give/get comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems/profiles. In addition users can also make their own profiles to let others know a few things about themselves. The purpose of the app is to offer users opportunities to be creative, to share their art and to inspire others.
 
-For this application, I used the following API built using Django REST Framework.<br>
+For this application, I used the following API I built with Django REST Framework.<br>
 https://github.com/rkyzk/drf_api2023
 
 ## User Stories
@@ -78,8 +78,7 @@ In this app users can:
 
 ## Wireframes
 
-Wireframes for this application can be found [here.](https://wireframe.cc/pro/pp/8521443d2672331)
-Please click on "Homepage" in the upper left corner to see wireframes of different pages.
+Wireframes for this application can be found [here](./public/documents/wireframes.md).
 
 ## Notes on the Design
 
@@ -309,7 +308,7 @@ Following components were used multiple times in the app.
 
 ## Manual Testing
 
-Manual tests for this applicatio is documented [here](./public/documents/MANUALTESTS.md)
+Manual tests for this applicatio are documented [here](./public/documents/MANUALTESTS.md)
 
 ## Bugs
 
