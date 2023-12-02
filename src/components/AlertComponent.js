@@ -18,9 +18,11 @@ const AlertComponent = () => {
   }, [show, hideAlert]);
   if (show) {
     return (
-      <Alert className={styles.AlertMessage} variant={"info"}>
-        {alert}
-      </Alert>
+      <div className="d-flex justify-content-center">
+        <Alert className={styles.AlertMessage} variant={"info"}>
+          {alert}
+        </Alert>
+      </div>
     );
   } else {
     return null;

@@ -97,13 +97,6 @@ export function ProfileEditDropdown({ id }) {
           <i className={`fas fa-key ${styles.Icons}`} />
           change password
         </Dropdown.Item>
-        <Dropdown.Item
-          onClick={() => showConfModal(obj, id)}
-          aria-label="delete-account"
-        >
-          <i className={`fa-solid fa-delete-left ${styles.Icons}`} />
-          delete my account
-        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
