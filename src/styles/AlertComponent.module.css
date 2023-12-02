@@ -1,11 +1,5 @@
 .AlertMessage {
   z-index: 5;
   position: absolute;
-  top: 170px;
-}
-
-@media screen and (max-width: 767px) {
-  .AlertMessage {
-    top: 100px;
-  }
+  top: 30px;
 }
