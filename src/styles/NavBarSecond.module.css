@@ -10,8 +10,9 @@
   outline: none;
 }
 
-.NavBarSecond .NavToggle {
-  padding: 7px 7px;
+.NavBarSecond > div > .NavToggle {
+  padding: 7px;
+  background-color: #fafafa;
 }
 
 .NavBarSecond .NavToggle .NavLink a {
@@ -24,7 +25,8 @@
   color: rgb(35, 78, 139);
 }
 
-.NavLink:hover {
+.NavBarSecond .NavDropdownItem:hover,
+.NavBarSecond .NavItems:hover {
   text-decoration: underline;
   color: rgb(10, 10, 90);
 }
@@ -37,7 +39,7 @@
   width: 77px;
   padding: 0;
   margin-left: 15px;
-  background-color: #f8f8f8;
+  background-color: #fafafa;
   border: none;
   outline: none;
   font-size: 1.2rem;
@@ -45,7 +47,7 @@
 }
 
 .NavBarSecond .PoemsDropdown:hover {
-  background-color: #f8f8f8;
+  background-color: #fafafa;
   color: rgb(10, 10, 90);
   border: none;
   outline: none;
@@ -53,7 +55,7 @@
 }
 
 .NavBarSecond .PoemsDropdown:active {
-  background-color: #f8f8f8;
+  background-color: #fafafa;
   color: rgb(10, 10, 90);
   border: none;
   outline: none;
@@ -62,12 +64,16 @@
 
 .PoemsMenu {
   width: 160px;
-  background-color: #fff;
+  background-color: #fafafa;
   border: solid 1px #ccc;
   position: absolute;
   top: 50px;
   left: 110px;
   font-size: 1rem;
+}
+
+.PoemsMenu > div {
+  margin-top: 5px;
 }
 
 .PoemsMenu a {

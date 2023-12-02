@@ -55,13 +55,13 @@ const ModalComponent = () => {
       setCurrentUser(null);
       // remove the token time stamp.
       removeTokenTimestamp();
+      /** hide modal, display home page and message */
+      hideModal();
       history.push("/");
       showAlert("Your profile and account have been deleted.");
     } catch (err) {
-      showAlert("Something went wrong.  Please try again.");
-    } finally {
-      /** hide modal, display home page and message */
       hideModal();
+      showAlert("Something went wrong.  Please try again."); 
     }
   };
 

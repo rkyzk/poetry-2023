@@ -1,29 +1,5 @@
 # Your Poetry
 
-詩をシェアするアプリ。
-デプロイしたアプリは[こちら](https://your-poetry-2023-094a4af35547.herokuapp.com/).
-
-# 目的
-
-ユーザーは詩を書いて投稿できます。他ユーザーからコメントをもらうことができます。
-好きな詩を「いいね」したり、プロフィールをフォローすることもできます。
-
-# 使用した言語、フレームワーク
-
-JavaScript, HTML/CSS, React, Bootstrap
-
-- 私が作成した Django Rest Framework の API を利用しました。<br>
-  https://github.com/rkyzk/drf_api2023
-
-#　本アプリ作成にあたって参考にした資料
-
-- コードインステュート教材の「Moments」<br>
-  https://github.com/Code-Institute-Solutions/moments/tree/a6d063e846e748d68b203b7d8f2d76068a1ccb4a
-
----
-
-# Your Poetry
-
 ## CONTENTS
 
 - [Overview](#overview)
@@ -44,15 +20,13 @@ JavaScript, HTML/CSS, React, Bootstrap
 - [Media](#media)
 - [Credits](#credits)
 
----
-
 ![your-poetry](./public/documents/media/readme/your-poetry.png)
 
 Link to the live site of this app: https://your-poetry-2023-094a4af35547.herokuapp.com
 
 ## Overview
 
-Your Poetry offers an interactive platform where users can share their poems and give/get comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems/profiles. In addition users can also make their own profiles to let others know a few things about themselves. The purpose of the app is to offer users opportunities to be creative, to share their art and to inspire others.
+Your Poetry offers an interactive platform where users can share their poems and exchange comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems and profiles. In addition users can also make their own profiles to let others know a few things about themselves. The purpose of the app is to offer users opportunities to be creative, to share their art, and to inspire others.
 
 For this application, I used the following API I built with Django REST Framework.<br>
 https://github.com/rkyzk/drf_api2023
@@ -87,7 +61,7 @@ Wireframes for this application can be found [here](./public/documents/wireframe
 - For the website title and the headings of the pages, I used ‘Bacasime Antique.’
 - For navigation links, labels for input boxes and the contents of poems, I used 'Nanum Myeongj.'
 - I chose these two fonts because they both look artistic.
-- For the introductory paragraph I used ‘Raleway’ since this font is readable and offers a friendly ambient.
+- For the introductory paragraph I used ‘Raleway’ since this font is readable and friendly.
 
 **Colors**
 
@@ -101,9 +75,9 @@ I used following colors in different sections:
 - unfollow button: rgb(189, 218, 243)
 - Footer: dark blue, rgb(13, 13, 70)
 
-I used dark blue for the text, instead of very commonly used black or dark gray in order to provide originality.<br>
-I used light gray for the background of navigation bars to keep the appearance simple.<br>
-I used olive color for most buttons, because the color provides a nice contrast to the dark blue.<br>
+I used dark blue for the text, instead of very common black or dark gray in order to provide originality.<br>
+I used white and light gray for the background of the pages to keep the appearance simple.<br>
+I used olive color for most buttons, because the color provides a nice contrast to the dark blue texts.<br>
 
 **Logo**
 
@@ -133,17 +107,26 @@ I chose a feather icon for the favicon that looks like a quill pen, which is ass
 
 _Navigation Bar at the top right_
 
-- For logged out users the navigation bar displays links to “Home”, “Contact”, “Sign in” and “Sign out” pages.
-- For logged in users, the avatar and the logged in user’s name are displayed in place of “Sign in” and “Sign up.”
-- Clicking the username shows a dropdown menu for “My Profile”, “My Poems”, “Poets I’m following”, “Poems I like” and “Sign out”.
-- I placed links to poems lists and a profile list that are specific to the current user in the top right dropdown menu. I placed links to other lists that are common to all users such as “New Poems” and “Popular poems” in the navigation bar on the left side.
+|                  |                                                                                |
+| :--------------- | :----------------------------------------------------------------------------- |
+|                  | navigation link items                                                          |
+| logged out users | "Home", "Contact", "Sign in", "Sign up"                                        |
+| logged in users  | "Home", "Contact", a menu button with the user's profile name                  |
+| dropdown menu.   | “My Profile”, “My Poems”, “Poets I’m following”, “Poems I like” and “Sign out” |
+
+- I placed links to personalized lists of poems and profiles (such as "My Poems," "Poets I'm following") in the top right dropdown menu.
+- I placed links to lists that are common for all users such as “New Poems” and “Popular poems” in the navigation bar on the left side.
 
 _Navigation Bar at the top left_
 
 - The second navigation bar is displayed on all pages except for sign in and sign up pages. (Users trying to sign in or sign up will not need this navigation bar.)
-- For logged out users, a dropdown menu “Poems” and a link “Search Profiles” are displayed.
-- For logged in users, the link to “Write Poems” will be displayed as well. This is hidden for logged out users because only logged in users can write poems.
-- Clicking the dropdown menu “Poems” will show links to “New Poems”, “Popular Poems”, “Poems by Categories” and “Search” pages.
+
+|                       |                                                                  |
+| :-------------------- | :--------------------------------------------------------------- |
+|                       | navigation link items                                            |
+| logged out users      | “Poems”, “Search Profiles”                                       |
+| logged in users       | “Poems”, “Write Poems”, “Search Profiles”                        |
+| dropdown menu “Poems” | “New Poems”, “Popular Poems”, “Poems by Categories” and “Search” |
 
 _Notes about both navigation bars_
 

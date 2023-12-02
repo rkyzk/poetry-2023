@@ -14,14 +14,9 @@
   text-decoration: underline;
 }
 
-.NavLink:hover {
-  text-decoration: underline;
-  color: rgb(10, 10, 90);
-}
-
 .NavLink {
   font-family: "Nanum Myeongj";
-  color: rgb(35, 63, 103);
+  color: rgb(39, 72, 117);
   margin-top: 20px;
 }
 
@@ -30,18 +25,24 @@
 }
 
 .NavBar .NavDropdownItem {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: "Nanum Myeongj";
-  color: rgb(35, 63, 103);
+  color: rgb(39, 72, 117);
   margin-left: 10px;
+}
+
+.NavBar .NavDropdownItem:hover,
+.NavLink:hover {
+  text-decoration: underline;
+  color: rgb(10, 10, 90);
 }
 
 .DropdownBox {
   border: solid 1px #ccc;
-  padding: 7px 10px;
-  background-color: #fff;
+  padding: 7px;
+  background-color: #f8f8f8;
   position: absolute;
-  top: 80px;
+  top: 88px;
   right: 100px;
 }
 
@@ -54,14 +55,14 @@
   outline: none;
   border: none;
   font-family: "Nanum Myeongj";
-  color: rgb(35, 63, 103);
+  color: rgb(39, 72, 117);
   font-size: 1.2rem;
   margin-top: 15px;
 }
 
 .NavBar .DropdownBtn:hover {
   background-color: #f8f8f8;
-  color: rgb(21, 40, 65);
+  color: rgb(10, 10, 90);
   text-decoration: underline;
   outline: none;
   border: none;
@@ -69,7 +70,7 @@
 
 .NavBar .DropdownBtn:active {
   background-color: #f8f8f8;
-  color: rgb(21, 40, 65);
+  color: rgb(10, 10, 90);
   outline: none;
   border: none;
 }
@@ -89,12 +90,16 @@
     padding-right: 40px;
   }
 
+  .NavBar h1 {
+    margin-left: -15px;
+  }
+
   .NavToggle {
-    background-color: #fff;
+    background-color: #f8f8f8;
     width: 120px;
     text-align: left;
     border: 1px solid #ccc;
-    padding: 10px 10px 10px 17px;
+    padding: 10px;
     position: absolute;
     top: 65px;
     right: 50px;
@@ -116,8 +121,8 @@
     width: 80px;
     padding: 0;
     margin-top: 0;
-    margin-left: -15px;
-    background-color: #fff;
+    margin-left: -10px;
+    background-color: #fafafa;
     font-size: 1rem;
   }
 
@@ -127,24 +132,15 @@
   }
 
   .NavBar .DropdownBtn:hover {
-    background-color: #fff;
-    color: rgb(21, 40, 65);
-  }
-
-  .NavBar .DropdownBtn:active {
-    background-color: #fff;
-    color: rgb(51, 93, 151);
+    color: rgb(10, 10, 90);
   }
 
   .DropdownBox {
-    /* border: solid 1px #ccc; */
     padding: 7px 0;
-    /* background-color: #fff; */
-    position: absolute;
-    /* color: rgb(51, 93, 151); */
     top: 87px;
     right: 0;
     width: 155px;
+    background-color: #fafafa;
   }
 }
 
