@@ -10,7 +10,7 @@ const AlertComponent = () => {
   const { alert, show, hideAlert } = useAlert();
   useEffect(() => {
     const removeAlert = setTimeout(() => {
-      hideAlert();
+      // hideAlert();
     }, 5000);
     return () => {
       clearTimeout(removeAlert);
