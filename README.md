@@ -26,7 +26,7 @@ Link to the live site of this app: https://your-poetry-2023-094a4af35547.herokua
 
 ## Overview
 
-Your Poetry offers an interactive platform where users can share their poems and exchange comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems and profiles. In addition users can also make their own profiles. The purpose of the app is to offer users opportunities to be creative, to share their art, and to inspire others.
+Your Poetry offers an interactive platform where users can share their poems and exchange comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems and profiles. Users can also make their own profiles. The purpose of the app is to offer users opportunities to be creative, to share their art, and to inspire others.
 
 For this application, I used the following API I built with Django REST Framework.<br>
 https://github.com/rkyzk/drf_api2023
@@ -52,7 +52,7 @@ In this app users can:
 
 ## Wireframes
 
-Wireframes for this application can be found [here](./public/documents/wireframes.md).
+Wireframes for this application can be found [here](./public/documents/WIREFRAMES.md).
 
 ## Notes on the Design
 
