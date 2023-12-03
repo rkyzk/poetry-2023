@@ -24,6 +24,8 @@
 
 Link to the live site of this app: https://your-poetry-2023-094a4af35547.herokuapp.com
 
+**Note:** If you use Safari please make sure to uncheck “prevent cross-site tracking” in settings so that the log in system functions properly.
+
 ## Overview
 
 Your Poetry offers an interactive platform where users can share their poems and exchange comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems and profiles. Users can also make their own profiles. The purpose of the app is to offer users opportunities to be creative, to share their art, and to inspire others.
@@ -58,11 +60,11 @@ Wireframes for this application can be found [here](./public/documents/WIREFRAME
 
 **Fonts**
 
-|       fonts        |                        where they are used                         |       why I used them       |
+|       fonts        |                        where they are used                         |    why I used the fonts     |
 | :----------------: | :----------------------------------------------------------------: | :-------------------------: |
 | ‘Bacasime Antique’ |            the website title, the headings of the pages            |      It looks artistic      |
 |  'Nanum Myeongj'   | navigation links, labels for input boxes and the contents of poems |      It looks artistic      |
-|     ‘Raleway’      |                     the introductory paragraph                     | It is readable and friendly |
+|     ‘Raleway’.     |                     the introductory paragraph                     | It is readable and friendly |
 
 **Colors**
 
