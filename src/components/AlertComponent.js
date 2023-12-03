@@ -9,6 +9,7 @@ import styles from "../styles/AlertComponent.module.css";
 const AlertComponent = () => {
   const { alert, show, hideAlert } = useAlert();
   useEffect(() => {
+    // hide alert after 5 sec
     const removeAlert = setTimeout(() => {
       hideAlert();
     }, 5000);

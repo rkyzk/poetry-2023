@@ -1,7 +1,9 @@
 # Wireframes
 
-<img width="600px" src="./media/wireframes/wireframe-home.jpg">
-<img width="300px" src="./media/wireframes/wireframe-home-mobile.jpg">
+<p float="left">
+ <img width="600px" src="./media/wireframes/wireframe-home.jpg">
+ <img width="300px" src="./media/wireframes/wireframe-home-mobile.jpg">
+</p>
 <img width="600px" src="./media/wireframes/wireframe-contact.jpg">
 <img width="300px" src="./media/wireframes/wireframe-contact-mobile.jpg">
 <img width="600px" src="./media/wireframes/wireframe-my-profile.jpg">

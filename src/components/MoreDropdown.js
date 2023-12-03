@@ -71,8 +71,6 @@ export const MoreDropdown = ({ handleEdit, poemId, handleDeleteComment }) => {
 export function ProfileEditDropdown({ id }) {
   /** stores info on which pages the user has been to. */
   const history = useHistory();
-  const { showConfModal } = useModal();
-  let obj = "profile and account";
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={ThreeDots} />

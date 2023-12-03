@@ -13,7 +13,7 @@ import { useAlert } from "../contexts/AlertContext";
 const ModalComponent = () => {
   const { obj, objId, showModal, hideModal } = useModal();
 
-  /** store info on which pages the user has visited. */
+  /** history of visited pages */
   const history = useHistory();
   const { showAlert } = useAlert();
 
