@@ -58,32 +58,35 @@ Wireframes for this application can be found [here](./public/documents/WIREFRAME
 
 **Fonts**
 
-- For the website title and the headings of the pages, I used ‘Bacasime Antique.’
-- For navigation links, labels for input boxes and the contents of poems, I used 'Nanum Myeongj.'
-- I chose these two fonts because they both look artistic.
-- For the introductory paragraph I used ‘Raleway’ since this font is readable and friendly.
+|       fonts        |                        where they are used                         |       why I used them       |
+| :----------------: | :----------------------------------------------------------------: | :-------------------------: |
+| ‘Bacasime Antique’ |            the website title, the headings of the pages            |      It looks artistic      |
+|  'Nanum Myeongj'   | navigation links, labels for input boxes and the contents of poems |      It looks artistic      |
+|     ‘Raleway’      |                     the introductory paragraph                     | It is readable and friendly |
 
 **Colors**
 
-Overall I wanted the website to appear simple, elegant and original.<br>
-I used following colors in different sections:
+I aimed to let the site appear simple, elegant and original.<br>
+I used following colors for different elements:
 
-- Background of navigation bars: light gray, #f8f8f8
-- Text color: dark blue, rgb(51, 93, 151)
-- Most buttons: olive, #8d7326;
-- follow button: black, #242a3d
-- unfollow button: rgb(189, 218, 243)
-- Footer: dark blue, rgb(13, 13, 70)
+|           Elements            |         used colors         |
+| :---------------------------: | :-------------------------: |
+| Background of navigation bars |     light gray #f8f8f8      |
+|          Text color           | dark blue, rgb(51, 93, 151) |
+|         Most buttons          |       olive, #8d7326        |
+|        'follow' button        |       black, #242a3d        |
+|       'unfollow' button       |     rgb(189, 218, 243)      |
+|            Footer             | dark blue, rgb(13, 13, 70)  |
 
 I used dark blue for the text, instead of very common black or dark gray in order to provide originality.<br>
-I used white and light gray for the background of the pages to keep the appearance simple.<br>
+I used white and light gray for the background of the pages in order to keep the appearance simple.<br>
 I used olive color for most buttons, because the color provides a nice contrast to the dark blue texts.<br>
 
 **Logo**
 
-<img src="./public/documents/media/readme/logo.png" alt="logo" width="150px" >
+<img src="./public/documents/media/readme/logo.png" alt="logo" width="150px" />
 
-As the logo, I chose a drawing of a quill pen and ink, which suits the website's theme.
+I chose a drawing of a quill pen and ink, which suits the website's theme.
 
 **Favicon**
 
@@ -93,13 +96,13 @@ I chose a feather icon for the favicon that looks like a quill pen, which is ass
 
 - HTML, CSS, JavaScript
 - React.js
-- Bootstrap.js
+- React Bootstrap
 
 ## Each Part and Function in Detail
 
 **Logo**
 
-- The logo is placed at the top left corner of the page, and it links to the home page.
+- The logo appears at the top left corner of the page, and it links to the home page.
 
 **Navigation Bars**
 
@@ -107,26 +110,24 @@ I chose a feather icon for the favicon that looks like a quill pen, which is ass
 
 _Navigation Bar at the top right_
 
-|                  |                                                                                |
-| :--------------- | :----------------------------------------------------------------------------- |
-|                  | navigation link items                                                          |
-| logged out users | "Home", "Contact", "Sign in", "Sign up"                                        |
-| logged in users  | "Home", "Contact", a menu button with the user's profile name                  |
-| dropdown menu.   | “My Profile”, “My Poems”, “Poets I’m following”, “Poems I like” and “Sign out” |
-
 - I placed links to personalized lists of poems and profiles (such as "My Poems," "Poets I'm following") in the top right dropdown menu.
-- I placed links to lists that are common for all users such as “New Poems” and “Popular poems” in the navigation bar on the left side.
+
+|                  |               | navigation link items                                                          |
+| :--------------- | :------------ | :----------------------------------------------------------------------------- |
+| logged out users |               | "Home", "Contact", "Sign in", "Sign up"                                        |
+| logged in users  |               | "Home", "Contact", a menu button with the user's profile name                  |
+|                  | dropdown menu | “My Profile”, “My Poems”, “Poets I’m following”, “Poems I like” and “Sign out” |
 
 _Navigation Bar at the top left_
 
+- I placed links to lists that are common for all users such as “New Poems” and “Popular poems” in the navigation bar on the left side.
 - The second navigation bar is displayed on all pages except for sign in and sign up pages. (Users trying to sign in or sign up will not need this navigation bar.)
 
-|                       |                                                                  |
-| :-------------------- | :--------------------------------------------------------------- |
 |                       | navigation link items                                            |
+| :-------------------- | :--------------------------------------------------------------- |
 | logged out users      | “Poems”, “Search Profiles”                                       |
 | logged in users       | “Poems”, “Write Poems”, “Search Profiles”                        |
-| dropdown menu “Poems” | “New Poems”, “Popular Poems”, “Poems by Categories” and “Search” |
+| dropdown menu 'Poems' | “New Poems”, “Popular Poems”, “Poems by Categories” and “Search” |
 
 _Notes about both navigation bars_
 
