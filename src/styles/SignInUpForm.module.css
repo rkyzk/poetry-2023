@@ -35,9 +35,9 @@
 
 .Input {
   background: #ffffff;
-  border: 1px solid #f0f1f9;
+  border: 1px solid #cacde0;
   box-sizing: border-box;
-  border-radius: 2px;
+  border-radius: 5px;
   color: #253464;
   text-align: center;
   padding: 10px;
@@ -69,4 +69,12 @@
 
 .TextColor {
   color: rgb(226, 141, 55);
+}
+
+.FormContainer {
+  width: 330px !important;
+}
+
+.TreeImg {
+  width: 350px;
 }
