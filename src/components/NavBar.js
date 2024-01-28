@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import logo from "../assets/media/poems-logo.png";
@@ -41,7 +41,7 @@ const NavBar = () => {
   const handleMyMenu = () => {
     if (myMenu === false) {
       setMyMenu(true);
-      /** add event listener so the menu will be closed 
+      /** add event listener so the menu will be closed
           after the next click (anywhere on the page) */
       document.addEventListener("mouseup", handleCloseMyMenu);
     }

@@ -354,10 +354,12 @@ https://jigsaw.w3.org/
 
 ### Media
 
-The favicon was taken from https://icons8.com/icons/set/feather.<br>
-The logo was taken from https://www.freepik.com/free-vector/hand-drawn-quill-isolated-white-background_2782976.htm#query=quill%20pen%20and%20ink&position=25&from_view=search&track=ais
+Sources of the used images:<br>
 
-I used fonts from Google fonts and icons from Fontawesome.
+- The favicon: https://icons8.com/icons/set/feather.<br>
+- The logo: https://www.freepik.com/free-vector/hand-drawn-quill-isolated-white-background_2782976.htm#query=quill%20pen%20and%20ink&position=25&from_view=search&track=ais<br>
+- The tree image on Signup page: https://www.freepik.com/free-vector/environmental-factory-air-pollution-with-text-go-green-hand-drawn-sketch-vector-illustration_31177341.htm#query=drawing%20black%20white%20tree&position=33&from_view=search&track=ais&uuid=70daedfd-1d03-4a00-8b42-4d0dab15fc2f
+  I used fonts from Google fonts and icons from Fontawesome.
 
 ### Credits
 

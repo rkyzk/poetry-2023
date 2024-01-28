@@ -1,5 +1,5 @@
 {
-  "name": "moments",
+  "name": "poetry-2023",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,10 +11,10 @@
     "infinite-scroll": "^4.0.1",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.2",
-    "react-bootstrap": "^1.6.3",
+    "react-bootstrap": "^1.6.8",
     "react-dom": "^17.0.2",
     "react-infinite-scroll-component": "^6.1.0",
-    "react-router-dom": "^5.3.0",
+    "react-router-dom": "^5.3.4",
     "react-scripts": "^4.0.3",
     "web-vitals": "^1.1.2"
   },
