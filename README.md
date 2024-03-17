@@ -315,7 +315,7 @@ Solution: I had key={profile.id} in the 'Profile' tag line 31 in FeaturedProfile
 
 **Performance**
 
-Performace for most pages scored in the mid 80s even though I cleared browser cache before testing and ran tests in incognito mode. The major factors that were delaying the page load were that I was importing bootstrap and google fonts. I tried deferring loading these CSS, but the score didn’t improve, so I removed the code to defer loading the CSS. I will take a closer look in the future to improve the page loading speed.
+Performace for most pages scored in the mid 80s even though I cleared browser cache before testing and ran tests in incognito mode. I will take a closer look in the future to improve the page loading speed.
 
 **Accessibility**
 
@@ -346,7 +346,7 @@ https://jigsaw.w3.org/
 
 ## Aspects to be improved in the future
 
-1. When the dropdown menu in the navigation, (the username next to Avatar when the user is logged in) is clicked, the menu first appears briefly on the left side of the dropdown title and disppears, and the menu reappears below the dropdown title. Similarly, the dropdown menu titled ‘Poems’ in the navigation on the left side also appears on the right side and reappears at below the title. I need to find a way to let the menus appear at the intended positions from the beginning.
+1. When the dropdown menu in the navigation, (the username next to Avatar when the user is logged in) is clicked, the menu first appears briefly on the left side of the dropdown title and disppears, and the menu reappears below the dropdown title. I need to find a way to let the menus appear at the intended positions from the beginning.
 
 2. On "Popular Poems" page, if the user ‘likes’ a poem, and if the poems will be rearranged due to the new likes count, the rearrangement happens in a manner that it’s difficult for the user to know where the poem they’ve just liked has been moved to. I need to make it easier for the user to follow where the poem has been replaced.
 

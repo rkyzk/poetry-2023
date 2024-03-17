@@ -23,7 +23,12 @@
 
 ### Testing Features
 
-If logging in is necessary, log in with username: admin, password: superuser, unless specified otherwise.
+If logging in is necessary, log in as admin unless specified otherwise.
+
+The device used: MacBook Air (OS Ventura 13.2.1)
+Browser: Google Chrome Version 119.0.6045.199
+
+Click the links for tests results on Safari and Firefox
 
 #### Navigation Bar
 
