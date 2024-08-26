@@ -2,6 +2,8 @@ import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { useHistory } from "react-router";
+import axios from "axios";
+import { useAlert } from "../contexts/AlertContext";
 
 /**
  * Set the three dots to forwardRef.
@@ -69,12 +71,26 @@ export const MoreDropdown = ({
 };
 
 /**
+ * delete user account.
+ * Action can be performed only if user owns the account
+ */
+const DeleteAccount = async (id) => {
+  const { data } = await axios.put(`/profiles/delete/${id}`);
+  // import alert context and setAlert
+  // const { showAlert } = useAlert();
+  // showAlert(data.detail);
+  console.log(data.status);
+  console.log(data.detail);
+};
+
+/**
  * Return a dropdown menu for editing profiles
  * shown as three dots.
  */
 export function ProfileEditDropdown({ id }) {
   /** stores info on which pages the user has been to. */
   const history = useHistory();
+
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={ThreeDots} />
@@ -100,7 +116,7 @@ export function ProfileEditDropdown({ id }) {
           change password
         </Dropdown.Item>
         <Dropdown.Item
-          // onClick={() => }
+          onClick={() => DeleteAccount(id)}
           aria-label="delete-account"
         >
           <i className={`fa-solid fa-delete-left ${styles.Icons}`} />
