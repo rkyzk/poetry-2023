@@ -22,7 +22,7 @@
 
 ![your-poetry](./public/documents/media/readme/your-poetry.png)
 
-Link to the live site of this app: https://your-poetry-2023-094a4af35547.herokuapp.com
+Link to the live site of this app: https://yourpoetry.up.railway.app
 
 **Note:** If you use Safari please make sure to uncheck “prevent cross-site tracking” in settings so that the log in system functions properly.
 
