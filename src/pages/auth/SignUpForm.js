@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Form from "react-bootstrap/Form";
@@ -20,11 +20,9 @@ const SignUpForm = () => {
   /** Redirect logged in users. */
   useRedirect("loggedIn");
   /** stores info about which pages the user has visited. */
-  const history = useHistory();
-
+  const navigate = useNavigate();
   // import alert context and setters for alert & show
   const { showAlert } = useAlert();
-
   /** registerData will store data entered by users. */
   const [registerData, setRegisterData] = useState({
     username: "",
@@ -56,7 +54,7 @@ const SignUpForm = () => {
     try {
       await axios.post("dj-rest-auth/registration/", registerData);
       showAlert("Your account has been made.");
-      history.push("/signin");
+      navigate("/signin");
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -65,7 +63,7 @@ const SignUpForm = () => {
   return (
     <Row>
       <Col className="d-none d-lg-flex justify-content-end" lg={{ span: 6 }}>
-        <img className="TreeImg" src={tree} alt="tree" />
+        <img className={styles.TreeImg} src={tree} alt="tree" />
       </Col>
       <Col
         className="my-auto pl-lg-3 d-lg-flex justify-content-lg-start"
@@ -90,11 +88,11 @@ const SignUpForm = () => {
               />
             </Form.Group>
             {errors.username?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert variant="warning" key={idx} className="mt-1">
                 {message}
               </Alert>
             ))}
-            <Form.Group controlId="password1">
+            <Form.Group controlId="password1" className="mt-1">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
                 className={styles.Input}
@@ -106,11 +104,11 @@ const SignUpForm = () => {
               />
             </Form.Group>
             {errors.password1?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert variant="warning" key={idx} className="mt-1">
                 {message}
               </Alert>
             ))}
-            <Form.Group controlId="password2">
+            <Form.Group controlId="password2" className="mt-1">
               <Form.Label className="d-none">Confirm password</Form.Label>
               <Form.Control
                 className={styles.Input}
@@ -127,7 +125,7 @@ const SignUpForm = () => {
               </Alert>
             ))}
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Large} ${btnStyles.Olive}`}
+              className={`${btnStyles.Button} ${btnStyles.Large} ${btnStyles.Olive} mt-2`}
               type="submit"
             >
               Sign up
