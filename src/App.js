@@ -1,5 +1,5 @@
 import styles from "./App.module.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/poems/Home";
 import NavBar from "./components/NavBar";
 import NavBarSecond from "./components/NavBarSecond";
@@ -35,86 +35,68 @@ function App() {
       <NavBarSecond />
       <AlertComponent />
       <Container className={styles.Main}>
-        <Switch>
-          <Route exact path="/signin" render={() => <SignInForm />} />
-          <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/poems/create" render={() => <PoemCreateForm />} />
-          <Route exact path="/poems/:id" render={() => <PoemPage />} />
-          <Route exact path="/poems/:id/edit" render={() => <PoemEditForm />} />
-          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
-          <Route exact path="/contact" render={() => <Contact />} />
-          <Route exact path="/search-poems" render={() => <SearchPoems />} />
+        <Routes>
+          <Route path="/signin" element={<SignInForm />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/poems/create" element={<PoemCreateForm />} />
+          <Route path="/poems/:id" element={<PoemPage />} />
+          <Route path="/poems/:id/edit" element={<PoemEditForm />} />
+          <Route path="/profiles/:id" element={<ProfilePage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/search-poems" element={<SearchPoems />} />
+          <Route path="/search-profiles" element={<SearchProfiles />} />
           <Route
-            exact
-            path="/search-profiles"
-            render={() => <SearchProfiles />}
-          />
-          <Route
-            exact
             path="/my-poems"
-            render={() => (
+            element={
               <PoemsPage
                 filter={`owner__profile=${profile_id}&ordering=-created_at&`}
                 message="You haven't wrriten any poems yet."
                 heading="My Poems"
               />
-            )}
+            }
           />
           <Route
-            exact
             path="/liked"
-            render={() => (
+            element={
               <PoemsPage
                 filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
                 heading="Poems I like"
                 message="You haven't liked any poems yet."
               />
-            )}
+            }
           />
           <Route
-            exact
             path="/new-poems"
-            render={() => <PoemsPageWithProfiles page={"newPoems"} />}
+            element={<PoemsPageWithProfiles page={"newPoems"} />}
           />
           <Route
-            exact
             path="/popular-poems"
-            render={() => <PoemsPageWithProfiles page={"popularPoems"} />}
+            element={<PoemsPageWithProfiles page={"popularPoems"} />}
           />
-          <Route
-            exact
-            path="/poems-by-categories"
-            render={() => <PoemsByCategories />}
-          />
+          <Route path="/poems-by-categories" element={<PoemsByCategories />} />
           <Route
             exact
             path="/profiles/:id/following"
-            render={() => (
+            element={
               <ProfilesPage
                 filter={`owner__followed__owner__profile=${profile_id}&ordering=-owner__following__created_at&`}
                 message="You haven't followed anyone."
                 page={"profilesPage"}
               />
-            )}
+            }
           />
+          <Route path="/profiles/:id/edit" element={<ProfileEditForm />} />
           <Route
-            exact
-            path="/profiles/:id/edit"
-            render={() => <ProfileEditForm />}
-          />
-          <Route
-            exact
             path="/profiles/:id/edit/username"
-            render={() => <UsernameForm />}
+            element={<UsernameForm />}
           />
           <Route
-            exact
             path="/profiles/:id/edit/password"
-            render={() => <UserPasswordForm />}
+            element={<UserPasswordForm />}
           />
-          <Route render={() => <h1>Page not found</h1>} />
-        </Switch>
+          <Route element={<h1>Page not found</h1>} />
+        </Routes>
       </Container>
       <FooterComponent />
       <ModalComponent />
