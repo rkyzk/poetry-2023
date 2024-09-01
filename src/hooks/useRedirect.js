@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 /**
  * Redirect users to "Home"
@@ -8,7 +8,7 @@ import { useHistory } from "react-router";
  */
 export const useRedirect = (userAuthStatus) => {
   /** stores info about which pages the user has visited. */
-  const history = useHistory();
+  const navigate = useNavigate();
 
   /**
    * Redirect users to "Home" page.
@@ -19,16 +19,16 @@ export const useRedirect = (userAuthStatus) => {
         await axios.post("/dj-rest-auth/token/refresh/");
         // if user is logged in, the code below will run
         if (userAuthStatus === "loggedIn") {
-          history.push("/");
+          navigate("/");
         }
       } catch (err) {
         // if user is not logged in, the code below will run
         if (userAuthStatus === "loggedOut") {
-          history.push("/");
+          navigate("/");
         }
       }
     };
 
     handleMount();
-  }, [history, userAuthStatus]);
+  }, [navigate, userAuthStatus]);
 };
