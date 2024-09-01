@@ -19,11 +19,11 @@ function Home() {
     <>
       <h2 className="text-center">Welcome!</h2>
       <p className={styles.Intro}>
-        You landed this page, because you love poetry. In this friednly and
-        supportive community you can share your poems, read others' poems, give
-        and receive feedback. Haven't written since high school years? Or
-        haven't written a poem before? Doesn't matter. Read some poems, get
-        inspired and start writing!
+        Be part of our friendly and supportive community where you can share
+        your poems, read others' poems and give and receive feedback. It doesn't
+        matter if you haven't written since your high school years, or you've
+        never written one before. Read some poems, get inspired and start
+        writing!
       </p>
       {/* if not logged in, display invitation to sign up. */}
       {!currentUser && (
