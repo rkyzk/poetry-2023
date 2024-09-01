@@ -7,8 +7,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { Link } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate, useLocation } from "react-router-dom";
 
 /**
  * Return poem data including title, content or excerpt,
@@ -40,14 +39,13 @@ const Poem = (props) => {
   const currentUser = useCurrentUser();
   /** is_owner tells if the current user is the owner of the poem. */
   const is_owner = currentUser?.username === owner;
-
-  const history = useHistory();
+  const navigate = useNavigate();
 
   /** get the pathname */
   const { pathname } = useLocation();
 
   /** Display PoemEdit page. */
-  const handleEdit = () => history.push(`/poems/${id}/edit`);
+  const handleEdit = () => navigate(`/poems/${id}/edit`);
 
   /**
    * Request the backend to make a new 'Like' object.
