@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import styles from "../styles/NavBarSecond.module.css";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom";
 
 /**
  * Return the second navigation bar (one on the left side of the page).
