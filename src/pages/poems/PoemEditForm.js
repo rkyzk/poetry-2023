@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import styles from "../../styles/PoemCreateEditForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import { useHistory, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useAlert } from "../../contexts/AlertContext";
 
@@ -28,7 +28,7 @@ function PoemEditForm() {
   const [published, setPublished] = useState(false);
   // 'publish' will be set true, if user decides to publish the poem
   const [publish, setPublish] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   // get id from the URL
   const { id } = useParams();
   // set flash message
@@ -47,15 +47,13 @@ function PoemEditForm() {
         published && setPublished(true);
         /* if the current user is the owner, request the API to update the poem
            otherwise redirect to "Home" */
-        is_owner
-          ? setPoemData({ title, content, category })
-          : history.push("/");
+        is_owner ? setPoemData({ title, content, category }) : navigate("/");
       } catch (err) {
         showAlert("Somethings went wrong. Please try again.");
       }
     };
     handleMount();
-  }, [history, id]);
+  }, [navigate, id]);
 
   /* Set data entered by users to variable 'poemData' */
   const handleChange = (event) => {
@@ -87,7 +85,7 @@ function PoemEditForm() {
       // Send the new data to the backend to update the poem.
       await axiosReq.put(`/poems/${id}`, formData);
       // redirect to the pome page.
-      history.push(`/poems/${id}`);
+      navigate(`/poems/${id}`);
       showAlert(msg);
     } catch (err) {
       // if error is not 401, set error messages
@@ -168,7 +166,7 @@ function PoemEditForm() {
       )}
       <Button
         className={`${btnStyles.Button} ${btnStyles.Olive} ml-2`}
-        onClick={() => history.goBack()}
+        onClick={() => navigate(-1)}
       >
         cancel
       </Button>
