@@ -50,17 +50,17 @@ https://github.com/rkyzk/poetry-2023/blob/main/public/documents/MANUALTESTS.md
 - [Media](#media)
 - [Credits](#credits)
 
----
-
 ![your-poetry](./public/documents/media/readme/your-poetry.png)
 
 The deployed app can be found [here](https://yourpoetry.up.railway.app).
 
+**Note:** If you use Safari please make sure to uncheck “prevent cross-site tracking” in settings so that the log in system functions properly.
+
 ## Overview
 
-Your Poetry offers an interactive platform where users can share their poems and give/get comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems/profiles. In addition users can also make their own profiles to let others know a few things about themselves. The purpose of the app is to offer users opportunities to be creative, to share their art and to inspire others.
+Your Poetry offers an interactive platform where users can share their poems and exchange comments on each other’s poems. The app is equipped with various features including liking/unliking poems, following/unfollowing profiles as well as searching poems and profiles. Users can also make their own profiles. The purpose of the app is to offer users opportunities to be creative, to share their art, and to inspire others.
 
-For this application, I used the following API built using Django REST Framework.<br>
+For this application, I used the following API I built with Django REST Framework.<br>
 https://github.com/rkyzk/drf_api2023
 
 ## User Stories
@@ -72,7 +72,7 @@ User stories can be found [here](https://github.com/users/rkyzk/projects/6/views
 In this app users can:
 
 - Sign up for membership
-- Sign in to have access to full features/sign out
+- Sign in and out
 - Edit one's own profile
 - Write, update and delete poems
 - Write, update and delete comments on poems
@@ -84,39 +84,41 @@ In this app users can:
 
 ## Wireframes
 
-Wireframes for this application can be found [here.](https://wireframe.cc/pro/pp/8521443d2672331)
-Please click on "Homepage" in the upper left corner to see wireframes of different pages.
+Wireframes for this application can be found [here](./public/documents/WIREFRAMES.md).
 
 ## Notes on the Design
 
 **Fonts**
 
-- For the website title and the headings of the pages, I used ‘Bacasime Antique.’
-- For navigation links, labels for input boxes and the contents of poems, I used 'Nanum Myeongj.'
-- I chose these two fonts because they both look artistic.
-- For the introductory paragraph I used ‘Raleway’ since this font is readable and offers a friendly ambient.
+|       fonts        |                        where they are used                         |    why I used the fonts     |
+| :----------------: | :----------------------------------------------------------------: | :-------------------------: |
+| ‘Bacasime Antique’ |            the website title, the headings of the pages            |      It looks artistic      |
+|  'Nanum Myeongj'   | navigation links, labels for input boxes and the contents of poems |      It looks artistic      |
+|     ‘Raleway’.     |                     the introductory paragraph                     | It is readable and friendly |
 
 **Colors**
 
-Overall I wanted the website to appear simple, elegant and original.<br>
-I used following colors in different sections:
+I aimed to let the site appear simple, elegant and original.<br>
+I used following colors for different elements:
 
-- Background of navigation bars: light gray, #f8f8f8
-- Text color: dark blue, rgb(51, 93, 151)
-- Most buttons: olive, #8d7326;
-- follow button: black, #242a3d
-- unfollow button: rgb(189, 218, 243)
-- Footer: dark blue, rgb(13, 13, 70)
+|           Elements            |         used colors         |
+| :---------------------------: | :-------------------------: |
+| Background of navigation bars |     light gray #f8f8f8      |
+|          Text color           | dark blue, rgb(51, 93, 151) |
+|         Most buttons          |       olive, #8d7326        |
+|        'follow' button        |       black, #242a3d        |
+|       'unfollow' button       |     rgb(189, 218, 243)      |
+|            Footer             | dark blue, rgb(13, 13, 70)  |
 
-I used dark blue for the text, instead of very commonly used black or dark gray in order to provide originality.<br>
-I used light gray for the background of navigation bars to keep the appearance simple.<br>
-I used olive color for most buttons, because the color provides a nice contrast to the dark blue.<br>
+I used dark blue for the text, instead of very common black or dark gray in order to provide originality.<br>
+I used white and light gray for the background of the pages in order to keep the appearance simple.<br>
+I used olive color for most buttons, because the color provides a nice contrast to the dark blue texts.<br>
 
 **Logo**
 
-<img src="./public/documents/media/readme/logo.png" alt="logo" width="150px" >
+<img src="./public/documents/media/readme/logo.png" alt="logo" width="150px" />
 
-As the logo, I chose a drawing of a quill pen and ink, which suits the website's theme.
+I chose a drawing of a quill pen and ink, which suits the website's theme.
 
 **Favicon**
 
@@ -126,13 +128,13 @@ I chose a feather icon for the favicon that looks like a quill pen, which is ass
 
 - HTML, CSS, JavaScript
 - React.js
-- Bootstrap.js
+- React Bootstrap
 
 ## Each Part and Function in Detail
 
 **Logo**
 
-- The logo is placed at the top left corner of the page, and it links to the home page.
+- The logo appears at the top left corner of the page, and it links to the home page.
 
 **Navigation Bars**
 
@@ -140,17 +142,24 @@ I chose a feather icon for the favicon that looks like a quill pen, which is ass
 
 _Navigation Bar at the top right_
 
-- For logged out users the navigation bar displays links to “Home”, “Contact”, “Sign in” and “Sign out” pages.
-- For logged in users, the avatar and the logged in user’s name are displayed in place of “Sign in” and “Sign up.”
-- Clicking the username shows a dropdown menu for “My Profile”, “My Poems”, “Poets I’m following”, “Poems I like” and “Sign out”.
-- I placed links to poems lists and a profile list that are specific to the current user in the top right dropdown menu. I placed links to other lists that are common to all users such as “New Poems” and “Popular poems” in the navigation bar on the left side.
+- I placed links to personalized lists of poems and profiles (such as "My Poems," "Poets I'm following") in the top right dropdown menu.
+
+|                  |               | navigation link items                                                          |
+| :--------------- | :------------ | :----------------------------------------------------------------------------- |
+| logged out users |               | "Home", "Contact", "Sign in", "Sign up"                                        |
+| logged in users  |               | "Home", "Contact", a menu button with the user's profile name                  |
+|                  | dropdown menu | “My Profile”, “My Poems”, “Poets I’m following”, “Poems I like” and “Sign out” |
 
 _Navigation Bar at the top left_
 
+- I placed links to lists that are common for all users such as “New Poems” and “Popular poems” in the navigation bar on the left side.
 - The second navigation bar is displayed on all pages except for sign in and sign up pages. (Users trying to sign in or sign up will not need this navigation bar.)
-- For logged out users, a dropdown menu “Poems” and a link “Search Profiles” are displayed.
-- For logged in users, the link to “Write Poems” will be displayed as well. This is hidden for logged out users because only logged in users can write poems.
-- Clicking the dropdown menu “Poems” will show links to “New Poems”, “Popular Poems”, “Poems by Categories” and “Search” pages.
+
+|                       | navigation link items                                            |
+| :-------------------- | :--------------------------------------------------------------- |
+| logged out users      | “Poems”, “Search Profiles”                                       |
+| logged in users       | “Poems”, “Write Poems”, “Search Profiles”                        |
+| dropdown menu 'Poems' | “New Poems”, “Popular Poems”, “Poems by Categories” and “Search” |
 
 _Notes about both navigation bars_
 
@@ -315,7 +324,7 @@ Following components were used multiple times in the app.
 
 ## Manual Testing
 
-Manual tests for this applicatio is documented [here](./public/documents/MANUALTESTS.md)
+Manual tests for this applicatio are documented [here](./public/documents/MANUALTESTS.md)
 
 ## Bugs
 
@@ -336,7 +345,7 @@ Solution: I had key={profile.id} in the 'Profile' tag line 31 in FeaturedProfile
 
 **Performance**
 
-Performace for most pages scored in the mid 80s even though I cleared browser cache before testing and ran tests in incognito mode. The major factors that were delaying the page load were that I was importing bootstrap and google fonts. I tried deferring loading these CSS, but the score didn’t improve, so I removed the code to defer loading the CSS. I will take a closer look in the future to improve the page loading speed.
+Performace for most pages scored in the mid 80s even though I cleared browser cache before testing and ran tests in incognito mode. I will take a closer look in the future to improve the page loading speed.
 
 **Accessibility**
 
@@ -367,7 +376,7 @@ https://jigsaw.w3.org/
 
 ## Aspects to be improved in the future
 
-1. When the dropdown menu in the navigation, (the username next to Avatar when the user is logged in) is clicked, the menu first appears briefly on the left side of the dropdown title and disppears, and the menu reappears below the dropdown title. Similarly, the dropdown menu titled ‘Poems’ in the navigation on the left side also appears on the right side and reappears at below the title. I need to find a way to let the menus appear at the intended positions from the beginning.
+1. When the dropdown menu in the navigation, (the username next to Avatar when the user is logged in) is clicked, the menu first appears briefly on the left side of the dropdown title and disppears, and the menu reappears below the dropdown title. I need to find a way to let the menus appear at the intended positions from the beginning.
 
 2. On "Popular Poems" page, if the user ‘likes’ a poem, and if the poems will be rearranged due to the new likes count, the rearrangement happens in a manner that it’s difficult for the user to know where the poem they’ve just liked has been moved to. I need to make it easier for the user to follow where the poem has been replaced.
 

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import logo from "../assets/media/poems-logo.png";
 import styles from "../styles/NavBar.module.css";
@@ -19,7 +18,7 @@ import { useAlert } from "../contexts/AlertContext";
  *  Adjust displayed link items depending on the logged in status.
  */
 const NavBar = () => {
-  /** get the info of logged in user. */
+  /** get info of logged in user. */
   const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id;
 
@@ -30,6 +29,7 @@ const NavBar = () => {
   const [expanded, setExpanded] = useState(false);
   const { showAlert } = useAlert();
 
+  /** close my menu ('my profile,' 'my poems'...etc) */
   const handleCloseMyMenu = () => {
     setTimeout(() => {
       setMyMenu(false);
@@ -37,13 +37,17 @@ const NavBar = () => {
     }, 100);
   };
 
+  /** open my menu if it's closed originally */
   const handleMyMenu = () => {
     if (myMenu === false) {
       setMyMenu(true);
+      /** add event listener so the menu will be closed 
+          after the next click (anywhere on the page) */
       document.addEventListener("mouseup", handleCloseMyMenu);
     }
   };
 
+  /** close the burger menu */
   const handleCloseBurger = (event) => {
     if (event.target.id !== "my-menu" && event.target.id !== "my-menu-icon") {
       setTimeout(() => {
@@ -53,10 +57,11 @@ const NavBar = () => {
     }
   };
 
+  /** open burger menu */
   const handleToggle = () => {
     if (expanded === false) {
       setExpanded(true);
-      console.log(setExpanded);
+      // add an eventlistener so the burger closes after the next click
       document.addEventListener("mouseup", handleCloseBurger);
     }
   };
@@ -169,38 +174,36 @@ const NavBar = () => {
       expand="md"
       fixed="top"
     >
-      <Container>
-        <NavLink exact activeClassName={styles.Active} to="/">
-          <Navbar.Brand className={styles.Logo}>
-            <img src={logo} alt="logo" />
-          </Navbar.Brand>
-        </NavLink>
-        <h1 className="mt-4">Your Poetry</h1>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          id="navbar-toggle"
-          onClick={() => handleToggle()}
-        >
-          <i className={`${styles.Burger} fa-solid fa-bars`}></i>
-        </Navbar.Toggle>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className={`${styles.NavToggle} ml-auto`}>
-            <NavLink
-              exact
-              className={`${styles.NavLink} mr-3`}
-              activeClassName={styles.Active}
-              to="/"
-            >
-              Home
-            </NavLink>
-            <NavLink className={`${styles.NavLink} mr-3`} to="/contact">
-              Contact
-            </NavLink>
-            {/* If logged in, display 'loggedIn' if not, 'loggedOut'. */}
-            {currentUser ? loggedIn : loggedOut}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+      <NavLink exact activeClassName={styles.Active} to="/">
+        <Navbar.Brand className={styles.Logo}>
+          <img src={logo} alt="logo" />
+        </Navbar.Brand>
+      </NavLink>
+      <h1 className="mt-4">Your Poetry</h1>
+      <Navbar.Toggle
+        aria-controls="basic-navbar-nav"
+        id="navbar-toggle"
+        onClick={() => handleToggle()}
+      >
+        <i className={`${styles.Burger} fa-solid fa-bars`}></i>
+      </Navbar.Toggle>
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className={`${styles.NavToggle} ml-auto`}>
+          <NavLink
+            exact
+            className={`${styles.NavLink} mr-3`}
+            activeClassName={styles.Active}
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink className={`${styles.NavLink} mr-3`} to="/contact">
+            Contact
+          </NavLink>
+          {/* If logged in, display 'loggedIn' if not, 'loggedOut'. */}
+          {currentUser ? loggedIn : loggedOut}
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 };

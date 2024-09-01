@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import styles from "../styles/NavBarSecond.module.css";
 import { NavLink } from "react-router-dom";
@@ -26,6 +25,7 @@ const NavBarSecond = () => {
   let hide = pathname === "/signin" || pathname === "/signup";
   const [expanded, setExpanded] = useState(false);
 
+  /** close poems menu */
   const handleClosePoemsMenu = () => {
     setTimeout(() => {
       setPoemsMenu(false);
@@ -33,13 +33,17 @@ const NavBarSecond = () => {
     }, 100);
   };
 
+  /** if the poems menu is closed, open it. */
   const handlePoemsMenu = () => {
     if (poemsMenu === false) {
       setPoemsMenu(true);
+      /** add an eventlistener so the poems menu closes 
+        after the next click (anywhere on the page) */
       document.addEventListener("mouseup", handleClosePoemsMenu);
     }
   };
 
+  /** close the burger menu */
   const handleCloseBurger = (event) => {
     if (
       event.target.id !== "poems-dropdown" &&
@@ -52,9 +56,11 @@ const NavBarSecond = () => {
     }
   };
 
+  /** open the burger menu if it's closed. */
   const handleToggle = () => {
     if (expanded === false) {
       setExpanded(true);
+      // add an event listener after the next click
       document.addEventListener("mouseup", handleCloseBurger);
     }
   };
@@ -67,85 +73,83 @@ const NavBarSecond = () => {
         expand="md"
         fixed="top"
       >
-        <Container>
-          <Navbar.Toggle
-            aria-controls="basic-navbar-second-nav"
-            onClick={() => handleToggle()}
-          >
-            <i className="fa-solid fa-bars"></i>
-          </Navbar.Toggle>
-          <Navbar.Collapse id="basic-navbar-second-nav">
-            <Nav className={`${styles.NavToggle} text-left`}>
-              <button
-                className={`${styles.NavLink} ${styles.PoemsDropdown}`}
-                id="poems-dropdown"
-                onClick={() => handlePoemsMenu()}
-              >
-                Poems
-                <i
-                  className="fa fa-angle-down ml-2"
-                  aria-hidden="true"
-                  id="dropdown-icon"
-                ></i>
-              </button>
-              {poemsMenu && (
-                <div className={`${styles.PoemsMenu} py-2`}>
-                  <div>
-                    <NavLink
-                      className={styles.NavDropdownItem}
-                      to="/new-poems"
-                      id="new-poems"
-                    >
-                      New Poems
-                    </NavLink>
-                  </div>
-                  <div>
-                    <NavLink
-                      className={styles.NavDropdownItem}
-                      to="/popular-poems"
-                      id="popular-poems"
-                    >
-                      Popular Poems
-                    </NavLink>
-                  </div>
-                  <div>
-                    <NavLink
-                      className={styles.NavDropdownItem}
-                      to="/poems-by-categories"
-                      id="poems-by-cat"
-                    >
-                      Poems by Categories
-                    </NavLink>
-                  </div>
-                  <div>
-                    <NavLink
-                      className={styles.NavDropdownItem}
-                      to="/search-poems"
-                      id="search-poems"
-                    >
-                      Search Poems
-                    </NavLink>
-                  </div>
+        <Navbar.Toggle
+          aria-controls="basic-navbar-second-nav"
+          onClick={() => handleToggle()}
+        >
+          <i className="fa-solid fa-bars"></i>
+        </Navbar.Toggle>
+        <Navbar.Collapse id="basic-navbar-second-nav">
+          <Nav className={`${styles.NavToggle} text-left`}>
+            <button
+              className={`${styles.NavLink} ${styles.PoemsDropdown}`}
+              id="poems-dropdown"
+              onClick={() => handlePoemsMenu()}
+            >
+              Poems
+              <i
+                className="fa fa-angle-down ml-2"
+                aria-hidden="true"
+                id="dropdown-icon"
+              ></i>
+            </button>
+            {poemsMenu && (
+              <div className={`${styles.PoemsMenu} py-2`}>
+                <div>
+                  <NavLink
+                    className={styles.NavDropdownItem}
+                    to="/new-poems"
+                    id="new-poems"
+                  >
+                    New Poems
+                  </NavLink>
                 </div>
-              )}
-              {/* if user is logged in, display the link 'Write Poems' */}
-              {currentUser && (
-                <NavLink
-                  className={`${styles.NavLink} ${styles.NavItems} mt-2`}
-                  to="/poems/create"
-                >
-                  Write Poems
-                </NavLink>
-              )}
+                <div>
+                  <NavLink
+                    className={styles.NavDropdownItem}
+                    to="/popular-poems"
+                    id="popular-poems"
+                  >
+                    Popular Poems
+                  </NavLink>
+                </div>
+                <div>
+                  <NavLink
+                    className={styles.NavDropdownItem}
+                    to="/poems-by-categories"
+                    id="poems-by-cat"
+                  >
+                    Poems by Categories
+                  </NavLink>
+                </div>
+                <div>
+                  <NavLink
+                    className={styles.NavDropdownItem}
+                    to="/search-poems"
+                    id="search-poems"
+                  >
+                    Search Poems
+                  </NavLink>
+                </div>
+              </div>
+            )}
+            {/* if user is logged in, display the link 'Write Poems' */}
+            {currentUser && (
               <NavLink
                 className={`${styles.NavLink} ${styles.NavItems} mt-2`}
-                to="/search-profiles"
+                to="/poems/create"
               >
-                Search Profiles
+                Write Poems
               </NavLink>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
+            )}
+            <NavLink
+              className={`${styles.NavLink} ${styles.NavItems} mt-2`}
+              to="/search-profiles"
+            >
+              Search Profiles
+            </NavLink>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     )
   );

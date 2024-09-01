@@ -9,18 +9,21 @@ import styles from "../styles/AlertComponent.module.css";
 const AlertComponent = () => {
   const { alert, show, hideAlert } = useAlert();
   useEffect(() => {
+    // hide alert after 5 sec
     const removeAlert = setTimeout(() => {
       hideAlert();
     }, 5000);
     return () => {
       clearTimeout(removeAlert);
     };
-  }, [show]);
+  }, [show, hideAlert]);
   if (show) {
     return (
-      <Alert className={styles.AlertMessage} variant={"info"}>
-        {alert}
-      </Alert>
+      <div className="d-flex justify-content-center">
+        <Alert className={styles.AlertMessage} variant={"info"}>
+          {alert}
+        </Alert>
+      </div>
     );
   } else {
     return null;

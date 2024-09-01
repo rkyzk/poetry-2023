@@ -12,7 +12,6 @@ import Comment from "../comments/Comment";
 import Asset from "../../components/Asset";
 import { fetchMoreData } from "../../utils/utils";
 import Alert from "react-bootstrap/Alert";
-import ConfirmationModal from "../../components/ConfirmationModal";
 import { useAlert } from "../../contexts/AlertContext";
 
 /**
@@ -31,8 +30,6 @@ function PoemPage() {
   const [comments, setComments] = useState({ results: [] });
   /** stores error messages */
   const [errMsg, setErrMsg] = useState("");
-  /** if set true, showModal will cause confirmation modal to show up. */
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     /** get the data of the poem and the comments and set them to variables */
@@ -53,7 +50,7 @@ function PoemPage() {
       }
     };
     handleMount();
-  }, [id, showModal]);
+  }, [id]);
 
   return (
     <>
@@ -66,12 +63,7 @@ function PoemPage() {
             </Alert>
           ) : (
             <>
-              <Poem
-                {...poem.results[0]}
-                setPoems={setPoem}
-                poemPage
-                setShowModal={setShowModal}
-              />
+              <Poem {...poem.results[0]} setPoems={setPoem} poemPage />
               {/* If logged in, display comment form.
                     If not, display the heading 'Comments' if there are any comments. */}
               {currentUser && (
@@ -121,7 +113,6 @@ function PoemPage() {
           )}
         </Col>
       </Row>
-      <ConfirmationModal show={showModal} id={id} setShowModal={setShowModal} />
     </>
   );
 }

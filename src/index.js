@@ -7,14 +7,17 @@ import reportWebVitals from "./reportWebVitals";
 import { CurrentUserProvider } from "./contexts/CurrentUserContext";
 import { FeaturedProfilesDataProvider } from "./contexts/FeaturedProfilesDataContext";
 import { AlertProvider } from "./contexts/AlertContext";
+import { ModalProvider } from "./contexts/ModalContext";
 
 ReactDOM.render(
   <Router>
     <AlertProvider>
       <CurrentUserProvider>
-        <FeaturedProfilesDataProvider>
-          <App />
-        </FeaturedProfilesDataProvider>
+        <ModalProvider>
+          <FeaturedProfilesDataProvider>
+            <App />
+          </FeaturedProfilesDataProvider>
+        </ModalProvider>
       </CurrentUserProvider>
     </AlertProvider>
   </Router>,

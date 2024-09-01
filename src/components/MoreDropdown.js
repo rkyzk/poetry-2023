@@ -1,9 +1,7 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
-import { useHistory } from "react-router";
-import axios from "axios";
-import { useAlert } from "../contexts/AlertContext";
+import { useModal } from "../contexts/ModalContext";
 
 /**
  * Set the three dots to forwardRef.
@@ -25,11 +23,9 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
  * Return a dropdown menu for editing/deleting poems and comments
  * shown as three dots.
  */
-export const MoreDropdown = ({
-  handleEdit,
-  setShowModal,
-  handleDeleteComment,
-}) => {
+export const MoreDropdown = ({ handleEdit, poemId, handleDeleteComment }) => {
+  const { showConfModal } = useModal();
+
   return (
     <Dropdown className="ml-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
@@ -44,14 +40,10 @@ export const MoreDropdown = ({
         >
           <i className="fas fa-edit" />
         </Dropdown.Item>
-        {/* If a poem will be deleted, setShowModal is passed down,
-            so a confirmation modal will be displayed.
-            If a comment will be deleted, handleDeleteComment will be fired
-            without a confirmation. */}
-        {setShowModal ? (
+        {poemId ? (
           <Dropdown.Item
             className={styles.DropdownItem}
-            onClick={() => setShowModal(true)}
+            onClick={() => showConfModal(poemId)}
             aria-label="delete"
           >
             <i className="fas fa-trash-alt" />
@@ -116,7 +108,7 @@ export function ProfileEditDropdown({ id }) {
           change password
         </Dropdown.Item>
         <Dropdown.Item
-          onClick={() => DeleteAccount(id)}
+          // onClick={() => }
           aria-label="delete-account"
         >
           <i className={`fa-solid fa-delete-left ${styles.Icons}`} />
