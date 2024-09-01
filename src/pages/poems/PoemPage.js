@@ -6,7 +6,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import Poem from "./Poem";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import CommentCreateForm from "../comments/CommentCreateForm";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Comment from "../comments/Comment";
 import Asset from "../../components/Asset";
