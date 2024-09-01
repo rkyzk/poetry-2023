@@ -1,8 +1,8 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { axiosReq } from "../api/axiosDefaults";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import styles from "../styles/ConfirmationModal.module.css";
+import { useNavigate } from "react-router-dom";
+import styles from "../styles/ModalComponent.module.css";
 import btnStyles from "../styles/Button.module.css";
 import { useModal } from "../contexts/ModalContext";
 import { useAlert } from "../contexts/AlertContext";
@@ -11,23 +11,23 @@ import { useAlert } from "../contexts/AlertContext";
  * Return Confirmation modal.
  */
 const ModalComponent = () => {
-  const { obj, objId, showModal, hideModal } = useModal();
+  const { objId, showModal, hideModal } = useModal();
 
   /** history of visited pages */
-  const history = useHistory();
+  const navigate = useNavigate();
   const { showAlert } = useAlert();
 
   /** Create Modal text */
-  let modalText = `Are you sure you want to delete your ${obj}?
+  let modalText = `Are you sure you want to delete your poem?
                    You won't be able to retrieve the data.`;
 
-  /** delete a poem from the backend,
+  /** delete a poem from the db,
       hide confirmation modal and send the user to 'My Poems' page. */
   const handleDeletePoem = async () => {
     try {
       await axiosReq.delete(`/poems/${objId}`);
       hideModal();
-      history.push("/my-poems");
+      navigate("/my-poems");
       showAlert("Your poem has been deleted.");
     } catch (err) {
       showAlert("Something went wrong.  Please try again.");
@@ -43,14 +43,12 @@ const ModalComponent = () => {
             <span className={styles.Text}>{modalText}</span>
           </Modal.Body>
           <Modal.Footer>
-            {obj === "poem" && (
-              <Button
-                className={`${btnStyles.Button} ${btnStyles.Olive}`}
-                onClick={handleDeletePoem}
-              >
-                delete
-              </Button>
-            )}
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Olive}`}
+              onClick={handleDeletePoem}
+            >
+              delete
+            </Button>
             {/* hideConfirmationModal will set 'show' false. */}
             <Button
               onClick={() => hideModal(false)}

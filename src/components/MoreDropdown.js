@@ -1,7 +1,7 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { useModal } from "../contexts/ModalContext";
 
 /**
@@ -26,7 +26,6 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
  */
 export const MoreDropdown = ({ handleEdit, poemId, handleDeleteComment }) => {
   const { showConfModal } = useModal();
-  let obj = "poem";
 
   return (
     <Dropdown className="ml-auto" drop="left">
@@ -45,7 +44,7 @@ export const MoreDropdown = ({ handleEdit, poemId, handleDeleteComment }) => {
         {poemId ? (
           <Dropdown.Item
             className={styles.DropdownItem}
-            onClick={() => showConfModal(obj, poemId)}
+            onClick={() => showConfModal(poemId)}
             aria-label="delete"
           >
             <i className="fas fa-trash-alt" />
@@ -70,26 +69,26 @@ export const MoreDropdown = ({ handleEdit, poemId, handleDeleteComment }) => {
  */
 export function ProfileEditDropdown({ id }) {
   /** stores info on which pages the user has been to. */
-  const history = useHistory();
+  const navigate = useNavigate();
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={ThreeDots} />
       <Dropdown.Menu>
         <Dropdown.Item
-          onClick={() => history.push(`/profiles/${id}/edit`)}
+          onClick={() => navigate(`/profiles/${id}/edit`)}
           aria-label="edit-profile"
         >
           <i className="fas fa-edit" /> edit profile
         </Dropdown.Item>
         <Dropdown.Item
-          onClick={() => history.push(`/profiles/${id}/edit/username`)}
+          onClick={() => navigate(`/profiles/${id}/edit/username`)}
           aria-label="edit-username"
         >
           <i className={`far fa-id-card ${styles.Icons}`} />
           change username
         </Dropdown.Item>
         <Dropdown.Item
-          onClick={() => history.push(`/profiles/${id}/edit/password`)}
+          onClick={() => navigate(`/profiles/${id}/edit/password`)}
           aria-label="edit-password"
         >
           <i className={`fas fa-key ${styles.Icons}`} />
