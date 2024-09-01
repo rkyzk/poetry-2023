@@ -1,16 +1,18 @@
 # Your Poetry
 
+![your-poetry](./public/documents/media/readme/your-poetry.png)
+
 詩をシェアするアプリ。
 デプロイしたアプリは[こちら](https://yourpoetry.up.railway.app/).
 
-# 概要
+## 概要
 
 ユーザーはメンバー登録すると詩を書いて投稿でき、
 他ユーザーからコメントをもらうことができます。
 好きな詩を「いいね」したり、プロフィールをフォローすることもできます。
 username: admin, password: usersuper 　でログインできます。
 
-# 使用した言語、フレームワーク、ライブラリ
+## 使用した言語、フレームワーク、ライブラリ
 
 JavaScript, HTML/CSS, React, React-Bootstrap
 
@@ -19,12 +21,12 @@ JavaScript, HTML/CSS, React, React-Bootstrap
   デプロイした API:<br>
   https://drf-api-poetry.up.railway.app/
 
-#　本アプリ作成にあたって参考にした資料
+##　本アプリ作成にあたって参考にした資料
 
 - コードインステュート教材の「Moments」<br>
   https://github.com/Code-Institute-Solutions/moments/tree/a6d063e846e748d68b203b7d8f2d76068a1ccb4a
 
-# テスト
+## テスト
 
 https://github.com/rkyzk/poetry-2023/blob/main/public/documents/MANUALTESTS.md
 
@@ -51,8 +53,6 @@ https://github.com/rkyzk/poetry-2023/blob/main/public/documents/MANUALTESTS.md
 - [Aspects to be improved in the future](#aspects-to-be-improved-in-the-future)
 - [Media](#media)
 - [Credits](#credits)
-
-![your-poetry](./public/documents/media/readme/your-poetry.png)
 
 Link to the live site of this app: https://yourpoetry.up.railway.app/
 
