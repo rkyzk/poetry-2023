@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import styles from "../../styles/PoemCreateEditForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
+import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
@@ -30,8 +31,8 @@ function PoemCreateForm() {
   const { title, content, category } = poemData;
   // boolean to tell if user has clicked on 'publish'
   const [publish, setPublish] = useState(false);
-  // instantiate history object to store data which url the user has visited.
-  const history = useHistory();
+  // instantiate navigate object to store data which url the user has visited.
+  const navigate = useNavigate();
   const { showAlert } = useAlert();
 
   const currentUser = useCurrentUser();
@@ -88,11 +89,11 @@ function PoemCreateForm() {
     try {
       // Send the api the data of a new poem
       const { data } = await axiosReq.post("/poems/", formData);
-      /* Add 1 to poems count in the featured profile		
+      /* Add 1 to poems count in the featured profile
          if the user is featured. */
       handlePoemCount();
       // redirect users to the new poem's page.
-      history.push(`/poems/${data.id}`);
+      navigate(`/poems/${data.id}`);
       showAlert(msg);
     } catch (err) {
       // if the error is not 'unauthorized, set error data to 'errors'
@@ -101,7 +102,7 @@ function PoemCreateForm() {
   };
 
   return (
-    <>
+    <Container className="pt-3">
       <h2>Write a new poem</h2>
       <Form onSubmit={handleSubmit} className={styles.PoemForm}>
         <Form.Group controlId="title">
@@ -139,7 +140,7 @@ function PoemCreateForm() {
           <Form.Label className="my-1 mr-2">Category</Form.Label>
           <Form.Control
             as="select"
-            className={`${styles.Category} ml-3`}
+            className={`${styles.Category}`}
             name="category"
             value={category}
             defaultValue="other"
@@ -181,12 +182,12 @@ function PoemCreateForm() {
         </Button>
         <Button
           className={`${btnStyles.Button} ${btnStyles.Olive} ml-2 mt-2`}
-          onClick={() => history.goBack()}
+          onClick={() => navigate(-1)}
         >
           cancel
         </Button>
       </Form>
-    </>
+    </Container>
   );
 }
 
