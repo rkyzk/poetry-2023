@@ -1,16 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter as Router } from "react-router-dom/cjs/react-router-dom.min";
 import reportWebVitals from "./reportWebVitals";
-import { CurrentUserProvider } from "./contexts/CurrentUserContext";
-import { FeaturedProfilesDataProvider } from "./contexts/FeaturedProfilesDataContext";
+import { BrowserRouter } from "react-router-dom";
 import { AlertProvider } from "./contexts/AlertContext";
+import { CurrentUserProvider } from "./contexts/CurrentUserContext";
 import { ModalProvider } from "./contexts/ModalContext";
+import { FeaturedProfilesDataProvider } from "./contexts/FeaturedProfilesDataContext";
 
-ReactDOM.render(
-  <Router>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <BrowserRouter>
     <AlertProvider>
       <CurrentUserProvider>
         <ModalProvider>
@@ -20,8 +21,7 @@ ReactDOM.render(
         </ModalProvider>
       </CurrentUserProvider>
     </AlertProvider>
-  </Router>,
-  document.getElementById("root")
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
